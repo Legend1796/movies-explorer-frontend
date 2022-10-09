@@ -9,14 +9,17 @@ import Main from '../Main/Main';
 
 function App() {
 
-  // const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   return (
     // <CurrentUserContext.Provider>
     <>
       <div className="page">
-        <Header />
-        <Main />
+        <Header loggedIn={loggedIn} />
+        <Main path="/main" />
         <Switch>
+          <Route exact path="/">
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/main" />}
+          </Route>
           {/* <Route path="/">
             <Main />
           </Route> */}
