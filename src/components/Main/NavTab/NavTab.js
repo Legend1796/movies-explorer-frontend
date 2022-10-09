@@ -1,4 +1,4 @@
-function AboutMe() {
+function NavTab() {
 
   return (
     <section>
@@ -7,4 +7,4 @@ function AboutMe() {
   )
 }
 
-export default AboutMe;
+export default NavTab;

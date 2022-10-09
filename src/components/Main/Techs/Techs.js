@@ -1,4 +1,4 @@
-function AboutMe() {
+function Techs() {
 
   return (
     <section>
@@ -7,4 +7,4 @@ function AboutMe() {
   )
 }
 
-export default AboutMe;
+export default Techs;
