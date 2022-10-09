@@ -5,23 +5,15 @@ function Header({ loggedIn }) {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="Логотип сайта" />
-      <div className={`header__links ${loggedIn ? "header__links_active" : ""}`}>
-        <Route path="/signup">
+      <div className="header__links">
+        <Route path="/movies">
           <Link className="header__link" to="movies">Фильмы</Link>
-        </Route>
-        <Route path="/signin">
           <Link className="header__link" to="saved-movies">Сохранённые фильмы</Link>
-        </Route>
-        <Route path="/signin">
           <Link className="header__link" to="profile">Аккаунт</Link>
         </Route>
-      </div>
-      <div className={`header__links ${!loggedIn ? "header__links_active" : ""}`}>
-        <Route path="/signin">
-          <Link className="header__link" to="signup">Регистрация</Link>
-        </Route>
-        <Route path="/signup">
+        <Route path="/main">
           <Link className="header__link" to="signin">Войти</Link>
+          <Link className="header__link" to="signup">Регистрация</Link>
         </Route>
       </div>
     </header >

@@ -7,15 +7,12 @@ import Portfolio from './Portfolio/Portfolio';
 import AboutProject from './AboutProject/AboutProject';
 
 function Main() {
-
-
   // function cardLikeClick(cardInfo) {
   //   onCardLike(cardInfo);
   // }
   // function cardDelete(cardInfo) {
   //   onCardDelete(cardInfo);
   // }
-
   return (
     <main>
       <Promo />
