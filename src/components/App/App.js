@@ -10,8 +10,6 @@ import Main from '../Main/Main';
 function App() {
 
   // const [loggedIn, setLoggedIn] = React.useState(false);
-
-
   return (
     // <CurrentUserContext.Provider>
     <>
