@@ -1,3 +1,8 @@
+
+
+
+
+
 function Techs() {
 
   return (
@@ -6,17 +11,15 @@ function Techs() {
       <div className="main__underline"></div>
       <h3 className="techs__subtitle">7 технологий</h3>
       <p className="techs__paragraph">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте</p>
-      <ui className="techs__list">
-        <li className="techs__technology">
-          <img src={html} alt="HTML5" />
-          <img src={html ???????} alt="Логотип сайта" />
-          <img src={js} alt="JavaScript" />
-          <img src={react} alt="React" />
-          <img src={git} alt="Git" />
-          <img src={express} alt="Express" />
-          <img src={mongodb} alt="MongoDB" />
-        </li>
-      </ui>
+      <div className="techs__technologys">
+        <p className="tech__technology">HTML</p>
+        <p className="tech__technology">CSS</p>
+        <p className="tech__technology">JS</p>
+        <p className="tech__technology">React</p>
+        <p className="tech__technology">Git</p>
+        <p className="tech__technology">Express.js</p>
+        <p className="tech__technology">mongoDB</p>
+      </div>
     </section >
   )
 }
