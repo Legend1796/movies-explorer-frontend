@@ -1,3 +1,5 @@
+import '../AboutProject/AboutProject.css'
+
 function AboutProject() {
 
   return (
@@ -17,7 +19,7 @@ function AboutProject() {
         </ul>
       </div>
       <div className="aboutproject__table">
-        <ul class="table__list">
+        <ul class="table__grid">
           <li class="table__cell table__cell_color_green">
             <h4 class="table__heading">1 неделя</h4>
             <p class="table__text table__text__color_grey">Back-end</p>

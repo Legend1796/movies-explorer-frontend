@@ -1,6 +1,6 @@
 .aboutme {
   margin: 0;
-  padding-top: 110px;
+  padding: 110px 70px 0 70px;
 }
 
 .aboutme__two-columns {
@@ -21,7 +21,6 @@
 }
 
 .aboutme__subtitle {
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 20px;
@@ -34,7 +33,6 @@
 .aboutme__paragraph {
   margin: 0;
   width: 600px;
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
@@ -52,7 +50,6 @@
 .aboutme__link {
   text-decoration: none;
   color: #000000;
-  font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;

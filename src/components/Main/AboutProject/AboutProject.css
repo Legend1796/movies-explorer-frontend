@@ -1,0 +1,44 @@
+.aboutproject {
+  margin: 0;
+  padding: 110px 70px 0 70px;
+}
+
+.table {
+  width: 100%;
+  display: flex;
+  margin: 0;
+}
+
+.table__list {
+  padding: 0;
+  margin: 70px auto 110px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  column-gap: 40px;
+  justify-content: space-between;
+}
+
+.table__cell {
+  margin: 0;
+}
+
+.table__heading {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.table__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+  padding-right: 70px;
+}
+
+.table__grid {
+  list-style: none;
+}
