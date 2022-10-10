@@ -17,9 +17,9 @@ function Main() {
     <main>
       <Promo />
       <NavTab />
-      <AboutMe />
       <Techs />
       <AboutProject />
+      <AboutMe />
       <Portfolio />
     </main >
   )

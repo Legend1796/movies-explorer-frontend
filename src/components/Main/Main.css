@@ -1,0 +1,17 @@
+.main__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: black;
+  margin: 0;
+  margin-left: 0px;
+  margin-bottom: 23px;
+}
+
+.main__underline {
+  width: 100%;
+  border: 1px solid black;
+  margin: 0;
+}

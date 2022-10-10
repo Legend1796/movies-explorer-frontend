@@ -4,6 +4,5 @@
 .page {
   max-width: 1280px;
   font-family: 'Inter';
-  /* display: flex;
-  align-items: center; */
+  padding: 0 70px 20px 70px;
 }
