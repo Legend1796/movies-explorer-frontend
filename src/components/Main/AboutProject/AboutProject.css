@@ -41,4 +41,5 @@
 
 .table__grid {
   list-style: none;
+  /* grid-template-rows: repeat(auto-fit, 1fr); */
 }
