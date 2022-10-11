@@ -19,16 +19,14 @@ function AboutProject() {
         </ul>
       </div>
       <div className="aboutproject__table">
-        <ul class="table__grid">
-          <li class="table__cell table__cell_color_green">
-            <h4 class="table__heading">1 неделя</h4>
-            <p class="table__text table__text__color_grey">Back-end</p>
-          </li>
-          <li class="table__cell table__cell_color_grey">
-            <h4 class="table__heading">4 недели</h4>
-            <p class="table__text table__text__color_grey">Front-end</p>
-          </li>
-        </ul>
+        <div class="aboutproject__table-cell">
+          <h4 class="aboutproject__table-heading aboutproject__table-heading_color_green">1 неделя</h4>
+          <p class="aboutproject__table-text">Back-end</p>
+        </div>
+        <div class="aboutproject__table-cell aboutproject__table-cell_grid">
+          <h4 class="aboutproject__table-heading aboutproject__table-heading_color_grey">4 недели</h4>
+          <p class="aboutproject__table-text">Front-end</p>
+        </div>
       </div>
     </section >
   )
