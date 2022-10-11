@@ -1,0 +1,52 @@
+.header {
+  margin: 0;
+  padding: 0 70px 0 70px;
+}
+
+.header__logo {
+  width: 38px;
+  margin-left: 60px;
+}
+
+.header__container {
+  background-color: #073042;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.header__links {
+  margin-right: 70px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.header__link {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  width: 76px;
+  height: 32px;
+  text-align: center;
+}
+
+.header__link_signup {
+  color: white;
+}
+
+.header__link_signin {
+  color: black;
+  background-color: rgba(43, 224, 128, 1);
+  border-radius: 3px;
+}
+
+.header__link-text {
+  margin: 0;
+  margin-top: 8px;
+}
