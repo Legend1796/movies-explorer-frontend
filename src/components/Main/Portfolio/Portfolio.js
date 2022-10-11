@@ -1,4 +1,5 @@
 import '../Portfolio/Portfolio.css'
+import link from '../../../images/portfolio_link.svg';
 
 function Portfolio() {
 
@@ -6,9 +7,22 @@ function Portfolio() {
     <section className="portfolio">
       <div className="portfolio__container">
         <div className="portfolio__title">Портфолио</div>
-        <a className="portfolio__link" href="https://legend1796.github.io/how-to-learn/" target="_blank" rel="noopener noreferrer">Статичный сайт</a>
-        <a className="portfolio__link" href="https://legend1796.github.io/russian-travel/" target="_blank" rel="noopener noreferrer">Адаптивный сайт</a>
-        <a className="portfolio__link" href="https://github.com/Legend1796/react-mesto-auth" target="_blank" rel="noopener noreferrer">Одностраничное приложение</a>
+        <div className="portfolio__links">
+          <div className="portfolio__link">
+            <p className="portfolio__link-text">Статичный сайт</p>
+            <a href="https://github.com/Legend1796/react-mesto-auth" target="_blank" rel="noopener noreferrer"><img className="portfolio__link-image" src={link} alt="Ссылка на ресурс" /></a>
+          </div>
+          <div className="portfolio__underline" />
+          <div className="portfolio__link">
+            <p className="portfolio__link-text">Адаптивный сайт</p>
+            <a href="https://github.com/Legend1796/react-mesto-auth" target="_blank" rel="noopener noreferrer"><img className="portfolio__link-image" src={link} alt="Ссылка на ресурс" /></a>
+          </div>
+          <div className="portfolio__underline" />
+          <div className="portfolio__link">
+            <p className="portfolio__link-text">Одностраничное приложение</p>
+            <a href="https://github.com/Legend1796/react-mesto-auth" target="_blank" rel="noopener noreferrer"><img className="portfolio__link-image" src={link} alt="Ссылка на ресурс" /></a>
+          </div>
+        </div>
       </div>
     </section >
   )

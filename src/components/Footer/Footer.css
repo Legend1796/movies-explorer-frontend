@@ -22,7 +22,7 @@
 
 .footer__underline {
   width: 100%;
-  border: 1px solid #E8E8E8;
+  border-bottom: 1px solid #E8E8E8;
   margin: 20px auto;
 }
 
