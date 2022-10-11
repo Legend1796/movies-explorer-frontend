@@ -23,3 +23,16 @@
   width: 320px;
   height: 320px;
 }
+
+@media screen and (max-width: 767px) {
+  .promo__logo {
+    width: 248px;
+    height: 248px;
+  }
+
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+    width: 300px;
+  }
+}

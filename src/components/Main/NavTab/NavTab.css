@@ -13,3 +13,11 @@
   line-height: 16px;
   margin: 25px 20px 25px 20px;
 }
+
+@media screen and (max-width: 767px) {
+  .navtab__link {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 25px 12px 25px 12px;
+  }
+}

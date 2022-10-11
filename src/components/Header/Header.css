@@ -1,5 +1,5 @@
 .header {
-  background-color: #073042;
+  background-color: #073042 !important;
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -48,4 +48,17 @@
 .header__link-text {
   margin: 0;
   margin-top: 8px;
+}
+
+@media screen and (max-width: 767px) {
+  .header__link {
+    font-size: 10px;
+    line-height: 16px;
+    width: 54px;
+    height: 26px;
+  }
+
+  .header__link-text {
+    margin-top: 5px;
+  }
 }
