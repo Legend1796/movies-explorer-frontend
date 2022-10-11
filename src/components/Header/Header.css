@@ -1,20 +1,19 @@
 .header {
-  margin: 0;
-  padding: 0 70px 0 70px;
-}
-
-.header__logo {
-  width: 38px;
-  margin-left: 60px;
-}
-
-.header__container {
   background-color: #073042;
   display: flex;
   justify-content: space-between;
   margin: 0;
   padding-top: 18px;
   padding-bottom: 18px;
+}
+
+.header_loggedin {
+  background-color: white;
+}
+
+.header__logo {
+  width: 38px;
+  margin-left: 60px;
 }
 
 .header__links {

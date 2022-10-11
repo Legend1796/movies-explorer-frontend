@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import '../App/App.css'
-// import Header from '../Header/Header';
+import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 // import Login from '../Login';
@@ -15,7 +15,7 @@ function App() {
     // <CurrentUserContext.Provider>
     <>
       <div className="page">
-        {/* <Header loggedIn={loggedIn} /> */}
+        <Header loggedIn={loggedIn} />
         <Main path="/main" />
         <Switch>
           <Route exact path="/">

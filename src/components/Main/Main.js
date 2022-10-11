@@ -5,7 +5,6 @@ import Promo from './Promo/Promo';
 import Techs from './Techs/Techs';
 import Portfolio from './Portfolio/Portfolio';
 import AboutProject from './AboutProject/AboutProject';
-import Header from './Header/Header';
 
 function Main() {
   // function cardLikeClick(cardInfo) {
@@ -16,7 +15,6 @@ function Main() {
   // }
   return (
     <main>
-      <Header />
       <Promo />
       <NavTab />
       <AboutProject />
