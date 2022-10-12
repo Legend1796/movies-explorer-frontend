@@ -4,6 +4,7 @@ import '../App/App.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
+import NotFound from '../NotFound/NotFound';
 // import Login from '../Login';
 // import Register from './Register';
 // import ProtectedRoute from '../ProtectedRoute';
@@ -15,15 +16,15 @@ function App() {
     // <CurrentUserContext.Provider>
     <>
       <div className="page">
-        <Header loggedIn={loggedIn} />
-        <Main path="/main" />
         <Switch>
           <Route exact path="/">
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/main" />}
           </Route>
-          {/* <Route path="/">
+          <Route path="/main">
+            <Header loggedIn={loggedIn} />
             <Main />
-          </Route> */}
+            <Footer />
+          </Route>
           {/* <ProtectedRoute path="/movies" loggedIn={loggedIn} /> */}
           {/* <Route path="/signup">
             <Register />
@@ -31,8 +32,10 @@ function App() {
           <Route path="/signin">
             <Login />
           </Route> */}
+          <Route path="*">
+            <NotFound />
+          </Route>
         </Switch>
-        <Footer />
       </div>
     </>
     // </CurrentUserContext.Provider>
