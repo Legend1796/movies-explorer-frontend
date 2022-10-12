@@ -41,3 +41,41 @@
   margin-bottom: 22px;
   margin-top: 17px;
 }
+
+
+@media screen and (max-width: 1279px) {
+  .portfolio {
+    padding: 90px 50px 90px 50px;
+  }
+
+  .portfolio__link-text {
+    font-size: 28px;
+  }
+
+  .portfolio__underline {
+    margin-bottom: 19px;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .portfolio {
+    padding: 70px 14px 70px 14px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 40px;
+  }
+
+  .portfolio__link-text {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__underline {
+    margin-bottom: 19px;
+    margin-top: 20px;
+  }
+}
