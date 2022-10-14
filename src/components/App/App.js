@@ -5,6 +5,8 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import NotFound from '../NotFound/NotFound';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 // import Login from '../Login';
 // import Register from './Register';
 // import ProtectedRoute from '../ProtectedRoute';
@@ -26,12 +28,12 @@ function App() {
             <Footer />
           </Route>
           {/* <ProtectedRoute path="/movies" loggedIn={loggedIn} /> */}
-          {/* <Route path="/signup">
+          <Route path="/signup">
             <Register />
           </Route>
           <Route path="/signin">
             <Login />
-          </Route> */}
+          </Route>
           <Route path="*">
             <NotFound />
           </Route>
