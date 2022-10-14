@@ -14,7 +14,7 @@ function Login({ onLoginIn }) {
   }
 
   React.useEffect(() => {
-    resetErrors({ email: ' ', password: ' ' });
+    resetErrors({ email: '', password: '' });
   }, []);
 
   return (

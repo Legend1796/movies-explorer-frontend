@@ -11,10 +11,10 @@ function Form({ submitButtonText, isActiveSubmitButton, name, onSubmit, children
       <div className="login__signup">
         <p className="login__signup-text">{signupText}</p>
         <Route path="/signup">
-          <Link className="login__link" to="/signin">Войти</Link>
+          <Link to="/signin" className="login__link">Войти</Link>
         </Route>
         <Route path="/signin">
-          <Link className="login__link" to="/signup">Регистрация</Link>
+          <Link to="/signup" className="login__link">Регистрация</Link>
         </Route>
       </div>
     </form>

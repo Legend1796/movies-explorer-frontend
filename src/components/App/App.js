@@ -18,6 +18,12 @@ function App() {
     <>
       <div className="page">
         <Switch>
+          <Route path="/signup">
+            <Register />
+          </Route>
+          <Route path="/signin">
+            <Login />
+          </Route>
           <Route exact path="/">
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/main" />}
           </Route>
@@ -25,13 +31,6 @@ function App() {
             <Header loggedIn={loggedIn} />
             <Main />
             <Footer />
-          </Route>
-          {/* <ProtectedRoute path="/movies" loggedIn={loggedIn} /> */}
-          <Route path="/signup">
-            <Register />
-          </Route>
-          <Route path="/signin">
-            <Login />
           </Route>
           <Route path="*">
             <NotFound />
