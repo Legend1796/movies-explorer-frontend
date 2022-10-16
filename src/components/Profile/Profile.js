@@ -2,16 +2,22 @@ import React from 'react';
 import '../Profile/Profile.css';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { Link } from 'react-router-dom';
 
-function Profile({ userName }) {
+function Profile({ userName, submitButtonText }) {
 
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
   const currentUser = React.useContext(CurrentUserContext);
-
+  const [isEdit, setIsEdit] = React.useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsEdit(false);
     // onLoginIn(values);
+  }
+
+  function handleProfileEditBottonClick() {
+    setIsEdit(true);
   }
 
   React.useEffect(() => {
@@ -40,6 +46,16 @@ function Profile({ userName }) {
         </div>
         <span className={`profile__input-error url-input-error ${!isValid ? "profile__input-error_active" : ""}`}>{errors.email}</span>
       </div>
+      {!isEdit ?
+        <div className="profile__btn">
+          <button className="profile__edit-btn" onClick={handleProfileEditBottonClick}>Редактировать</button>
+          <Link to="/main" className="profile__link">Выйти из аккаунта</Link>
+        </div>
+        :
+        <div className="profile__btn">
+          <button className={`login__btn ${!isValid ? "login__save-btn_disabled" : ""}`} type="submit" disabled={!isValid}>{submitButtonText}</button>
+        </div>}
+
     </div >
   )
 }

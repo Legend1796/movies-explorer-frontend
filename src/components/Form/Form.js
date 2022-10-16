@@ -7,7 +7,7 @@ function Form({ submitButtonText, isActiveSubmitButton, name, onSubmit, children
     <form className="popup__form" name={name} noValidate onSubmit={onSubmit}>
       <h2 className="login__title">{title}</h2>
       {children}
-      <button className={`login__btn ${!isActiveSubmitButton ? 'popup__save-btn_disabled' : ''}`} type="submit" disabled={!isActiveSubmitButton}>{submitButtonText}</button>
+      <button className={`login__btn ${!isActiveSubmitButton ? "login__save-btn_disabled" : ""}`} type="submit" disabled={!isActiveSubmitButton}>{submitButtonText}</button>
       <div className="login__signup">
         <p className="login__signup-text">{signupText}</p>
         <Route path="/signup">

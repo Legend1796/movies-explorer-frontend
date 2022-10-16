@@ -28,7 +28,7 @@ function App() {
           </Route>
           <Route path="/profile">
             <Header loggedIn={loggedIn} />
-            <Profile userName={userName} />
+            <Profile userName={userName} submitButtonText="Сохранить" />
           </Route>
           <Route exact path="/">
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/main" />}
