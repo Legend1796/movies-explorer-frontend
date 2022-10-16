@@ -117,6 +117,57 @@
   text-decoration: none;
 }
 
-@media screen and (max-width: 1279px) {}
+@media screen and (max-width: 1279px) {
+  .login {
+    margin: 232px auto 232px;
+  }
 
-@media screen and (max-width: 767px) {}
+  .login__title {
+    margin: 38px auto 40px 0;
+  }
+
+  .login__btn {
+    margin-top: 158px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .login {
+    display: flex;
+    flex-direction: column;
+    margin: 56px auto 232px;
+    align-items: center;
+  }
+
+  .login__title {
+    margin: 50px auto 80px;
+  }
+
+  .login__input {
+    width: 244px;
+  }
+
+  .login__btn {
+    margin: 0;
+    margin-top: 247px;
+    margin-bottom: 14px;
+    height: 45px;
+    width: 260px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .login__signup {
+    margin: 0 auto 0;
+  }
+
+  .login__signup-text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .login__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
