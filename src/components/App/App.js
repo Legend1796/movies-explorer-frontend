@@ -8,16 +8,16 @@ import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
-
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 // import ProtectedRoute from '../ProtectedRoute';
 
 function App() {
-
+  const [userName, setUserName] = React.useState('Legend');
+  const [currentUser, setUserInfo] = React.useState({ name: '', email: '' });
   // const [loggedIn, setLoggedIn] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(true);
   return (
-    // <CurrentUserContext.Provider>
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
           <Route path="/signup">
@@ -28,7 +28,7 @@ function App() {
           </Route>
           <Route path="/profile">
             <Header loggedIn={loggedIn} />
-            <Profile />
+            <Profile userName={userName} />
           </Route>
           <Route exact path="/">
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/main" />}
@@ -43,8 +43,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </>
-    // </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

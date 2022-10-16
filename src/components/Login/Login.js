@@ -24,12 +24,12 @@ function Login({ onLoginIn }) {
         <div className="login__input-container">
           <span className="login__input-placeholder">E-mail</span>
           <input className="login__input login__input_type_email" id="email" name="email" type="email" value={values.email || ''} onChange={handleChange} required />
-          <span className={`login__input-error url-input-error ${!isValid ? 'login__input-error_active' : ''}`}>{errors.email}</span>
+          <span className={`login__input-error url-input-error ${!isValid ? "login__input-error_active" : ""}`}>{errors.email}</span>
         </div>
         <div className="login__input-container">
           <span className="login__input-placeholder">Пароль</span>
-          <input className="login__input login__input_type_password" id="password" name="password" type="password" value={values.password || ''} onChange={handleChange} minLength="6" maxLength="20" required />
-          <span className={`login__input-error password-input-error ${!isValid ? 'login__input-error_active' : ''}`}>{errors.password}</span>
+          <input className={`login__input login__input_type_password ${!isValid ? "login__input_type-error_active" : ""}`} id="password" name="password" type="password" value={values.password || ''} onChange={handleChange} minLength="6" maxLength="20" required />
+          <span className={`login__input-error password-input-error ${!isValid ? "login__input-error_active" : ""}`}>{errors.password}</span>
         </div>
       </Form>
     </div >

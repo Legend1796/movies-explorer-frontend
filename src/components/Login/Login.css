@@ -90,7 +90,11 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  color: #FF3055;
+  color: #000000;
+}
+
+.login__input_type-error_active {
+  color: red;
 }
 
 .login__signup {

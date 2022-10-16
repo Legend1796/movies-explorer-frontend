@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0;
-  padding-top: 18px;
+  padding-top: 17px;
   padding-bottom: 18px;
 }
 
@@ -16,6 +16,10 @@
 .header__logo {
   width: 38px;
   margin-left: 60px;
+}
+
+.header__logo_logged-in {
+  margin-left: 70px;
 }
 
 .header__links {
@@ -68,7 +72,7 @@
   width: 26px;
   height: 30px;
   margin: 0;
-  margin-left: 17px;
+  margin-left: 18px;
   margin-top: 3px;
 }
 

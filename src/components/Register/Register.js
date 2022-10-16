@@ -23,8 +23,8 @@ function Register({ onLoginIn }) {
       <Form onSubmit={handleSubmit} name="login" isActiveSubmitButton={isValid} submitButtonText="Зарегистрироваться" signupText="Уже зарегистрированы?" title="Добро пожаловать!">
         <div className="login__input-container">
           <span className="login__input-placeholder">Имя</span>
-          <input className="login__input login__input_type_email" id="name" name="name" type="text" value={values.email || ''} onChange={handleChange} required />
-          <span className={`login__input-error url-input-error ${!isValid ? 'login__input-error_active' : ''}`}>{errors.email}</span>
+          <input className="login__input login__input_type_email" id="name" name="name" type="text" value={values.name || ''} onChange={handleChange} required />
+          <span className={`login__input-error name-input-error ${!isValid ? 'login__input-error_active' : ''}`}>{errors.name}</span>
         </div>
         <div className="login__input-container">
           <span className="login__input-placeholder">E-mail</span>
