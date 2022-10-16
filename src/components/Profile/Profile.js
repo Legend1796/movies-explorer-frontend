@@ -1,10 +1,11 @@
 import React from 'react';
-import '../Profile/Profile.css'
+import '../Profile/Profile.css';
+import { Link, Route } from 'react-router-dom';
 
 function Profile({ onLoginIn }) {
 
   return (
-    <div className="login">
+    <div className="profile">
 
     </div >
   )

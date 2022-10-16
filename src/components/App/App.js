@@ -7,12 +7,14 @@ import Main from '../Main/Main';
 import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 
 // import ProtectedRoute from '../ProtectedRoute';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  // const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   return (
     // <CurrentUserContext.Provider>
     <>
@@ -23,6 +25,10 @@ function App() {
           </Route>
           <Route path="/signin">
             <Login />
+          </Route>
+          <Route path="/profile">
+            <Header loggedIn={loggedIn} />
+            <Profile />
           </Route>
           <Route exact path="/">
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/main" />}

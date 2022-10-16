@@ -1,5 +1,5 @@
 .header {
-  background-color: #073042 !important;
+  background-color: #073042;
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -9,6 +9,8 @@
 
 .header_loggedin {
   background-color: white;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .header__logo {
@@ -48,6 +50,51 @@
 .header__link-text {
   margin: 0;
   margin-top: 8px;
+}
+
+.header__navigation {
+  margin-right: 70px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.header__link_loggedin {
+  width: auto;
+  display: flex;
+}
+
+.header__profile-image {
+  width: 26px;
+  height: 30px;
+  margin: 0;
+  margin-left: 17px;
+  margin-top: 3px;
+}
+
+.header__link-text_movies {
+  font-weight: 500;
+  color: black;
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 10px;
+}
+
+.header__link-text_saved-movies {
+  font-weight: 400;
+  color: black;
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 10px;
+}
+
+.header__link-text_profile {
+  font-weight: 500;
+  color: black;
+  font-size: 14px;
+  line-height: 16px;
+  margin-left: 30px;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 767px) {
