@@ -116,3 +116,7 @@
   color: #3456F3;
   text-decoration: none;
 }
+
+@media screen and (max-width: 1279px) {}
+
+@media screen and (max-width: 767px) {}
