@@ -119,9 +119,13 @@
   line-height: 17px;
   color: #3456F3;
   text-decoration: none;
+  opacity: 1;
 }
 
-.login__save-btn_disabled {}
+.login__btn_disabled {
+  background: #F8F8F8;
+  color: #C2C2C2;
+}
 
 @media screen and (max-width: 1279px) {
   .login {
@@ -161,6 +165,7 @@
     width: 260px;
     font-size: 12px;
     line-height: 15px;
+    opacity: 1;
   }
 
   .login__signup {
@@ -176,4 +181,16 @@
     font-size: 12px;
     line-height: 15px;
   }
+}
+
+.login__link:hover {
+  transition: opacity .2s linear;
+  opacity: .8;
+  cursor: pointer;
+}
+
+.login__btn:hover {
+  transition: opacity .2s linear;
+  opacity: .8;
+  cursor: pointer;
 }
