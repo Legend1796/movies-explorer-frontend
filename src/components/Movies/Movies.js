@@ -5,12 +5,14 @@ import smalltumbOff from '../../images/smalltumboff.svg';
 import Header from '../Header/Header';
 import React from 'react';
 import Film from '../Film/Film';
+import Footer from '../Footer/Footer';
 
 function Movies({ loggedIn, films, onFilmLike }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
   function filmLikeClick(filmInfo) {
-    onFilmLike(filmInfo); // need to give on Api
+    console.log(filmInfo);
+    // onFilmLike(filmInfo); // need to give on Api
   }
 
   function handleChangeShortFilmActivetily() {
@@ -44,6 +46,12 @@ function Movies({ loggedIn, films, onFilmLike }) {
           ))}
         </ul>
       </section>
+      <section>
+        <div className='movies__more'>
+          <button className='movies__more-button'>Ещё</button>
+        </div>
+      </section>
+      <Footer />
     </>
   )
 }

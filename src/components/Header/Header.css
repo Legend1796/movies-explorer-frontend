@@ -69,6 +69,10 @@
   display: flex;
 }
 
+.header__link_active {
+  border-bottom: 1px solid black;
+}
+
 .header__profile-image {
   width: 26px;
   height: 30px;

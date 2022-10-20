@@ -49,7 +49,6 @@ function App() {
     //   .catch(() => onAsseccDenied());
     history.push('/movies');
     setLoggedIn(true);
-    console.log(loggedIn);
   }
 
   return (

@@ -67,9 +67,22 @@
   cursor: pointer;
 }
 
-.movies {
-  padding-left: 70px;
-  padding-right: 70px;
+.movies__more {
+  width: 100%;
+}
+
+.movies__more-button {
+  width: calc(100% - 140px);
+  height: 36px;
+  background-color: #F9F9F9;
+  margin: 50px 70px 80px 70px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #000000;
+  padding: 0;
+  border: 0;
 }
 
 .elements {
@@ -82,4 +95,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   justify-content: center;
+}
+
+.movies__more-button:hover {
+  cursor: pointer;
 }
