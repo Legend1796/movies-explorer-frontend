@@ -6,7 +6,7 @@ import Header from '../Header/Header';
 import React from 'react';
 import Film from '../Film/Film';
 
-function Movies({ loggedIn, initialFilms, onFilmLike }) {
+function Movies({ loggedIn, films, onFilmLike }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
   function filmLikeClick(filmInfo) {
@@ -23,7 +23,7 @@ function Movies({ loggedIn, initialFilms, onFilmLike }) {
 
   return (
     <>
-      <section className='movies'>
+      <section>
         <Header loggedIn={loggedIn} />
         <div className='movies__search'>
           <div className='movies__container'>
@@ -37,11 +37,13 @@ function Movies({ loggedIn, initialFilms, onFilmLike }) {
           <div className='movies__underline' />
         </div >
       </section>
-      <ul className="elements">
-        {initialFilms.map((film) => (
-          <Film filmInfo={film} onFilmLikeClick={filmLikeClick} key={film._id} />
-        ))}
-      </ul>
+      <section>
+        <ul className='elements'>
+          {films.map((film) => (
+            <Film filmInfo={film} onFilmLikeClick={filmLikeClick} key={film._id} />
+          ))}
+        </ul>
+      </section>
     </>
   )
 }

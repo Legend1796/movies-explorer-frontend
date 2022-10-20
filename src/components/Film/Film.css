@@ -1,0 +1,21 @@
+.element {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  justify-content: center;
+}
+
+.element__image {
+  width: 270px;
+  height: 151px;
+  object-fit: cover;
+}
+
+.element__title {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #000000;
+}

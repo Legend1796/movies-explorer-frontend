@@ -61,10 +61,25 @@
   color: #000000;
 }
 
-.smalltumbActive {}
-
 .movies__search-image:hover {
   transition: opacity .2s linear;
   opacity: .8;
   cursor: pointer;
+}
+
+.movies {
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+.elements {
+  display: grid;
+  list-style: none;
+  margin: 70px 70px 10px;
+  padding: 0;
+  row-gap: 38px;
+  column-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  justify-content: center;
 }
