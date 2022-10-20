@@ -6,11 +6,9 @@ import Header from '../Header/Header';
 import React from 'react';
 import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
-import deletefilm from '../../images/deletefilm.svg';
-import { Route } from 'react-router-dom';
 
 
-function Movies({ loggedIn, films, onFilmSave, savedFilms }) {
+function Movies({ loggedIn, initialFilms, onFilmSave }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
   function filmSave(filmInfo) {
@@ -26,9 +24,6 @@ function Movies({ loggedIn, films, onFilmSave, savedFilms }) {
     console.log('click');
   }
 
-  function handleActionWithFilm() {
-
-  }
   return (
     <>
       <section>
@@ -47,16 +42,9 @@ function Movies({ loggedIn, films, onFilmSave, savedFilms }) {
       </section>
       <section>
         <ul className='elements'>
-          <Route path="/movies">
-            {films.map((film) => (
-              <Film filmInfo={film} actionWithFilm={handleActionWithFilm} onFilmSave={filmSave} key={film._id} />
-            ))}
-          </Route>
-          <Route path="/saved-movies">
-            {savedFilms.map((film) => (
-              <Film filmInfo={film} actionWithFilm={deletefilm} onFilmSave={filmSave} key={film._id} />
-            ))}
-          </Route>
+          {initialFilms.map((film) => (
+            <Film filmInfo={film} onFilmSave={filmSave} key={film._id} />
+          ))}
         </ul>
       </section>
       <section>

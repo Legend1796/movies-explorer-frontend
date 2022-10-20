@@ -93,7 +93,7 @@
   row-gap: 38px;
   column-gap: 20px;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(auto, 1fr);
   justify-content: center;
 }
 

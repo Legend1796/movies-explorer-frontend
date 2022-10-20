@@ -11,7 +11,9 @@ import Profile from '../Profile/Profile';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import { initialFilms } from '../../utils/initialFilms';
+import { savedMovies } from '../../utils/savedMovies';
 
 function App() {
   const [userName, setUserName] = React.useState('Legend');
@@ -55,8 +57,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Switch>
-          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} films={initialFilms} />
-          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={Movies} films={initialFilms} />
+          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} initialFilms={initialFilms} />
+          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={SavedMovies} savedFilms={savedMovies} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />
           </Route>

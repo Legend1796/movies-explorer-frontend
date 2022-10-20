@@ -7,12 +7,12 @@ import React from 'react';
 import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ loggedIn, films, onFilmLike }) {
+function SavedMovies({ loggedIn, onFilmDelete, savedFilms }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
-  function filmLikeClick(filmInfo) {
+  function deletefilm(filmInfo) {
     console.log(filmInfo);
-    // onFilmLike(filmInfo); // need to give on Api
+    // onFilmDelete(filmInfo); // need to give on Api
   }
 
   function handleChangeShortFilmActivetily() {
@@ -37,12 +37,12 @@ function SavedMovies({ loggedIn, films, onFilmLike }) {
             <img onClick={handleChangeShortFilmActivetily} className='movies__short-btn' src={shortFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' />
           </div>
           <div className='movies__underline' />
-        </div >
+        </div>
       </section>
       <section>
         <ul className='elements'>
-          {films.map((film) => (
-            <Film filmInfo={film} onFilmLikeClick={filmLikeClick} key={film._id} />
+          {savedFilms.map((film) => (
+            <Film filmInfo={film} onFilmDelete={deletefilm} key={film._id} />
           ))}
         </ul>
       </section>
