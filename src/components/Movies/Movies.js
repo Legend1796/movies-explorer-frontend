@@ -34,8 +34,10 @@ function Movies({ loggedIn, initialFilms, onFilmSave }) {
               <input className='movies__input' id='film-search' name='film-search' type='film-search' placeholder='Фильм' maxLength='70' required />
               <img onClick={handleBottonSearchClick} className='movies__search-image' src={find} alt='Кнопка поиска' />
             </div>
-            <p className='movies__short-title'>Короткометражки</p>
-            <img onClick={handleChangeShortFilmActivetily} className='movies__short-btn' src={shortFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' />
+            <div className='movies__short-container'>
+              <p className='movies__short-title'>Короткометражки</p>
+              <img onClick={handleChangeShortFilmActivetily} className='movies__short-btn' src={shortFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' />
+            </div>
           </div>
           <div className='movies__underline' />
         </div>

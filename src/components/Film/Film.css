@@ -59,3 +59,28 @@
   opacity: .5;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1279px) {
+  .element__image {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .element__image {
+    width: 300px;
+    height: 168px;
+  }
+
+  .element__title {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 12px;
+  }
+
+  .element__time {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}
