@@ -1,5 +1,7 @@
 import React from 'react';
 import '../Film/Film.css';
+import likeOn from '../../images/likeOn.svg';
+import likeOff from '../../images/likeOff.svg';
 // import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Film({ filmInfo, onFilmLikeClick }) {
@@ -7,7 +9,6 @@ function Film({ filmInfo, onFilmLikeClick }) {
 
   // const isLiked = filmInfo.likes.some(i => i._id === currentUser._id);
   const [isLiked, setIsLiked] = React.useState(false);
-  const filmLikeButtonClassName = `element__like ${isLiked ? 'element__like_active' : ''}`;
 
   function handlefilmLikeClick() {
     onFilmLikeClick(filmInfo);
@@ -20,10 +21,10 @@ function Film({ filmInfo, onFilmLikeClick }) {
         <img className='element__image' src={filmInfo.link} alt='Фото места' />
         <div className='element__rectangle'>
           <h2 className='element__title'>{filmInfo.name}</h2>
-          <button className={filmLikeButtonClassName} onClick={handlefilmLikeClick} type='button' aria-label='В избранное'></button>
+          <img className='element__like' src={isLiked ? likeOn : likeOff} onClick={handlefilmLikeClick} type='button' aria-label='В избранное' />
         </div>
-        <div className='elemet__underline' />
-        <div className='elemet__time' />
+        <div className='element__underline' />
+        <p className='element__time'>{filmInfo.duration}</p>
       </div>
     </li>
   )

@@ -19,3 +19,25 @@
   line-height: 16px;
   color: #000000;
 }
+
+.element__rectangle {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  align-items: center;
+}
+
+.element__like {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  margin: 0;
+}
+
+.element__underline {
+  width: 100%;
+  border-bottom: 1px solid #E8E8E8;
+  margin-top: 19px;
+}
+
+.element__time {}
