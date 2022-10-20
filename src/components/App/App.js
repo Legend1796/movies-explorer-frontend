@@ -56,6 +56,7 @@ function App() {
       <div className='page'>
         <Switch>
           <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} films={initialFilms} />
+          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={Movies} films={initialFilms} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />
           </Route>
@@ -63,8 +64,7 @@ function App() {
             <Login onLoginIn={onLoginIn} />
           </Route>
           <Route path='/profile'>
-            <Header loggedIn={loggedIn} />
-            <Profile userName={userName} submitButtonText='Сохранить' exitProfile={handleExitProfile} />
+            <Profile loggedIn={loggedIn} userName={userName} submitButtonText='Сохранить' exitProfile={handleExitProfile} />
           </Route>
           <Route path="/main">
             <Header loggedIn={loggedIn} />

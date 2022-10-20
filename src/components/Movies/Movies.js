@@ -6,13 +6,16 @@ import Header from '../Header/Header';
 import React from 'react';
 import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
+import deletefilm from '../../images/deletefilm.svg';
+import { Route } from 'react-router-dom';
 
-function Movies({ loggedIn, films, onFilmLike }) {
+
+function Movies({ loggedIn, films, onFilmSave, savedFilms }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
-  function filmLikeClick(filmInfo) {
+  function filmSave(filmInfo) {
     console.log(filmInfo);
-    // onFilmLike(filmInfo); // need to give on Api
+    // onFilmSave(filmInfo); // need to give on Api
   }
 
   function handleChangeShortFilmActivetily() {
@@ -23,6 +26,9 @@ function Movies({ loggedIn, films, onFilmLike }) {
     console.log('click');
   }
 
+  function handleActionWithFilm() {
+
+  }
   return (
     <>
       <section>
@@ -37,13 +43,20 @@ function Movies({ loggedIn, films, onFilmLike }) {
             <img onClick={handleChangeShortFilmActivetily} className='movies__short-btn' src={shortFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' />
           </div>
           <div className='movies__underline' />
-        </div >
+        </div>
       </section>
       <section>
         <ul className='elements'>
-          {films.map((film) => (
-            <Film filmInfo={film} onFilmLikeClick={filmLikeClick} key={film._id} />
-          ))}
+          <Route path="/movies">
+            {films.map((film) => (
+              <Film filmInfo={film} actionWithFilm={handleActionWithFilm} onFilmSave={filmSave} key={film._id} />
+            ))}
+          </Route>
+          <Route path="/saved-movies">
+            {savedFilms.map((film) => (
+              <Film filmInfo={film} actionWithFilm={deletefilm} onFilmSave={filmSave} key={film._id} />
+            ))}
+          </Route>
         </ul>
       </section>
       <section>

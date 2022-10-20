@@ -1,18 +1,19 @@
 import React from 'react';
 import '../Film/Film.css';
-import likeOn from '../../images/likeOn.svg';
-import likeOff from '../../images/likeOff.svg';
-// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import saveOn from '../../images/likeOn.svg';
+import saveOff from '../../images/likeOff.svg';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Film({ filmInfo, onFilmLikeClick }) {
-  // const currentUser = React.useContext(CurrentUserContext);
+function Film({ filmInfo, onFilmSave, actionWithFilm }) {
+  const currentUser = React.useContext(CurrentUserContext);
 
-  // const isLiked = filmInfo.likes.some(i => i._id === currentUser._id);
-  const [isLiked, setIsLiked] = React.useState(false);
+  const isSaved = filmInfo.owner.some(i => i._id === currentUser._id);
 
-  function handlefilmLikeClick() {
-    onFilmLikeClick(filmInfo);
-    setIsLiked(!isLiked);
+  // const [isSaved, setIsSaved] = React.useState(false);
+
+  function handlefilmSave() {
+    onFilmSave(filmInfo);
+    // setIsSaved(true);
   }
 
   return (
@@ -21,7 +22,7 @@ function Film({ filmInfo, onFilmLikeClick }) {
         <img className='element__image' src={filmInfo.link} alt='Фото места' />
         <div className='element__rectangle'>
           <h2 className='element__title'>{filmInfo.name}</h2>
-          <img className='element__like' src={isLiked ? likeOn : likeOff} onClick={handlefilmLikeClick} type='button' aria-label='В избранное' />
+          <img className='element__save' src={isSaved ? saveOn : saveOff} onClick={handlefilmSave} type='button' aria-label='В избранное' />
         </div>
         <div className='element__underline' />
         <p className='element__time'>{filmInfo.duration}</p>
