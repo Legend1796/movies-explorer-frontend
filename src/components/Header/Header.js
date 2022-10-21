@@ -1,6 +1,6 @@
 import { Link, Route } from 'react-router-dom';
 
-function Header({ loggedIn, openPopup, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
+function Header({ loggedIn, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
 
   return (
     <header className={`header ${loggedIn ? 'header_loggedin' : ''}`}>
@@ -12,7 +12,7 @@ function Header({ loggedIn, openPopup, navigationBtn, profileImage, logoLoggedIn
         </div>
         :
         <>
-          <img onClick={openPopup} className='header__navigation-image' src={navigationBtn} alt='кнопка навигации' />
+          <img onClick={openNavigation} className='header__navigation-image' src={navigationBtn} alt='кнопка навигации' />
           <div className='header__navigation'>
             <Route path="/movies">
               <Link className='header__link header__link_loggedin header__link_active' to='/movies'><p className='header__link-text header__link-text_movies'>Фильмы</p></Link>

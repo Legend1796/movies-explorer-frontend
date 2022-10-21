@@ -11,20 +11,20 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import Popup from '../Popup/Popup';
+import Navigation from '../Navigation/Navigation';
 import { initialFilms } from '../../utils/initialFilms';
 import { savedMovies } from '../../utils/savedMovies';
 import logoLoggedOut from '../../images/logo-unlogged.svg';
 import logoLoggedIn from '../../images/header-logo.svg';
 import profileImage from '../../images/profile.svg';
 import navigationBtn from '../../images/navigation-btn.svg';
-import closePopupBtn from '../../images/closePopupBtn.svg';
+import closeNavigationBtn from '../../images/closePopupBtn.svg';
 
 function App() {
   const [userName, setUserName] = React.useState('Legend');
   const [currentUser, setUserInfo] = React.useState({ name: '', email: '' });
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [openPopup, setOpenPopup] = React.useState(false);
+  const [openNavigation, setOpenNavigation] = React.useState(false);
   const history = useHistory();
 
   function handleExitProfile() {
@@ -32,13 +32,12 @@ function App() {
     history.push('/main');
   }
 
-  function handleOpenPopup() {
-    setOpenPopup(true);
-    console.log(openPopup);
+  function handleOpenNavigation() {
+    setOpenNavigation(true);
   }
 
-  function handleClosePopup() {
-    setOpenPopup(false);
+  function handleCloseNavigation() {
+    setOpenNavigation(false);
   }
 
   function onRegister({ name, email, password }) {
@@ -52,7 +51,6 @@ function App() {
     //   .catch(() => onAsseccDenied());
     history.push('/movies');
     setLoggedIn(true);
-    console.log(loggedIn);
   }
 
   function onLoginIn({ email, password }) {
@@ -70,9 +68,9 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <Header loggedIn={loggedIn} openPopup={handleOpenPopup} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+        <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
         <Switch>
-          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} initialFilms={initialFilms} handleOpenPopup={handleOpenPopup} />
+          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} initialFilms={initialFilms} handleOpenNavigation={handleOpenNavigation} />
           <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={SavedMovies} savedFilms={savedMovies} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />
@@ -94,7 +92,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-        <Popup profileImage={profileImage} closePopupBtn={closePopupBtn} onClose={handleClosePopup} isOpen={openPopup} />
+        <Navigation profileImage={profileImage} exitProfile={handleExitProfile} closeNavigationBtn={closeNavigationBtn} onClose={handleCloseNavigation} isOpen={openNavigation} />
       </div>
     </CurrentUserContext.Provider>
   );
