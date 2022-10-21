@@ -26,6 +26,7 @@
   text-align: right;
   outline: none;
   padding: 0;
+  width: 170px;
 }
 
 .profile__input-placeholder {
@@ -91,6 +92,32 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 1279px) {}
+@media screen and (max-width: 1279px) {
+  .profile__title {
+    margin: 236px auto 96px;
+  }
+}
 
-@media screen and (max-width: 767px) {}
+@media screen and (max-width: 767px) {
+  .profile__title {
+    margin: 70px auto 80px;
+  }
+
+  .profile__underline {
+    width: 260px;
+  }
+
+  .profile__input-container {
+    width: 260px;
+  }
+
+  .profile__edit-btn {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

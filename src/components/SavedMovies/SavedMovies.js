@@ -3,6 +3,7 @@ import smalltumbOn from '../../images/smalltumb-active.svg';
 import smalltumbOff from '../../images/smalltumboff.svg';
 import React from 'react';
 import Film from '../Film/Film';
+import Footer from '../Footer/Footer';
 
 function SavedMovies({ loggedIn, onFilmDelete, savedFilms }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
@@ -49,6 +50,7 @@ function SavedMovies({ loggedIn, onFilmDelete, savedFilms }) {
           <button className='movies__more-button'>Ещё</button>
         </div>
       </section>
+      <Footer />
     </>
   )
 }

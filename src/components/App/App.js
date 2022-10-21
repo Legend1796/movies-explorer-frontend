@@ -91,7 +91,6 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
-        <Footer />
         <Navigation profileImage={profileImage} exitProfile={handleExitProfile} closeNavigationBtn={closeNavigationBtn} onClose={handleCloseNavigation} isOpen={openNavigation} />
       </div>
     </CurrentUserContext.Provider>
