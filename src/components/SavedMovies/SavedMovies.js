@@ -4,8 +4,9 @@ import smalltumbOff from '../../images/smalltumboff.svg';
 import React from 'react';
 import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
-function SavedMovies({ loggedIn, onFilmDelete, savedFilms }) {
+function SavedMovies({ loggedIn, onFilmDelete, savedFilms, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
   function deletefilm(filmInfo) {
@@ -21,8 +22,13 @@ function SavedMovies({ loggedIn, onFilmDelete, savedFilms }) {
     console.log('click');
   }
 
+  function handleOpenNavigation() {
+    openNavigation();
+  }
+
   return (
     <>
+      <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
       <section>
         <div className='movies__search'>
           <div className='movies__container'>

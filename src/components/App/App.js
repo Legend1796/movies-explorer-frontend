@@ -68,10 +68,9 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
         <Switch>
-          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} initialFilms={initialFilms} handleOpenNavigation={handleOpenNavigation} />
-          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={SavedMovies} savedFilms={savedMovies} />
+          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={SavedMovies} savedFilms={savedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />
           </Route>
@@ -82,7 +81,9 @@ function App() {
             <Profile loggedIn={loggedIn} userName={userName} submitButtonText='Сохранить' exitProfile={handleExitProfile} />
           </Route>
           <Route path="/main">
+            <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
             <Main />
+            <Footer />
           </Route>
           <Route exact path='/'>
             {loggedIn ? <Redirect to='/movies' /> : <Redirect to='/main' />}
