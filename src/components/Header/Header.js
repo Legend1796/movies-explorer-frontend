@@ -17,17 +17,17 @@ function Header({ loggedIn, openNavigation, navigationBtn, profileImage, logoLog
             <Route path="/movies">
               <Link className='header__link header__link_loggedin header__link_active' to='/movies'>Фильмы</Link>
               <Link className='header__link header__link_loggedin' to='/saved-movies'>Сохранённые фильмы</Link>
-              <Link className='header__link header__link_loggedin' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
+              <Link className='header__link header__link_loggedin header__link_profile' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
             </Route>
             <Route path="/saved-movies">
               <Link className='header__link header__link_loggedin' to='/movies'>Фильмы</Link>
               <Link className='header__link header__link_loggedin header__link_active' to='/saved-movies'>Сохранённые фильмы</Link>
-              <Link className='header__link header__link_loggedin' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
+              <Link className='header__link header__link_loggedin header__link_profile' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
             </Route>
             <Route path="/profile">
               <Link className='header__link header__link_loggedin' to='/movies'>Фильмы</Link>
               <Link className='header__link header__link_loggedin' to='/saved-movies'>Сохранённые фильмы</Link>
-              <Link className='header__link header__link_loggedin' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
+              <Link className='header__link header__link_loggedin header__link_profile header__link_active' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
             </Route>
           </div>
         </>}

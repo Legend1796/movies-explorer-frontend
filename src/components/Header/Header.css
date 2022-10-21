@@ -36,24 +36,29 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  width: 76px;
-  height: 32px;
-  text-align: center;
+  justify-content: center;
   opacity: 1;
+  display: flex;
+  align-items: center;
 }
 
 .header__link_signup {
   color: white;
+  width: 76px;
+  height: 32px;
 }
 
 .header__link_signin {
   color: black;
   background-color: rgba(43, 224, 128, 1);
   border-radius: 3px;
+  width: 76px;
+  height: 32px;
 }
 
 .header__link-text {
   margin: 0;
+  padding: 0;
 }
 
 .header__navigation {
@@ -71,7 +76,10 @@
   color: black;
   font-size: 14px;
   line-height: 18px;
-  margin-top: 10px;
+}
+
+.header__link_profile {
+  margin-left: 30px;
 }
 
 .header__link_active {
@@ -83,7 +91,6 @@
   height: 30px;
   margin: 0;
   margin-left: 18px;
-  margin-top: 3px;
 }
 
 .header__link-text_profile {

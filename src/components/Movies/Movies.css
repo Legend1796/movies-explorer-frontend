@@ -13,13 +13,13 @@
 .movies__container {
   display: flex;
   align-items: center;
-  margin: 77px 0 83px 0;
+  margin: 81px 0 83px 0;
 }
 
 .movies__search-block {
-  width: calc(100% - 208px);
-  height: 48px;
-  border-radius: 24px;
+  width: calc(100% - 209px);
+  height: 44px;
+  border-radius: 23px;
   display: flex;
   align-items: center;
   border: 1px solid #E8E8E8;
@@ -54,7 +54,7 @@
 }
 
 .movies__short-title {
-  margin: 0 14px 0 41px;
+  margin: 0 14px 0 40px;
   padding: 0;
   font-weight: 400;
   font-size: 13px;
