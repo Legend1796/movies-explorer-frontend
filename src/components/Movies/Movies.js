@@ -2,13 +2,10 @@ import '../Movies/Movies.css';
 import find from '../../images/find.svg';
 import smalltumbOn from '../../images/smalltumb-active.svg';
 import smalltumbOff from '../../images/smalltumboff.svg';
-import Header from '../Header/Header';
 import React from 'react';
 import Film from '../Film/Film';
-import Footer from '../Footer/Footer';
 
-
-function Movies({ loggedIn, initialFilms, onFilmSave }) {
+function Movies({ loggedIn, initialFilms, onFilmSave, handleOpenPopup }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
   function filmSave(filmInfo) {
@@ -27,7 +24,6 @@ function Movies({ loggedIn, initialFilms, onFilmSave }) {
   return (
     <>
       <section>
-        <Header loggedIn={loggedIn} />
         <div className='movies__search'>
           <div className='movies__container'>
             <div className='movies__search-block'>
@@ -54,7 +50,6 @@ function Movies({ loggedIn, initialFilms, onFilmSave }) {
           <button className='movies__more-button'>Ещё</button>
         </div>
       </section>
-      <Footer />
     </>
   )
 }

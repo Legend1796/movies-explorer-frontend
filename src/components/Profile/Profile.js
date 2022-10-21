@@ -4,7 +4,6 @@ import '../Login/Login.css';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom';
-import Header from '../Header/Header';
 
 function Profile({ userName, submitButtonText, exitProfile, loggedIn }) {
 
@@ -37,7 +36,6 @@ function Profile({ userName, submitButtonText, exitProfile, loggedIn }) {
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
       <div className='profile'>
         <h2 className='profile__title'>Привет, {userName}!</h2>
         <div className='profile__inputs'>
