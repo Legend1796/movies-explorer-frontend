@@ -15,19 +15,19 @@ function Header({ loggedIn, openNavigation, navigationBtn, profileImage, logoLog
           <img onClick={openNavigation} className='header__navigation-image' src={navigationBtn} alt='кнопка навигации' />
           <div className='header__navigation'>
             <Route path="/movies">
-              <Link className='header__link header__link_loggedin header__link_active' to='/movies'><p className='header__link-text header__link-text_movies'>Фильмы</p></Link>
-              <Link className='header__link header__link_loggedin' to='/saved-movies'><p className='header__link-text header__link-text_saved-movies'>Сохранённые фильмы</p></Link>
-              <Link className='header__link header__link_loggedin' to='/profile'><p className='header__link-text header__link-text_profile'>Аккаунт</p><img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
+              <Link className='header__link header__link_loggedin header__link_active' to='/movies'>Фильмы</Link>
+              <Link className='header__link header__link_loggedin' to='/saved-movies'>Сохранённые фильмы</Link>
+              <Link className='header__link header__link_loggedin' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
             </Route>
             <Route path="/saved-movies">
-              <Link className='header__link header__link_loggedin' to='/movies'><p className='header__link-text header__link-text_movies'>Фильмы</p></Link>
-              <Link className='header__link header__link_loggedin header__link_active' to='/saved-movies'><p className='header__link-text header__link-text_saved-movies'>Сохранённые фильмы</p></Link>
-              <Link className='header__link header__link_loggedin' to='/profile'><p className='header__link-text header__link-text_profile'>Аккаунт</p><img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
+              <Link className='header__link header__link_loggedin' to='/movies'>Фильмы</Link>
+              <Link className='header__link header__link_loggedin header__link_active' to='/saved-movies'>Сохранённые фильмы</Link>
+              <Link className='header__link header__link_loggedin' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
             </Route>
             <Route path="/profile">
-              <Link className='header__link header__link_loggedin' to='/movies'><p className='header__link-text header__link-text_movies'>Фильмы</p></Link>
-              <Link className='header__link header__link_loggedin' to='/saved-movies'><p className='header__link-text header__link-text_saved-movies'>Сохранённые фильмы</p></Link>
-              <Link className='header__link header__link_loggedin' to='/profile'><p className='header__link-text header__link-text_profile'>Аккаунт</p><img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
+              <Link className='header__link header__link_loggedin' to='/movies'>Фильмы</Link>
+              <Link className='header__link header__link_loggedin' to='/saved-movies'>Сохранённые фильмы</Link>
+              <Link className='header__link header__link_loggedin' to='/profile'>Аккаунт<img className='header__profile-image' src={profileImage} alt='значок профиля' /></Link>
             </Route>
           </div>
         </>}

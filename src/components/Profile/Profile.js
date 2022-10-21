@@ -2,8 +2,9 @@ import React from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom';
+import Header from '../Header/Header';
 
-function Profile({ userName, submitButtonText, exitProfile, loggedIn }) {
+function Profile({ userName, submitButtonText, exitProfile, loggedIn, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
 
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
   const currentUser = React.useContext(CurrentUserContext);
@@ -14,6 +15,10 @@ function Profile({ userName, submitButtonText, exitProfile, loggedIn }) {
     setIsEdit(false);
     console.log(isEdit);
     // onLoginIn(values);
+  }
+
+  function handleOpenNavigation() {
+    openNavigation();
   }
 
   function loggedOut() {
@@ -34,6 +39,7 @@ function Profile({ userName, submitButtonText, exitProfile, loggedIn }) {
 
   return (
     <>
+      <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
       <div className='profile'>
         <h2 className='profile__title'>Привет, {userName}!</h2>
         <div className='profile__inputs'>
