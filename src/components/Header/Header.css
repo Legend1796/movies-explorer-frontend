@@ -106,13 +106,30 @@
   margin-top: 10px;
 }
 
+.header__navigation-image {
+  display: none;
+}
+
 @media screen and (max-width: 1279px) {
   .header__logo {
     margin-left: 30px;
   }
+
+  .header__navigation {
+    display: none;
+  }
+
+  .header__navigation-image {
+    display: flex;
+    margin-right: 30px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  .header__navigation-image {
+    margin-right: 14px;
+  }
+
   .header__link {
     font-size: 10px;
     line-height: 16px;
