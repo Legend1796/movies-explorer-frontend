@@ -1,5 +1,4 @@
 import { Link, Route } from 'react-router-dom';
-import './Header.css'
 
 function Header({ loggedIn, openPopup, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
 

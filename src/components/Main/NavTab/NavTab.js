@@ -1,5 +1,3 @@
-import '../NavTab/NavTab.css'
-
 function NavTab() {
 
   return (

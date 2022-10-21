@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Film/Film.css';
 import saveOn from '../../images/likeOn.svg';
 import saveOff from '../../images/likeOff.svg';
 import deletefilm from '../../images/deletefilm.svg';

@@ -1,4 +1,3 @@
-import '../Movies/Movies.css';
 import find from '../../images/find.svg';
 import smalltumbOn from '../../images/smalltumb-active.svg';
 import smalltumbOff from '../../images/smalltumboff.svg';

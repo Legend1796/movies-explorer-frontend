@@ -1,7 +1,6 @@
 import React from 'react';
 import logoLoggedIn from '../../images/header-logo.svg';
 import Form from '../Form/Form';
-import '../Login/Login.css'
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function Register({ onRegister }) {

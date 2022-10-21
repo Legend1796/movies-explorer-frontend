@@ -1,4 +1,3 @@
-import '../Promo/Promo.css'
 import landingLogo from '../../../images/landing-logo.png';
 
 function Promo() {

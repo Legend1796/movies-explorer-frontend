@@ -1,5 +1,3 @@
-import '../Techs/Techs.css'
-
 function Techs() {
 
   return (

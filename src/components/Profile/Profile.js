@@ -1,6 +1,4 @@
 import React from 'react';
-import '../Profile/Profile.css';
-import '../Login/Login.css';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom';

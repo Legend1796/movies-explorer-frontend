@@ -1,4 +1,3 @@
-import '../Portfolio/Portfolio.css'
 import link from '../../../images/portfolio_link.svg';
 
 function Portfolio() {

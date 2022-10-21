@@ -1,4 +1,3 @@
-import '../App/App.css'
 import React from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -12,12 +11,14 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Popup from '../Popup/Popup';
 import { initialFilms } from '../../utils/initialFilms';
 import { savedMovies } from '../../utils/savedMovies';
 import logoLoggedOut from '../../images/logo-unlogged.svg';
 import logoLoggedIn from '../../images/header-logo.svg';
 import profileImage from '../../images/profile.svg';
 import navigationBtn from '../../images/navigation-btn.svg';
+import closePopupBtn from '../../images/closePopupBtn.svg';
 
 function App() {
   const [userName, setUserName] = React.useState('Legend');
@@ -29,11 +30,15 @@ function App() {
   function handleExitProfile() {
     setLoggedIn(false);
     history.push('/main');
-    console.log(loggedIn);
   }
 
   function handleOpenPopup() {
     setOpenPopup(true);
+    console.log(openPopup);
+  }
+
+  function handleClosePopup() {
+    setOpenPopup(false);
   }
 
   function onRegister({ name, email, password }) {
@@ -89,7 +94,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-        <Profile profileImage={profileImage} />
+        <Popup profileImage={profileImage} closePopupBtn={closePopupBtn} onClose={handleClosePopup} isOpen={openPopup} />
       </div>
     </CurrentUserContext.Provider>
   );

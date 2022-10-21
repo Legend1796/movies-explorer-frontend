@@ -1,5 +1,3 @@
-import '../AboutProject/AboutProject.css'
-
 function AboutProject() {
 
   return (

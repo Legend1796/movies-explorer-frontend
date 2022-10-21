@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-import '../Form/Form.css'
 
 function Form({ submitButtonText, isActiveSubmitButton, name, onSubmit, children, signupText, title }) {
   return (

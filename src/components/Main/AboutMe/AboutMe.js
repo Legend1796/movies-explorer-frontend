@@ -1,4 +1,3 @@
-import '../AboutMe/AboutMe.css';
 import '../Main.css';
 import photo from '../../../images/photo.png'
 
