@@ -1,11 +1,11 @@
 import { Link, Route } from 'react-router-dom';
 import '../Popup/Popup.css';
 
-function Popup({ onClose, isOpen }) {
+function Popup({ onClose, isOpen, profileImage }) {
   return (
-    <div className={`popup popup_full-size ${isOpen && 'popup_opened'}`} >
+    <div className={`popup ${isOpen && 'popup_opened'}`} >
       <button onClick={onClose} className="popup__overlay" />
-      <div className='header__navigation'>
+      <div className='popup__navigation'>
         <Route path="/movies">
           <Link className='header__link header__link_loggedin header__link_active' to='/movies'><p className='header__link-text header__link-text_movies'>Фильмы</p></Link>
           <Link className='header__link header__link_loggedin' to='/saved-movies'><p className='header__link-text header__link-text_saved-movies'>Сохранённые фильмы</p></Link>

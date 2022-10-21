@@ -89,6 +89,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
+        <Profile profileImage={profileImage} />
       </div>
     </CurrentUserContext.Provider>
   );
