@@ -63,6 +63,10 @@
 }
 
 .movies__search-image:hover {
+  cursor: pointer;
+}
+
+.movies__short-btn:hover {
   transition: opacity .2s linear;
   opacity: .8;
   cursor: pointer;
