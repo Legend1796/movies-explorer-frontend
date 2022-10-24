@@ -16,7 +16,7 @@
 .login__btn {
   width: 396px;
   height: 44px;
-  background: #3456F3;
+  background: #FF6838;
   border-radius: 3px;
   border: none;
   color: white;
@@ -117,7 +117,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: #3456F3;
+  color: #FF6838;
   text-decoration: none;
   opacity: 1;
 }
