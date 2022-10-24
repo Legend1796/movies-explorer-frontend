@@ -14,7 +14,6 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Navigation from '../Navigation/Navigation';
 import { initialFilms } from '../../utils/initialFilms';
 import { savedMovies } from '../../utils/savedMovies';
-import logoLoggedOut from '../../images/logo-unlogged.svg';
 import logoLoggedIn from '../../images/header-logo.svg';
 import profileImage from '../../images/profile.svg';
 import navigationBtn from '../../images/navigation-btn.svg';
@@ -69,8 +68,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Switch>
-          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
-          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={SavedMovies} savedFilms={savedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+          <ProtectedRoute path='/movies' loggedIn={loggedIn} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} component={SavedMovies} savedFilms={savedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />
           </Route>
@@ -78,10 +77,10 @@ function App() {
             <Login onLoginIn={onLoginIn} />
           </Route>
           <Route path='/profile'>
-            <Profile loggedIn={loggedIn} userName={userName} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+            <Profile loggedIn={loggedIn} userName={userName} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           </Route>
           <Route path="/main">
-            <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+            <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
             <Main />
             <Footer />
           </Route>

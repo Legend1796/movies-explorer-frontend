@@ -1,10 +1,10 @@
 import { Link, Route } from 'react-router-dom';
 
-function Header({ loggedIn, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
+function Header({ loggedIn, openNavigation, navigationBtn, profileImage, logoLoggedIn }) {
 
   return (
     <header className={`header ${loggedIn ? 'header_loggedin' : ''}`}>
-      <img className={`header__logo ${loggedIn ? 'header__logo_logged-in' : ''}`} src={loggedIn ? logoLoggedIn : logoLoggedOut} alt='Логотип сайта' />
+      <img className='header__logo' src={logoLoggedIn} alt='Логотип сайта' />
       {!loggedIn ?
         <div className='header__links'>
           <Link className='header__link header__link_signup' to='/signup'><p className='header__link-text'>Регистрация</p></Link>
