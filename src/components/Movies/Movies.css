@@ -45,7 +45,7 @@
 
 .movies__search-image {
   height: 34px;
-  width: 34px;
+  width: 80px;
   margin-left: 46px;
   margin-right: 7px;
   padding: 0;
@@ -97,9 +97,10 @@
   padding: 0;
   row-gap: 38px;
   column-gap: 20px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(auto, 1fr);
   justify-content: center;
+  background-color: #FFFFFF;
 }
 
 .movies__more-button:hover {

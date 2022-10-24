@@ -5,11 +5,19 @@
   align-items: center;
   margin: 0;
   justify-content: center;
+  background-color: #FDFDFD;
+  border-radius: 6px;
+}
+
+.element__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .element__image {
-  width: 270px;
-  height: 151px;
+  width: 360px;
+  height: 200px;
   object-fit: cover;
 }
 
@@ -17,41 +25,37 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  width: 250px;
+  width: 240px;
   color: #000000;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0;
 }
 
 .element__rectangle {
   display: flex;
   justify-content: space-between;
-  margin: 0;
   align-items: center;
+  width: calc(100% - 36px);
+  margin: 18px;
 }
 
 .element__save {
-  width: 24px;
-  height: 24px;
+  width: 100px;
+  height: 29px;
   object-fit: cover;
   margin: 0;
   opacity: 1;
-}
-
-.element__underline {
-  width: 100%;
-  border-bottom: 1px solid #E8E8E8;
-  margin: 0;
-  margin-top: 19px;
+  margin: 18px auto;
 }
 
 .element__time {
-  margin-top: 6px;
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
   color: #A0A0A0;
+  margin: 0;
 }
 
 .element__save:hover {
@@ -62,8 +66,12 @@
 
 @media screen and (max-width: 1279px) {
   .element__image {
-    width: 339px;
+    width: 342px;
     height: 190px;
+  }
+
+  .element__title {
+    width: 224px;
   }
 }
 
@@ -75,12 +83,21 @@
 
   .element__title {
     font-size: 12px;
-    line-height: 15px;
-    margin-top: 12px;
+    line-height: 18px;
+    width: 200px;
   }
 
   .element__time {
     font-size: 10px;
-    line-height: 12px;
+    line-height: 18px;
+  }
+
+  .element__rectangle {
+    width: calc(100% - 28px);
+    margin: 14px;
+  }
+
+  .element__save {
+    margin: 14px auto;
   }
 }
