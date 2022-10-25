@@ -10,7 +10,7 @@ function Navigation({ onClose, isOpen, profileImage, closeNavigationBtn, exitPro
   return (
     <div className={`navigation ${isOpen ? 'navigation_opened' : ''}`}>
       <div className='navigation__block' >
-        <img src={closeNavigationBtn} onClick={onClose} className="navigation__close" type="button" alt="Закрыть" />
+        <button className='navigation__close-button' type='button'><img src={closeNavigationBtn} onClick={onClose} className='navigation__close' alt='Закрыть' /></button>
         <div className='navigation__container'>
           <Route path="/movies">
             <div className='navigation__links'>
@@ -38,7 +38,7 @@ function Navigation({ onClose, isOpen, profileImage, closeNavigationBtn, exitPro
           </Route>
         </div>
       </div >
-      <button onClick={onClose} className="navigation__overlay" />
+      <button onClick={onClose} className='navigation__overlay' type='button' />
     </div>
   )
 }

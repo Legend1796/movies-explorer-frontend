@@ -91,6 +91,13 @@
 .header__navigation-button {
   background-color: white;
   border: none;
+  opacity: 1;
+}
+
+.header__navigation-button:hover {
+  transition: opacity .2s linear;
+  opacity: .8;
+  cursor: pointer;
 }
 
 .header__link-text_profile {
