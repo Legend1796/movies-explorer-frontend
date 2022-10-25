@@ -108,7 +108,7 @@
 .elements {
   display: grid;
   list-style: none;
-  margin: 70px 70px 10px;
+  margin: 70px auto 10px;
   padding: 0;
   row-gap: 38px;
   column-gap: 20px;
@@ -116,6 +116,7 @@
   grid-template-rows: repeat(auto, 1fr);
   justify-content: center;
   background-color: #FFFFFF;
+  width: 1140px;
 }
 
 .movies__more-button:hover {
@@ -128,11 +129,12 @@
 
 @media screen and (max-width: 1279px) {
   .elements {
-    margin: 30px 30px 10px;
+    margin: 30px auto 10px;
     padding: 0;
     row-gap: 30px;
     column-gap: 30px;
     grid-template-columns: repeat(2, 1fr);
+    width: 678px;
   }
 
   .movies__more-button {
@@ -170,10 +172,11 @@
 
 @media screen and (max-width: 767px) {
   .elements {
-    margin: 0 10px 10px;
+    margin: 0 auto 10px;
     padding: 0;
     row-gap: 24px;
     grid-template-columns: repeat(1, 1fr);
+    width: 300px;
   }
 
   .movies__more-button {

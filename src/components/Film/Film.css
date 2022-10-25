@@ -8,6 +8,8 @@
   background-color: #FDFDFD;
   border-radius: 6px;
   box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.1);
+  width: 360px;
+  align-self: center;
 }
 
 .element__container {
@@ -20,6 +22,12 @@
   width: 360px;
   height: 200px;
   object-fit: cover;
+}
+
+.element__button {
+  background-color: white;
+  border: none;
+  padding: 0;
 }
 
 .element__title {
@@ -66,6 +74,10 @@
 }
 
 @media screen and (max-width: 1279px) {
+  .element {
+    width: 342px;
+  }
+
   .element__image {
     width: 342px;
     height: 190px;
@@ -77,6 +89,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  .element {
+    width: 300px;
+  }
+
   .element__image {
     width: 300px;
     height: 168px;

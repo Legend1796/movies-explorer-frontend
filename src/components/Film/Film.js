@@ -31,10 +31,14 @@ function Film({ filmInfo, onFilmSave, onFilmDelete }) {
         </div>
         <img className='element__image' src={filmInfo.link} alt='Фото места' />
         <Route path='/movies'>
-          <img className='element__save' src={isSaved ? saveOn : saveOff} onClick={handlefilmSave} type='button' aria-label='В избранное' />
+          <button className='element__button'>
+            <img className='element__save' src={isSaved ? saveOn : saveOff} onClick={handlefilmSave} type='button' aria-label='В избранное' />
+          </button>
         </Route>
         <Route path='/saved-movies'>
-          <img className='element__save' src={deletefilm} onClick={handlefilmDelete} type='button' aria-label='В избранное' />
+          <button className='element__button'>
+            <img className='element__save' src={deletefilm} onClick={handlefilmDelete} type='button' aria-label='В избранное' />
+          </button>
         </Route>
       </div>
     </li>
