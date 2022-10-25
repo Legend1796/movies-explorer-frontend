@@ -89,6 +89,7 @@
 @media screen and (max-width: 767px) {
   .techs {
     padding: 70px 18px 70px 18px;
+    background-color: white;
   }
 
   .techs__paragraph {
