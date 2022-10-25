@@ -6,7 +6,7 @@ import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-function Movies({ loggedIn, initialFilms, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
+function Movies({ loggedIn, exitProfile, initialFilms, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
 
   function filmSave(filmInfo) {
@@ -28,10 +28,10 @@ function Movies({ loggedIn, initialFilms, onFilmSave, openNavigation, navigation
 
   return (
     <>
-      <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+      <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
       <section>
         <div className='movies__search'>
-          <div className='movies__container'>
+          <form className='movies__container'>
             <div className='movies__search-block'>
               <input className='movies__input' id='film-search' name='film-search' type='film-search' placeholder='Фильм' maxLength='70' required />
               <button className='movies__search-button' type='button'><img onClick={handleBottonSearchClick} className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
@@ -40,7 +40,7 @@ function Movies({ loggedIn, initialFilms, onFilmSave, openNavigation, navigation
               <p className='movies__short-title'>Короткометражки</p>
               <button className='movies__short-button' type='button'><img onClick={handleChangeShortFilmActivetily} className='movies__short-image' src={shortFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' /></button>
             </div>
-          </div>
+          </form>
           <div className='movies__underline' />
         </div>
       </section>
@@ -53,7 +53,7 @@ function Movies({ loggedIn, initialFilms, onFilmSave, openNavigation, navigation
       </section>
       <section>
         <div className='movies__more'>
-          <button className='movies__more-button'>Ещё</button>
+          <button className='movies__more-button' type='button'>Ещё</button>
         </div>
       </section>
       <Footer />

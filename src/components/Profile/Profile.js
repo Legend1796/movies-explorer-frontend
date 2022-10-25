@@ -39,7 +39,7 @@ function Profile({ userName, submitButtonText, exitProfile, loggedIn, openNaviga
 
   return (
     <>
-      <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+      <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
       <div className='profile'>
         <h2 className='profile__title'>Привет, {userName}!</h2>
         <div className='profile__inputs'>
