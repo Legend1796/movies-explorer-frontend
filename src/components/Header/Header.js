@@ -12,7 +12,7 @@ function Header({ loggedIn, openNavigation, navigationBtn, profileImage, logoLog
         </div>
         :
         <>
-          <img onClick={openNavigation} className='header__navigation-image' src={navigationBtn} alt='кнопка навигации' />
+          <button type='button' className='header__navigation-button' onClick={openNavigation}><img className='header__navigation-image' src={navigationBtn} alt='кнопка навигации' /></button>
           <div className='header__navigation'>
             <Route path="/movies">
               <Link className='header__link header__link_loggedin header__link_active' to='/movies'>Фильмы</Link>
