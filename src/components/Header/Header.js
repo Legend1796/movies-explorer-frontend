@@ -7,7 +7,7 @@ function Header({ loggedIn, exitProfile, openNavigation, navigationBtn, profileI
   }
   return (
     <header className={`header ${loggedIn ? 'header_loggedin' : ''}`}>
-      <Link onClick={loggedOut} className='navigation__link' to='/main'><img className='header__logo' src={logoLoggedIn} alt='Логотип сайта' /></Link>
+      <Link onClick={loggedOut} className='header__logo-link' to='/main'><img className='header__logo' src={logoLoggedIn} alt='Логотип сайта' /></Link>
       {!loggedIn ?
         <div className='header__links'>
           <Link className='header__link header__link_signup' to='/signup'><p className='header__link-text'>Регистрация</p></Link>
