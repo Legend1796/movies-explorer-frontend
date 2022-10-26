@@ -15,17 +15,3 @@
   src: url("Inter-Medium.woff") format("woff2"),
     url("Inter-Medium.woff2") format("woff");
 }
-
-@font-face {
-  font-family: system;
-  font-style: normal;
-  font-weight: 400;
-  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
-}
-
-@font-face {
-  font-family: system;
-  font-style: normal;
-  font-weight: 500;
-  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
-}

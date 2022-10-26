@@ -1,11 +1,11 @@
 .login {
   padding: 0;
-  margin-top: 70px;
-  margin-bottom: 70px;
+  margin: 70px auto 70px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  width: 396px;
 }
 
 .login__input-container {
@@ -147,7 +147,9 @@
 
 @media screen and (max-width: 767px) {
   .login {
+    width: 320px;
     margin: 56px auto 232px;
+    align-items: center;
   }
 
   .login__title {
