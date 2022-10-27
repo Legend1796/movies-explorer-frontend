@@ -1,0 +1,8 @@
+@import url(../../vendor/normalize.css);
+@import url(../../vendor/fonts/inter.css);
+
+.page {
+  font-family: 'Inter';
+  font-style: normal;
+  min-width: 320px;
+}
