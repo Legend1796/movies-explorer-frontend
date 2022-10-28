@@ -34,7 +34,7 @@ function Movies({ loggedIn, exitProfile, initialFilms, onFilmSave, openNavigatio
           <form className='movies__container'>
             <div className='movies__search-block'>
               <input className='movies__input' id='film-search' name='film-search' type='film-search' placeholder='Фильм' maxLength='70' required />
-              <button className='movies__search-button' type='button'><img onClick={handleBottonSearchClick} className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
+              <button className='movies__search-button' type='submit'><img onClick={handleBottonSearchClick} className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
             </div>
             <div className='movies__short-container'>
               <p className='movies__short-title'>Короткометражки</p>
