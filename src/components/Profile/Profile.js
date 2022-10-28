@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 
-function Profile({ userName, submitButtonText, exitProfile, loggedIn, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
+function Profile({ submitButtonText, exitProfile, loggedIn, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, editProfile }) {
 
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
   const currentUser = React.useContext(CurrentUserContext);
@@ -13,8 +13,8 @@ function Profile({ userName, submitButtonText, exitProfile, loggedIn, openNaviga
   function handleSubmit(e) {
     e.preventDefault();
     setIsEdit(false);
+    editProfile(values);
     console.log(isEdit);
-    // onLoginIn(values);
   }
 
   function handleOpenNavigation() {
@@ -30,18 +30,15 @@ function Profile({ userName, submitButtonText, exitProfile, loggedIn, openNaviga
   }
 
   React.useEffect(() => {
-    resetErrors({ email: '', password: '' });
-  }, []);
-
-  React.useEffect(() => {
     resetErrors({ name: currentUser.name, email: currentUser.email });
+    console.log(currentUser.name, currentUser.email);
   }, [currentUser]);
 
   return (
     <>
       <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
-      <div className='profile'>
-        <h2 className='profile__title'>Привет, {userName}!</h2>
+      <form className='popup__form profile' onSubmit={handleSubmit}>
+        <h2 className='profile__title'>Привет, {values.name}!</h2>
         <div className='profile__inputs'>
           <div className='profile__input-container'>
             <span className='profile__input-placeholder'>Имя</span>
@@ -60,17 +57,17 @@ function Profile({ userName, submitButtonText, exitProfile, loggedIn, openNaviga
         {!isEdit ?
           <>
             <div className='profile__btn'>
-              <button className='profile__edit-btn' onClick={handleProfileEditBottonClick}>Редактировать</button>
-              <Link to='/main' className='profile__link' onClick={loggedOut}>Выйти из аккаунта</Link>
+              <button className='profile__edit-btn' type='button' onClick={handleProfileEditBottonClick}>Редактировать</button>
+              <Link to='/main' className='profile__link' type='button' onClick={loggedOut}>Выйти из аккаунта</Link>
             </div>
           </>
           : <>
-            <form className='profile__btn' onSubmit={handleSubmit}>
+            <div className='profile__btn' >
               <button className={`login__btn ${!isValid ? 'login__btn_disabled' : ''}`} type='submit' disabled={!isValid}>{submitButtonText}</button>
-            </form>
+            </div>
           </>
         }
-      </div >
+      </form >
     </>
   )
 }

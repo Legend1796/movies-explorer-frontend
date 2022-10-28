@@ -19,6 +19,7 @@ import profileImage from '../../images/profile.svg';
 import navigationBtn from '../../images/navigation-btn.svg';
 import closeNavigationBtn from '../../images/closePopupBtn.svg';
 import * as auth from '../../utils/auth';
+import mainApi from '../../utils/MainApi';
 
 
 function App() {
@@ -27,6 +28,20 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const history = useHistory();
+
+  React.useEffect(() => {
+    if (loggedIn === true) {
+      Promise.all([
+        mainApi.getUserInfo()])
+        // api.getInitialCards()])
+        .then(([info, cards]) => {
+          setUserInfo(info);
+          console.log(currentUser)
+          // setCards(cards);
+        })
+        .catch((err) => console.log(err));
+    };
+  }, [loggedIn]);
 
   function handleExitProfile() {
     setLoggedIn(false);
@@ -57,6 +72,7 @@ function App() {
   function onRegister({ name, email, password }) {
     auth.register(name, email, password)
       .then((res) => {
+        console.log(name, email, password);
         setLoggedIn(true);
         onAsseccAllowed();
         history.push('/movies');
@@ -67,10 +83,22 @@ function App() {
   function onLoginIn({ email, password }) {
     auth.autorise(email, password)
       .then((res) => {
+        console.log(res);
         setLoggedIn(true);
         history.push("/movies");
       })
       .catch(() => onAsseccDenied());
+  }
+
+  function handleUpdateUser(userData) {
+    // setIsLoading(true);
+    mainApi.setUserInfo(userData)
+      .then((res) => {
+        setUserInfo(res);
+        // handleCloseAllPopups();
+      })
+      .catch((err) => console.log(err))
+    // .finally(() => setIsLoading(false))
   }
 
   return (
@@ -86,7 +114,7 @@ function App() {
             <Login onLoginIn={onLoginIn} />
           </Route>
           <Route path='/profile'>
-            <Profile loggedIn={loggedIn} userName={userName} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+            <Profile loggedIn={loggedIn} editProfile={handleUpdateUser} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           </Route>
           <Route path="/main">
             <Header loggedIn={loggedIn} exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
