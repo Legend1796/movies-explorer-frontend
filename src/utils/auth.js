@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://movies.legend1796.nomoredomains.icu';
 
 function getResponseData(response) {
   if (response.ok) {
@@ -7,13 +7,13 @@ function getResponseData(response) {
   return Promise.reject(`Ошибка: ${response.status}`);
 }
 
-export const register = (email, password) => {
+export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ password, email })
+    body: JSON.stringify({ name, password, email })
   })
     .then((response) => getResponseData(response))
 };

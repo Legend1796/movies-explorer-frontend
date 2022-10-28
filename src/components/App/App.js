@@ -18,6 +18,8 @@ import logoLoggedIn from '../../images/header-logo.svg';
 import profileImage from '../../images/profile.svg';
 import navigationBtn from '../../images/navigation-btn.svg';
 import closeNavigationBtn from '../../images/closePopupBtn.svg';
+import * as auth from '../../utils/auth';
+
 
 function App() {
   const [userName, setUserName] = React.useState('Legend');
@@ -39,29 +41,36 @@ function App() {
     setOpenNavigation(false);
   }
 
+  function onAsseccDenied() {
+    // setAccesMessage('Что-то пошло не так!\nПопробуйте ещё раз.');
+    // setAccessImage(deniedImage);
+    // setInfoTooltipOpen(true);
+    console.log('Доделать попап неудачного входа в аккаунт');
+  }
+
+  function onAsseccAllowed() {
+    // setAccesMessage('Вы успешно зарегистрировались!');
+    // setAccessImage(allowedImage);
+    // setInfoTooltipOpen(true);
+    console.log('Доделать попап удачного входа в аккаунт');
+  }
   function onRegister({ name, email, password }) {
-    // auth.register(email, password)
-    //   .then((res) => {
-    //     setUserEmail(res.email);
-    //     setLoggedIn(true);
-    //     onAsseccAllowed();
-    //     history.push('/main');
-    //   })
-    //   .catch(() => onAsseccDenied());
-    history.push('/movies');
-    setLoggedIn(true);
+    auth.register(name, email, password)
+      .then((res) => {
+        setLoggedIn(true);
+        onAsseccAllowed();
+        history.push('/movies');
+      })
+      .catch(() => onAsseccDenied());
   }
 
   function onLoginIn({ email, password }) {
-    // auth.autorise(email, password)
-    //   .then((res) => {
-    //     setUserEmail(res.email);
-    //     setLoggedIn(true);
-    //     history.push('/main');
-    //   })
-    //   .catch(() => onAsseccDenied());
-    history.push('/movies');
-    setLoggedIn(true);
+    auth.autorise(email, password)
+      .then((res) => {
+        setLoggedIn(true);
+        history.push("/movies");
+      })
+      .catch(() => onAsseccDenied());
   }
 
   return (
