@@ -7,8 +7,8 @@ export class MainApi {
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      headers: this._headers,
-      credentials: "include"
+      credentials: "include",
+      headers: this._headers
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -16,20 +16,37 @@ export class MainApi {
   }
 
 
-  setUserInfo(userData) {
-    return fetch(`${this._url}/users/me`, {
-      credentials: "include",
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: userData.name,
-        about: userData.about
-      })
-    })
-      .then(res => {
-        return this._getResponseData(res);
-      });
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.clone().json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
+}
+
+const mainApi = new MainApi({
+  baseUrl: 'http://localhost:3000',
+  // baseUrl: 'https://movies.legend1796.nomoredomains.icu',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+export default mainApi;
+  // setUserInfo(userData) {
+  //   return fetch(`${this._url}/users/me`, {
+  //     credentials: "include",
+  //     method: 'PATCH',
+  //     headers: this._headers,
+  //     body: JSON.stringify({
+  //       name: userData.name,
+  //       about: userData.about
+  //     })
+  //   })
+  //     .then(res => {
+  //       return this._getResponseData(res);
+  //     });
+  // }
 
   // getInitialCards() {
   //   return fetch(`${this._url}/cards`, {
@@ -80,20 +97,3 @@ export class MainApi {
   //       return this._getResponseData(res);
   //     });
   // }
-
-  _getResponseData(res) {
-    if (res.ok) {
-      return res.clone().json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  }
-}
-
-const mainApi = new MainApi({
-  baseUrl: 'https://movies.legend1796.nomoredomains.icu',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
-
-export default mainApi;

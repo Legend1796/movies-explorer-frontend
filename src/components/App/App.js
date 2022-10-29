@@ -73,9 +73,9 @@ function App() {
     auth.register(name, email, password)
       .then((res) => {
         console.log(name, email, password);
-        setLoggedIn(true);
         onAsseccAllowed();
         history.push('/movies');
+        setLoggedIn(true);
       })
       .catch(() => onAsseccDenied());
   }
@@ -84,8 +84,14 @@ function App() {
     auth.autorise(email, password)
       .then((res) => {
         console.log(res);
-        setLoggedIn(true);
-        history.push("/movies");
+        // history.push("/movies");
+        // setLoggedIn(true);
+        mainApi.getUserInfo()
+          .then((info) => {
+            setUserInfo(info);
+            console.log(currentUser)
+          })
+          .catch((err) => console.log(err));
       })
       .catch(() => onAsseccDenied());
   }
