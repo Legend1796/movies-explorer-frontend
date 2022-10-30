@@ -18,6 +18,8 @@ import logoLoggedIn from '../../images/header-logo.svg';
 import profileImage from '../../images/profile.svg';
 import navigationBtn from '../../images/navigation-btn.svg';
 import closeNavigationBtn from '../../images/closePopupBtn.svg';
+import allowedImage from '../../images/Allowed.svg'
+import deniedImage from '../../images/Denied.svg'
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
 
