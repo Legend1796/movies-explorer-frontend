@@ -22,7 +22,7 @@ import allowedImage from '../../images/Allowed.svg'
 import deniedImage from '../../images/Denied.svg'
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
-import InfoTooltip from './InfoTooltip/InfoTooltip';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
   const history = useHistory();
+  const isOpen = isInfoTooltipOpen || openNavigation;
 
   React.useEffect(() => {
     if (loggedIn === true) {
@@ -104,6 +105,21 @@ function App() {
     setInfoTooltipOpen(false);
     setOpenNavigation(false);
   }
+
+  React.useEffect(() => {
+    console.log(isOpen);
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        handleCloseAllPopups();
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
