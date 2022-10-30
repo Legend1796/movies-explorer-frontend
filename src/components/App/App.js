@@ -22,6 +22,7 @@ import allowedImage from '../../images/Allowed.svg'
 import deniedImage from '../../images/Denied.svg'
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
+import InfoTooltip from './InfoTooltip/InfoTooltip';
 
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
   const [currentUser, setUserInfo] = React.useState({ name: '', email: '' });
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
+  const [accesMessage, setAccesMessage] = React.useState('');
+  const [accessImage, setAccessImage] = React.useState('');
   const history = useHistory();
 
   React.useEffect(() => {
@@ -38,7 +42,6 @@ function App() {
         // api.getInitialCards()])
         .then(([info, cards]) => {
           setUserInfo(info);
-          console.log(currentUser)
           // setCards(cards);
         })
         .catch((err) => console.log(err));
@@ -54,30 +57,24 @@ function App() {
     setOpenNavigation(true);
   }
 
-  function handleCloseNavigation() {
-    setOpenNavigation(false);
-  }
-
   function onAsseccDenied() {
-    // setAccesMessage('Что-то пошло не так!\nПопробуйте ещё раз.');
-    // setAccessImage(deniedImage);
-    // setInfoTooltipOpen(true);
-    console.log('Доделать попап неудачного входа в аккаунт');
+    setAccesMessage('Что-то пошло не так!\nПопробуйте ещё раз.');
+    setAccessImage(deniedImage);
+    setInfoTooltipOpen(true);
   }
 
   function onAsseccAllowed() {
-    // setAccesMessage('Вы успешно зарегистрировались!');
-    // setAccessImage(allowedImage);
-    // setInfoTooltipOpen(true);
-    console.log('Доделать попап удачного входа в аккаунт');
+    setAccesMessage('Вы успешно зарегистрировались!');
+    setAccessImage(allowedImage);
+    setInfoTooltipOpen(true);
   }
+
   function onRegister({ name, email, password }) {
     auth.register(name, email, password)
       .then((res) => {
-        console.log(name, email, password);
         onAsseccAllowed();
-        history.push('/movies');
         setLoggedIn(true);
+        history.push('/movies');
       })
       .catch(() => onAsseccDenied());
   }
@@ -85,15 +82,9 @@ function App() {
   function onLoginIn({ email, password }) {
     auth.autorise(email, password)
       .then((res) => {
-        console.log(res);
-        // history.push("/movies");
-        // setLoggedIn(true);
-        mainApi.getUserInfo()
-          .then((info) => {
-            setUserInfo(info);
-            console.log(currentUser)
-          })
-          .catch((err) => console.log(err));
+        onAsseccAllowed();
+        setLoggedIn(true);
+        history.push("/movies");
       })
       .catch(() => onAsseccDenied());
   }
@@ -107,6 +98,11 @@ function App() {
       })
       .catch((err) => console.log(err))
     // .finally(() => setIsLoading(false))
+  }
+
+  function handleCloseAllPopups() {
+    setInfoTooltipOpen(false);
+    setOpenNavigation(false);
   }
 
   return (
@@ -136,7 +132,9 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
-        <Navigation profileImage={profileImage} exitProfile={handleExitProfile} closeNavigationBtn={closeNavigationBtn} onClose={handleCloseNavigation} isOpen={openNavigation} />
+        <Navigation profileImage={profileImage} exitProfile={handleExitProfile} closeNavigationBtn={closeNavigationBtn} onClose={handleCloseAllPopups} isOpen={openNavigation} />
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={handleCloseAllPopups} name="access-message" title={accesMessage} image={accessImage} />
+
       </div>
     </CurrentUserContext.Provider>
   );
