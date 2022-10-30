@@ -23,6 +23,7 @@ import deniedImage from '../../images/Denied.svg'
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import Preloader from '../Preloader/Preloader';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
   const history = useHistory();
@@ -38,6 +40,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn === true) {
+      setIsLoading(true);
       Promise.all([
         mainApi.getUserInfo()])
         // api.getInitialCards()])
@@ -45,7 +48,8 @@ function App() {
           setUserInfo(info);
           // setCards(cards);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false))
     };
   }, [loggedIn]);
 
@@ -71,34 +75,39 @@ function App() {
   }
 
   function onRegister({ name, email, password }) {
+    setIsLoading(true);
     auth.register(name, email, password)
       .then((res) => {
         onAsseccAllowed();
         setLoggedIn(true);
         history.push('/movies');
       })
-      .catch(() => onAsseccDenied());
+      .catch(() => onAsseccDenied())
+      .finally(() => setIsLoading(false))
   }
 
   function onLoginIn({ email, password }) {
+    setIsLoading(true);
+    console.log(isLoading);
     auth.autorise(email, password)
       .then((res) => {
         onAsseccAllowed();
         setLoggedIn(true);
         history.push("/movies");
       })
-      .catch(() => onAsseccDenied());
+      .catch(() => onAsseccDenied())
+      .finally(() => setIsLoading(false))
   }
 
   function handleUpdateUser(userData) {
-    // setIsLoading(true);
+    setIsLoading(true);
     mainApi.setUserInfo(userData)
       .then((res) => {
         setUserInfo(res);
         // handleCloseAllPopups();
       })
       .catch((err) => console.log(err))
-    // .finally(() => setIsLoading(false))
+      .finally(() => setIsLoading(false))
   }
 
   function handleCloseAllPopups() {
@@ -150,7 +159,7 @@ function App() {
         </Switch>
         <Navigation profileImage={profileImage} exitProfile={handleExitProfile} closeNavigationBtn={closeNavigationBtn} onClose={handleCloseAllPopups} isOpen={openNavigation} />
         <InfoTooltip isOpen={isInfoTooltipOpen} onClose={handleCloseAllPopups} name="access-message" title={accesMessage} image={accessImage} />
-
+        <Preloader isLoading={isLoading} />
       </div>
     </CurrentUserContext.Provider>
   );
