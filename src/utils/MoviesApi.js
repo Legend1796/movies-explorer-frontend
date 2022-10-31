@@ -4,16 +4,16 @@ export class MoviesApi {
     this._headers = options.headers;
   }
 
-  // getUserInfo() {
-  //   return fetch(`${this._url}/users/me`, {
-  //     method: 'GET',
-  //     credentials: "include",
-  //     headers: this._headers
-  //   })
-  //     .then((res) => {
-  //       return this._getResponseData(res);
-  //     });
-  // }
+  getMovies() {
+    return fetch(`${this._url}/movies`, {
+      method: 'GET',
+      credentials: "include",
+      headers: this._headers
+    })
+      .then((res) => {
+        return this._getResponseData(res);
+      });
+  }
 
 
   _getResponseData(res) {
