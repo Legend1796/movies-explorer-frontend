@@ -32,7 +32,7 @@ function Navigation({ onClose, isOpen, profileImage, closeNavigationBtn, exitPro
             <div className='navigation__link-container'>
               <Link onClick={loggedOut} className='navigation__link' to='/main'><p className='navigation__link-text'>Главная</p></Link>
               <Link onClick={onClose} className='navigation__link' to='/movies'><div className='navigation__link-text'>Фильмы<div className='navigation__underline-movies' /></div></Link>
-              <Link onClick={onClose} className='navigation__link' to='/saved-movies'><p className='navigation__link-text'>Сохранённые фильмы<div className='navigation__underline-movies' /></p></Link>
+              <Link onClick={onClose} className='navigation__link' to='/saved-movies'><div className='navigation__link-text'>Сохранённые фильмы<div className='navigation__underline-movies' /></div></Link>
             </div>
             <Link onClick={onClose} className='navigation__link navigation__link-profile' to='/profile'><p className='navigation__link-text navigation__link-text_active'>Аккаунт</p><img className='navigation__profile-image' src={profileImage} alt='значок профиля' /></Link>
           </Route>

@@ -92,6 +92,10 @@
   cursor: pointer;
 }
 
+.login__btn_forProfile {
+  margin-top: 0;
+}
+
 @media screen and (max-width: 1279px) {
   .profile__title {
     margin: 236px auto 96px;
