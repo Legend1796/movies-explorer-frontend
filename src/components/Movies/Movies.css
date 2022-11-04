@@ -14,22 +14,8 @@
 .movies__container {
   display: flex;
   align-items: center;
-  margin: 81px 0 83px 0;
+  margin: 81px 0 0 0;
   position: relative;
-}
-
-.movies__input-error {
-  position: absolute;
-  top: 11px;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
-  color: rgba(255, 48, 85, 0);
-  margin: 0;
-}
-
-.movies__input-error_active {
-  color: rgba(255, 48, 85, 1);
 }
 
 .movies__search-block {
@@ -85,12 +71,13 @@
 }
 
 .movies__short-title {
-  margin: 0 14px 0 40px;
   padding: 0;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 18px;
   color: #000000;
+  margin: 0;
+  margin-left: 6px;
 }
 
 .movies__search-button:hover {
@@ -149,6 +136,9 @@
 .movies__short-container {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: center;
+  margin-top: 41px;
+  margin-bottom: 70px;
 }
 
 @media screen and (max-width: 1279px) {

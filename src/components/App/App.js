@@ -24,6 +24,7 @@ import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
+import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
@@ -41,17 +42,24 @@ function App() {
   React.useEffect(() => {
     if (loggedIn === true) {
       setIsLoading(true);
-      Promise.all([
-        mainApi.getUserInfo()])
-        // api.getInitialCards()])
-        .then(([info, cards]) => {
+      mainApi.getUserInfo()
+        .then((info) => {
           setUserInfo(info);
-          // setCards(cards);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
   }, [loggedIn]);
+
+  function handleFilmSearch(value) {
+    setIsLoading(true);
+    moviesApi.getMovies()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(() => onAsseccDenied())
+      .finally(() => setIsLoading(false))
+  }
 
   function handleExitProfile() {
     setLoggedIn(false);
@@ -88,7 +96,6 @@ function App() {
 
   function onLoginIn({ email, password }) {
     setIsLoading(true);
-    console.log(isLoading);
     auth.autorise(email, password)
       .then((res) => {
         onAsseccAllowed();
@@ -116,7 +123,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    console.log(isOpen);
     function closeByEscape(evt) {
       if (evt.key === 'Escape') {
         handleCloseAllPopups();
@@ -134,7 +140,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Switch>
-          <ProtectedRoute path='/movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute path='/movies' loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedFilms={savedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />

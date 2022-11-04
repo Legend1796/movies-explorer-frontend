@@ -7,7 +7,7 @@ export class MainApi {
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      credentials: "include",
+      credentials: 'include',
       headers: this._headers
     })
       .then((res) => {
@@ -25,8 +25,8 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'http://localhost:3000',
-  // baseUrl: 'https://movies.legend1796.nomoredomains.icu',
+  // baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://movies.legend1796.nomoredomains.icu',
   headers: {
     'Content-Type': 'application/json'
   }
