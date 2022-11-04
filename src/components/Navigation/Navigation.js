@@ -23,7 +23,7 @@ function Navigation({ onClose, isOpen, profileImage, closeNavigationBtn, exitPro
           <Route path="/saved-movies">
             <div className='navigation__link-container'>
               <Link onClick={loggedOut} className='navigation__link' to='/main'><p className='navigation__link-text'>Главная</p></Link>
-              <Link onClick={onClose} className='navigation__link' to='/movies'><p className='navigation__link-text'>Фильмы<div className='navigation__underline-movies' /></p></Link>
+              <Link onClick={onClose} className='navigation__link' to='/movies'><div className='navigation__link-text'>Фильмы<div className='navigation__underline-movies' /></div></Link>
               <Link onClick={onClose} className='navigation__link' to='/saved-movies'><div className='navigation__link-text navigation__link-text_active'>Сохранённые фильмы<div className='navigation__underline-movies navigation__underline-movies_active' /></div></Link>
             </div>
             <Link onClick={onClose} className='navigation__link navigation__link-profile' to='/profile'><p className='navigation__link-text'>Аккаунт</p><img className='navigation__profile-image' src={profileImage} alt='значок профиля' /></Link>
@@ -31,7 +31,7 @@ function Navigation({ onClose, isOpen, profileImage, closeNavigationBtn, exitPro
           <Route path="/profile">
             <div className='navigation__link-container'>
               <Link onClick={loggedOut} className='navigation__link' to='/main'><p className='navigation__link-text'>Главная</p></Link>
-              <Link onClick={onClose} className='navigation__link' to='/movies'><p className='navigation__link-text'>Фильмы<div className='navigation__underline-movies' /></p></Link>
+              <Link onClick={onClose} className='navigation__link' to='/movies'><div className='navigation__link-text'>Фильмы<div className='navigation__underline-movies' /></div></Link>
               <Link onClick={onClose} className='navigation__link' to='/saved-movies'><p className='navigation__link-text'>Сохранённые фильмы<div className='navigation__underline-movies' /></p></Link>
             </div>
             <Link onClick={onClose} className='navigation__link navigation__link-profile' to='/profile'><p className='navigation__link-text navigation__link-text_active'>Аккаунт</p><img className='navigation__profile-image' src={profileImage} alt='значок профиля' /></Link>

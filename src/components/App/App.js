@@ -45,6 +45,7 @@ function App() {
       mainApi.getUserInfo()
         .then((info) => {
           setUserInfo(info);
+          console.log(currentUser);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
@@ -98,6 +99,7 @@ function App() {
     setIsLoading(true);
     auth.autorise(email, password)
       .then((res) => {
+        console.log(res);
         onAsseccAllowed();
         setLoggedIn(true);
         history.push("/movies");
