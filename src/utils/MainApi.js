@@ -15,6 +15,20 @@ export class MainApi {
       });
   }
 
+  setUserInfo(userData) {
+    return fetch(`${this._url}/users/me`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: userData.name,
+        about: userData.email
+      })
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
 
   _getResponseData(res) {
     if (res.ok) {
@@ -25,7 +39,6 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  // baseUrl: 'http://localhost:3000',
   baseUrl: 'https://movies.legend1796.nomoredomains.icu',
   headers: {
     'Content-Type': 'application/json'
@@ -33,20 +46,7 @@ const mainApi = new MainApi({
 });
 
 export default mainApi;
-  // setUserInfo(userData) {
-  //   return fetch(`${this._url}/users/me`, {
-  //     credentials: "include",
-  //     method: 'PATCH',
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       name: userData.name,
-  //       about: userData.about
-  //     })
-  //   })
-  //     .then(res => {
-  //       return this._getResponseData(res);
-  //     });
-  // }
+
 
   // getInitialCards() {
   //   return fetch(`${this._url}/cards`, {

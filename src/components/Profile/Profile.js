@@ -13,8 +13,7 @@ function Profile({ submitButtonText, exitProfile, loggedIn, openNavigation, navi
   function handleSubmit(e) {
     e.preventDefault();
     setIsEdit(false);
-    // editProfile(values);
-    console.log(isEdit);
+    editProfile(values);
   }
 
   function handleOpenNavigation() {
@@ -37,11 +36,11 @@ function Profile({ submitButtonText, exitProfile, loggedIn, openNavigation, navi
     <>
       <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
       <div className='profile' onSubmit={handleSubmit}>
-        <h2 className='profile__title'>Привет, {values.name}!</h2>
+        <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
         <form className='popup__form profile__inputs'>
           <div className='profile__input-container'>
             <span className='profile__input-placeholder'>Имя</span>
-            <input className='profile__input profile__input_type_name' id='name' name='name' type='name' value={isEdit ? currentUser.name : values.name || ''} onChange={handleChange} required />
+            <input className='profile__input profile__input_type_name' id='name' name='name' type='name' value={!isEdit ? currentUser.name : values.name || ''} onChange={handleChange} required />
           </div>
           <span className={`profile__input-error name-input-error ${!isValid ? 'profile__input-error_active' : ''}`}>{errors.name}</span>
         </form>
@@ -49,7 +48,7 @@ function Profile({ submitButtonText, exitProfile, loggedIn, openNavigation, navi
         <form className='popup__form profile__inputs'>
           <div className='profile__input-container'>
             <span className='profile__input-placeholder'>E-mail</span>
-            <input className='profile__input profile__input_type_email' id='email' name='email' type='email' value={values.email || ''} onChange={handleChange} required />
+            <input className='profile__input profile__input_type_email' id='email' name='email' type='email' value={!isEdit ? currentUser.email : values.email || ''} onChange={handleChange} required />
           </div>
           <span className={`profile__input-error url-input-error ${!isValid ? 'profile__input-error_active' : ''}`}>{errors.email}</span>
         </form>

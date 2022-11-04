@@ -112,6 +112,7 @@ function App() {
     setIsLoading(true);
     mainApi.setUserInfo(userData)
       .then((res) => {
+        console.log(userData.name, userData.email);
         setUserInfo(res);
         // handleCloseAllPopups();
       })
