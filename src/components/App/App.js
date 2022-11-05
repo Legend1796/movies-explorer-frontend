@@ -28,7 +28,6 @@ import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
-  const [userName, setUserName] = React.useState('Legend');
   const [currentUser, setUserInfo] = React.useState({ name: '', email: '' });
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
