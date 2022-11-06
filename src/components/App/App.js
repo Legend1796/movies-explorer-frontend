@@ -156,15 +156,13 @@ function App() {
       <div className='page'>
         <Switch>
           <ProtectedRoute path='/movies' loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
-          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedFilms={savedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedFilms={SavedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute path='/profile' loggedIn={loggedIn} editProfile={handleUpdateUser} component={Profile} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />
           </Route>
           <Route path='/signin'>
             <Login onLoginIn={onLoginIn} />
-          </Route>
-          <Route path='/profile'>
-            <Profile loggedIn={loggedIn} editProfile={handleUpdateUser} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           </Route>
           <Route path="/main">
             <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
