@@ -41,24 +41,27 @@ function App() {
   React.useEffect(() => {
     if (loggedIn === true) {
       setIsLoading(true);
-      mainApi.getUserInfo()
-        .then((info) => {
+
+      Promise.all([
+        mainApi.getUserInfo(),
+        moviesApi.getMovies()])
+        .then(([info, movies]) => {
           setUserInfo(info);
-          console.log(currentUser);
+          setMovies(movies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
   }, [loggedIn]);
 
+  function setMovies(movies) {
+    movies.map((movie) => (localStorage.setItem(movie.nameRU.toLowerCase(), movie)))
+  }
+
   function handleFilmSearch(value) {
     setIsLoading(true);
-    moviesApi.getMovies()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(() => onAsseccDenied())
-      .finally(() => setIsLoading(false))
+    console.log(value);
+    setIsLoading(false);
   }
 
   function handleExitProfile() {
@@ -151,7 +154,7 @@ function App() {
             <Profile loggedIn={loggedIn} editProfile={handleUpdateUser} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           </Route>
           <Route path="/main">
-            <Header loggedIn={loggedIn} exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+            <Header loggedIn={loggedIn} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
             <Main />
             <Footer />
           </Route>

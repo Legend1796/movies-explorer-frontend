@@ -5,9 +5,8 @@ export class MoviesApi {
   }
 
   getMovies() {
-    return fetch(`${this._url}/movies`, {
+    return fetch(`${this._url}`, {
       method: 'GET',
-      credentials: "include",
       headers: this._headers
     })
       .then((res) => {

@@ -5,9 +5,16 @@ import React from 'react';
 import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
+function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, savedFilmSearch }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
+  const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    savedFilmSearch(values.savedFilmSearch);
+  }
 
   function deletefilm(filmInfo) {
     console.log(filmInfo);
@@ -18,23 +25,23 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
     setShortFilmsActive(!shortFilmsActive);
   }
 
-  function handleBottonSearchClick() {
-    console.log('click');
-  }
-
   function handleOpenNavigation() {
     openNavigation();
   }
+
+  React.useEffect(() => {
+    resetErrors({ filmSearch: '' });
+  }, []);
 
   return (
     <>
       <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
       <section>
         <div className='movies__search'>
-          <form className='movies__container'>
+          <form className='popup__form movies__container'>
             <div className='movies__search-block'>
-              <input className='movies__input' id='film-search' name='film-search' type='film-search' placeholder='Фильм' maxLength='70' required />
-              <button className='movies__search-button' type='button'><img onClick={handleBottonSearchClick} className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
+              <input onChange={handleChange} value={values.savedFilmSearch || ''} className='movies__input' id='savedFilmSearch' name='savedFilmSearch' type='text' placeholder={!isValid ? errors.savedFilmSearch : 'Фильм'} maxLength='70' required />
+              <button className='movies__search-button' type='submit'><img className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
             </div>
             <div className='movies__short-container'>
               <p className='movies__short-title'>Короткометражки</p>
