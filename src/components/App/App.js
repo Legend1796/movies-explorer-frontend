@@ -85,6 +85,18 @@ function App() {
     setInfoTooltipOpen(true);
   }
 
+  function savedProfile() {
+    setAccesMessage('Профиль сохранен!');
+    setAccessImage(allowedImage);
+    setInfoTooltipOpen(true);
+  }
+
+  function notSavedProfile() {
+    setAccesMessage('Что-то пошло не так!');
+    setAccessImage(deniedImage);
+    setInfoTooltipOpen(true);
+  }
+
   function onRegister({ name, email, password }) {
     setIsLoading(true);
     auth.register(name, email, password)
@@ -101,7 +113,6 @@ function App() {
     setIsLoading(true);
     auth.autorise(email, password)
       .then((res) => {
-        console.log(res);
         onAsseccAllowed();
         setLoggedIn(true);
         history.push("/movies");
@@ -114,8 +125,10 @@ function App() {
     setIsLoading(true);
     mainApi.setUserInfo(userData)
       .then((res) => {
+        setUserInfo(res)
+        savedProfile();
       })
-      .catch((err) => console.log(err))
+      .catch((err) => notSavedProfile())
       .finally(() => setIsLoading(false))
   }
 
