@@ -109,9 +109,10 @@ function App() {
 
   function handleUpdateUser(userData) {
     setIsLoading(true);
+    console.log(userData.name, userData.email);
     mainApi.setUserInfo(userData)
       .then((res) => {
-        console.log(userData.name, userData.email);
+        console.log(res);
         setUserInfo(res);
         // handleCloseAllPopups();
       })

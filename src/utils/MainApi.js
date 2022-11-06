@@ -22,7 +22,7 @@ export class MainApi {
       headers: this._headers,
       body: JSON.stringify({
         name: userData.name,
-        about: userData.email
+        email: userData.email
       })
     })
       .then(res => {
