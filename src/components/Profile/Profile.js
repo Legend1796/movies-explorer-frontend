@@ -59,7 +59,7 @@ function Profile({ submitButtonText, exitProfile, loggedIn, openNavigation, navi
           </div>
           :
           <form className='profile__btn' >
-            <button className={`login__btn login__btn_forProfile ${!isValid ? 'login__btn_disabled' : ''}`} type='submit' disabled={!isValid}>{submitButtonText}</button>
+            <button className={`login__btn login__btn_forProfile ${currentUser.name === values.name ? 'login__btn_disabled' : !isValid ? 'login__btn_disabled' : ''}`} type='submit' disabled={currentUser.name === values.name ? true : !isValid}>{submitButtonText}</button>
           </form>
         }
       </div >

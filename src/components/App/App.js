@@ -125,7 +125,7 @@ function App() {
     setIsLoading(true);
     mainApi.setUserInfo(userData)
       .then((res) => {
-        setUserInfo(res)
+        setUserInfo(res);
         savedProfile();
       })
       .catch((err) => notSavedProfile())
