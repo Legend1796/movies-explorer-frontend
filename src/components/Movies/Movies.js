@@ -53,9 +53,14 @@ function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openN
       </section>
       <section>
         <ul className='elements'>
-          {movies.map((movie) => (
-            <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} />
-          ))}
+          {movies.length === 0
+            ?
+            <p className='elements__not-found'>Ничего не найдено</p>
+            : movies.map((movie) => (
+              <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} />
+            ))
+
+          }
         </ul>
       </section>
       <section>
