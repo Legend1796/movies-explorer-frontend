@@ -7,8 +7,8 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch }) {
-  const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
+function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState }) {
+
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
   function handleSubmit(e) {
@@ -22,7 +22,7 @@ function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openN
   }
 
   function handleChangeShortFilmActivetily() {
-    setShortFilmsActive(!shortFilmsActive);
+    changeShortFilmState();
   }
 
   function handleOpenNavigation() {

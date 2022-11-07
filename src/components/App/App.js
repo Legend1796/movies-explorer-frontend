@@ -32,11 +32,13 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
+  const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
   const [searchMoviesValue, setSearchMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
+  const [resultSearchMovies, setResultSearchMovies] = React.useState([]);
   const history = useHistory();
   const isOpen = isInfoTooltipOpen || openNavigation;
 
@@ -58,13 +60,23 @@ function App() {
   React.useEffect(() => {
     setIsLoading(true);
     moviesApi.getMovies()
-      .then((movies) => {
-        setMovies(movies);
+      .then((res) => {
+        const resultSearch = filterMovies(searchMoviesValue, res)
+
+
+        setMovies(resultSearchMovies);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false))
   }, [searchMoviesValue]);
 
+  function filterMovies(searchMovies, movies) {
+    shortFilmsActive ? movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration < 52) : movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
+  }
+
+  function handleChangeShortFilmActivetily() {
+    setShortFilmsActive(!shortFilmsActive);
+  }
 
   function handleFilmSearch(value) {
     setSearchMoviesValue(value);
@@ -161,7 +173,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Switch>
-          <ProtectedRoute path='/movies' movies={movies} loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute path='/movies' shortFilmsActive={shortFilmsActive} changeShortFilmState={handleChangeShortFilmActivetily} movies={movies} loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedFilms={SavedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <ProtectedRoute path='/profile' loggedIn={loggedIn} editProfile={handleUpdateUser} component={Profile} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <Route path='/signup'>
