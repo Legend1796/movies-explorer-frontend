@@ -15,6 +15,7 @@ function Film({ filmInfo, onFilmSave, onFilmDelete }) {
   function handlefilmSave() {
     onFilmSave(filmInfo);
     setIsSaved(true);
+    console.log(filmInfo.image.url);
   }
 
   function handlefilmDelete() {
@@ -31,7 +32,7 @@ function Film({ filmInfo, onFilmSave, onFilmDelete }) {
         </div>
         <button className='element__button' type='button'>
           <a className='element__trailer-link' href={filmInfo.trailerLink} target='_blank' rel='noopener noreferrer'>
-            <img className='element__image' src={filmInfo.link} alt='Обложка фильма' />
+            <img className='element__image' src={`https://api.nomoreparties.co/${filmInfo.image.url}`} alt='Обложка фильма' />
           </a>
         </button>
         <Route path='/movies'>
