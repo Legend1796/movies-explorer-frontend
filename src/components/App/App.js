@@ -35,6 +35,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
+  const [searchMoviesValue, setSearchMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
   const history = useHistory();
   const isOpen = isInfoTooltipOpen || openNavigation;
@@ -42,13 +43,9 @@ function App() {
   React.useEffect(() => {
     if (loggedIn === true) {
       setIsLoading(true);
-
-      Promise.all([
-        mainApi.getUserInfo(),
-        moviesApi.getMovies()])
-        .then(([info, movies]) => {
+      mainApi.getUserInfo()
+        .then((info) => {
           setUserInfo(info);
-          setMovies(movies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
@@ -58,11 +55,19 @@ function App() {
   // function setMovies(movies) {
   //   movies.map((movie) => (localStorage.setItem(movie.nameRU.toLowerCase(), movie)))
   // }
+  React.useEffect(() => {
+    setIsLoading(true);
+    moviesApi.getMovies()
+      .then((movies) => {
+        setMovies(movies);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false))
+  }, [searchMoviesValue]);
+
 
   function handleFilmSearch(value) {
-    setIsLoading(true);
-    console.log(value);
-    setIsLoading(false);
+    setSearchMoviesValue(value);
   }
 
   function handleExitProfile() {
