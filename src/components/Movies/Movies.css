@@ -5,6 +5,12 @@
   justify-content: center;
 }
 
+.elements__not-found {
+  width: 200px;
+  margin-left: calc(50% - 100px);
+  text-align: center;
+}
+
 .movies__underline {
   width: 100%;
   border-bottom: 1px solid #E8E8E8;

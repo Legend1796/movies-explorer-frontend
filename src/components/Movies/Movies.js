@@ -52,16 +52,16 @@ function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openN
         </div>
       </section>
       <section>
-        <ul className='elements'>
-          {movies.length === 0
-            ?
-            <p className='elements__not-found'>Ничего не найдено</p>
-            : movies.map((movie) => (
+        {movies.length === 0
+          ?
+          <p className='elements__not-found'>Ничего не найдено</p>
+          :
+          <ul className='elements'>
+            {movies.map((movie) => (
               <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} />
-            ))
-
-          }
-        </ul>
+            ))}
+          </ul>
+        }
       </section>
       <section>
         <div className='movies__more'>
