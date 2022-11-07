@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Movies({ loggedIn, exitProfile, initialFilms, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch }) {
+function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch }) {
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
@@ -53,8 +53,8 @@ function Movies({ loggedIn, exitProfile, initialFilms, onFilmSave, openNavigatio
       </section>
       <section>
         <ul className='elements'>
-          {initialFilms.map((film) => (
-            <Film filmInfo={film} onFilmSave={filmSave} key={film._id} />
+          {movies.map((movie) => (
+            <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} />
           ))}
         </ul>
       </section>

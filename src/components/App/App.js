@@ -35,6 +35,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
+  const [movies, setMovies] = React.useState([]);
   const history = useHistory();
   const isOpen = isInfoTooltipOpen || openNavigation;
 
@@ -54,9 +55,9 @@ function App() {
     };
   }, [loggedIn]);
 
-  function setMovies(movies) {
-    movies.map((movie) => (localStorage.setItem(movie.nameRU.toLowerCase(), movie)))
-  }
+  // function setMovies(movies) {
+  //   movies.map((movie) => (localStorage.setItem(movie.nameRU.toLowerCase(), movie)))
+  // }
 
   function handleFilmSearch(value) {
     setIsLoading(true);
@@ -155,7 +156,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Switch>
-          <ProtectedRoute path='/movies' loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute path='/movies' movies={movies} loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} initialFilms={initialFilms} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedFilms={SavedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <ProtectedRoute path='/profile' loggedIn={loggedIn} editProfile={handleUpdateUser} component={Profile} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <Route path='/signup'>

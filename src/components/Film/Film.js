@@ -26,11 +26,13 @@ function Film({ filmInfo, onFilmSave, onFilmDelete }) {
     <li className='element'>
       <div className='element__container'>
         <div className='element__rectangle'>
-          <h2 className='element__title'>{filmInfo.name}</h2>
+          <h2 className='element__title'>{filmInfo.nameRU}</h2>
           <p className='element__time'>{filmInfo.duration}</p>
         </div>
         <button className='element__button' type='button'>
-          <img className='element__image' src={filmInfo.link} alt='Обложка фильма' />
+          <a className='element__trailer-link' href={filmInfo.trailerLink} target='_blank' rel='noopener noreferrer'>
+            <img className='element__image' src={filmInfo.link} alt='Обложка фильма' />
+          </a>
         </button>
         <Route path='/movies'>
           <button className='element__button' type='button'>
