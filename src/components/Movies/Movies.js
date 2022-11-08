@@ -58,7 +58,7 @@ function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openN
           :
           <ul className='elements'>
             {movies.map((movie) => (
-              <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} />
+              <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} savedFilms={false} />
             ))}
           </ul>
         }

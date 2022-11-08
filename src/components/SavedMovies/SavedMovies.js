@@ -52,11 +52,16 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
         </div>
       </section>
       <section>
-        <ul className='elements'>
-          {savedFilms.map((film) => (
-            <Film filmInfo={film} onFilmDelete={deletefilm} key={film._id} />
-          ))}
-        </ul>
+        {savedFilms.length === 0
+          ?
+          <p className='elements__not-found'>Ничего не найдено</p>
+          :
+          <ul className='elements'>
+            {savedFilms.map((movie) => (
+              <Film filmInfo={movie} onFilmDelete={deletefilm} key={movie._id} savedFilms={true} />
+            ))}
+          </ul>
+        }
       </section>
       <section>
         <div className='movies__more'>

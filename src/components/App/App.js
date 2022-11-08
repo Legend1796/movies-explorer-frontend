@@ -63,6 +63,19 @@ function App() {
       .finally(() => setIsLoading(false))
   }, [searchMoviesValue, shortFilmsActive]);
 
+  React.useEffect(() => {
+    if (loggedIn === true) {
+      setIsLoading(true);
+      mainApi.getSavedMovies()
+        .then((res) => {
+          setSavedMovies(res);
+          console.log(res)
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false))
+    };
+  }, [loggedIn]);
+
   function filterMovies(searchMovies, movies) {
     if (shortFilmsActive) {
       return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
@@ -171,7 +184,7 @@ function App() {
       <div className='page'>
         <Switch>
           <ProtectedRoute path='/movies' shortFilmsActive={shortFilmsActive} changeShortFilmState={handleChangeShortFilmActivetily} movies={movies} loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
-          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedMovies={SavedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedFilms={savedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <ProtectedRoute path='/profile' loggedIn={loggedIn} editProfile={handleUpdateUser} component={Profile} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
           <Route path='/signup'>
             <Register onRegister={onRegister} />

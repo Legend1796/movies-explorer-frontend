@@ -36,6 +36,17 @@ export class MainApi {
     }
     return Promise.reject(`Ошибка: ${res.status}`);
   }
+
+  getSavedMovies() {
+    return fetch(`${this._url}/movies`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: this._headers
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
 }
 
 const mainApi = new MainApi({
@@ -48,16 +59,6 @@ const mainApi = new MainApi({
 export default mainApi;
 
 
-  // getInitialCards() {
-  //   return fetch(`${this._url}/cards`, {
-  //     method: 'GET',
-  //     credentials: "include",
-  //     headers: this._headers
-  //   })
-  //     .then(res => {
-  //       return this._getResponseData(res);
-  //     });
-  // }
 
   // setInitialCards(newCardData) {
   //   return fetch(`${this._url}/cards`, {
