@@ -38,7 +38,6 @@ function App() {
   const [accessImage, setAccessImage] = React.useState('');
   const [searchMoviesValue, setSearchMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
-  const [resultSearchMovies, setResultSearchMovies] = React.useState([]);
   const history = useHistory();
   const isOpen = isInfoTooltipOpen || openNavigation;
 
@@ -54,24 +53,23 @@ function App() {
     };
   }, [loggedIn]);
 
-  // function setMovies(movies) {
-  //   movies.map((movie) => (localStorage.setItem(movie.nameRU.toLowerCase(), movie)))
-  // }
   React.useEffect(() => {
     setIsLoading(true);
     moviesApi.getMovies()
       .then((res) => {
         const resultSearch = filterMovies(searchMoviesValue, res)
-
-
-        setMovies(resultSearchMovies);
+        setMovies(resultSearch);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false))
-  }, [searchMoviesValue]);
+  }, [searchMoviesValue, shortFilmsActive]);
 
   function filterMovies(searchMovies, movies) {
-    shortFilmsActive ? movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration < 52) : movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
+    if (shortFilmsActive) {
+      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
+    } else {
+      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration > 52);
+    }
   }
 
   function handleChangeShortFilmActivetily() {
