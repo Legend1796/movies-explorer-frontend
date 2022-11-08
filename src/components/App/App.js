@@ -70,7 +70,6 @@ function App() {
       mainApi.getSavedMovies()
         .then((res) => {
           const resultSearch = filterMovies(searchSavedMoviesValue, res)
-          console.log(resultSearch);
           setSavedMovies(resultSearch);
         })
         .catch((err) => console.log(err))
@@ -92,19 +91,6 @@ function App() {
     }
   }, [isOpen]);
 
-  function handleExitProfile() {
-    setIsLoading(true);
-    mainApi.signOut()
-      .then((res) => {
-        handleExitToMain();
-        setCurrentUser({});
-        localStorage.clear();
-        setLoggedIn(false);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false))
-  }
-
   function onRegister({ name, email, password }) {
     setIsLoading(true);
     auth.register(name, email, password)
@@ -113,7 +99,7 @@ function App() {
         setLoggedIn(true);
         history.push('/movies');
       })
-      .catch(() => onAsseccDenied())
+      .catch(() => onError())
       .finally(() => setIsLoading(false))
   }
 
@@ -125,18 +111,44 @@ function App() {
         setLoggedIn(true);
         history.push("/movies");
       })
-      .catch(() => onAsseccDenied())
+      .catch(() => onError())
       .finally(() => setIsLoading(false))
   }
 
   function handleUpdateUser(userData) {
     setIsLoading(true);
-    mainApi.setCurrentUser(userData)
+    mainApi.setUserInfo(userData)
       .then((res) => {
         setCurrentUser(res);
         savedProfile();
       })
-      .catch((err) => notSavedProfile())
+      .catch((err) => onError())
+      .finally(() => setIsLoading(false))
+  }
+  function handleExitProfile() {
+    setIsLoading(true);
+    mainApi.signOut()
+      .then((res) => {
+        handleExitToMain();
+        setCurrentUser({});
+        localStorage.clear();
+        setLoggedIn(false);
+      })
+      .catch((err) => onError())
+      .finally(() => setIsLoading(false))
+  }
+
+  function handleFilmSave(filmInfo) {
+    setIsLoading(true);
+    console.log('image ' + filmInfo.image.url,
+      'thumbnail ' + filmInfo.image.formats.thumbnail.url);
+    mainApi.saveMovie(filmInfo)
+      .then((res) => {
+        console.log(res);
+        // setCurrentUser(res);
+        savedFilm();
+      })
+      .catch((err) => onError())
       .finally(() => setIsLoading(false))
   }
 
@@ -144,7 +156,7 @@ function App() {
     setOpenNavigation(true);
   }
 
-  function onAsseccDenied() {
+  function onError() {
     setAccesMessage('Что-то пошло не так!\nПопробуйте ещё раз.');
     setAccessImage(deniedImage);
     setInfoTooltipOpen(true);
@@ -162,11 +174,12 @@ function App() {
     setInfoTooltipOpen(true);
   }
 
-  function notSavedProfile() {
-    setAccesMessage('Что-то пошло не так!');
-    setAccessImage(deniedImage);
+  function savedFilm() {
+    setAccesMessage('Фильм сохранен!');
+    setAccessImage(allowedImage);
     setInfoTooltipOpen(true);
   }
+
 
   function filterMovies(searchMovies, movies) {
     if (shortFilmsActive) {
@@ -210,6 +223,7 @@ function App() {
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             shortFilmsActive={shortFilmsActive}
+            onFilmSave={handleFilmSave}
             filmSearch={handleFilmSearch}
             exitProfile={handleExitToMain}
             openNavigation={handleOpenNavigation}

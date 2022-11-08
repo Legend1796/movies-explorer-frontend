@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://movies.legend1796.nomoredomains.icu';
-// export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'https://movies.legend1796.nomoredomains.icu';
+export const BASE_URL = 'http://localhost:3000';
 
 function getResponseData(response) {
   if (response.ok) {

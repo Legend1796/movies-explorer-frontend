@@ -17,7 +17,6 @@ function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, nav
   }
 
   function filmSave(filmInfo) {
-    console.log(filmInfo);
     onFilmSave(filmInfo);
   }
 
