@@ -26,7 +26,7 @@ import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
-  const [currentUser, setUserInfo] = React.useState({ name: '', email: '' });
+  const [currentUser, setCurrentUser] = React.useState({ name: '', email: '' });
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
@@ -45,7 +45,7 @@ function App() {
       setIsLoading(true);
       mainApi.getUserInfo()
         .then((info) => {
-          setUserInfo(info);
+          setCurrentUser(info);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
@@ -69,32 +69,72 @@ function App() {
       mainApi.getSavedMovies()
         .then((res) => {
           setSavedMovies(res);
-          console.log(res)
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
   }, [loggedIn]);
 
-  function filterMovies(searchMovies, movies) {
-    if (shortFilmsActive) {
-      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
-    } else {
-      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration > 52);
+  React.useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        handleCloseAllPopups();
+      }
     }
-  }
-
-  function handleChangeShortFilmActivetily() {
-    setShortFilmsActive(!shortFilmsActive);
-  }
-
-  function handleFilmSearch(value) {
-    setSearchMoviesValue(value);
-  }
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen]);
 
   function handleExitProfile() {
-    setLoggedIn(false);
-    history.push('/main');
+    setIsLoading(true);
+    mainApi.signOut()
+      .then((res) => {
+        handleExitToMain();
+        setCurrentUser({});
+        localStorage.clear();
+        setLoggedIn(false);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false))
+  }
+
+  function onRegister({ name, email, password }) {
+    setIsLoading(true);
+    auth.register(name, email, password)
+      .then((res) => {
+        onAsseccAllowed();
+        setLoggedIn(true);
+        history.push('/movies');
+      })
+      .catch(() => onAsseccDenied())
+      .finally(() => setIsLoading(false))
+  }
+
+  function onLoginIn({ email, password }) {
+    setIsLoading(true);
+    auth.autorise(email, password)
+      .then((res) => {
+        onAsseccAllowed();
+        setLoggedIn(true);
+        history.push("/movies");
+      })
+      .catch(() => onAsseccDenied())
+      .finally(() => setIsLoading(false))
+  }
+
+  function handleUpdateUser(userData) {
+    setIsLoading(true);
+    mainApi.setCurrentUser(userData)
+      .then((res) => {
+        setCurrentUser(res);
+        savedProfile();
+      })
+      .catch((err) => notSavedProfile())
+      .finally(() => setIsLoading(false))
   }
 
   function handleOpenNavigation() {
@@ -125,39 +165,24 @@ function App() {
     setInfoTooltipOpen(true);
   }
 
-  function onRegister({ name, email, password }) {
-    setIsLoading(true);
-    auth.register(name, email, password)
-      .then((res) => {
-        onAsseccAllowed();
-        setLoggedIn(true);
-        history.push('/movies');
-      })
-      .catch(() => onAsseccDenied())
-      .finally(() => setIsLoading(false))
+  function filterMovies(searchMovies, movies) {
+    if (shortFilmsActive) {
+      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
+    } else {
+      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration > 52);
+    }
   }
 
-  function onLoginIn({ email, password }) {
-    setIsLoading(true);
-    auth.autorise(email, password)
-      .then((res) => {
-        onAsseccAllowed();
-        setLoggedIn(true);
-        history.push("/movies");
-      })
-      .catch(() => onAsseccDenied())
-      .finally(() => setIsLoading(false))
+  function handleChangeShortFilmActivetily() {
+    setShortFilmsActive(!shortFilmsActive);
   }
 
-  function handleUpdateUser(userData) {
-    setIsLoading(true);
-    mainApi.setUserInfo(userData)
-      .then((res) => {
-        setUserInfo(res);
-        savedProfile();
-      })
-      .catch((err) => notSavedProfile())
-      .finally(() => setIsLoading(false))
+  function handleFilmSearch(value) {
+    setSearchMoviesValue(value);
+  }
+
+  function handleExitToMain() {
+    history.push('/main');
   }
 
   function handleCloseAllPopups() {
@@ -165,27 +190,47 @@ function App() {
     setOpenNavigation(false);
   }
 
-  React.useEffect(() => {
-    function closeByEscape(evt) {
-      if (evt.key === 'Escape') {
-        handleCloseAllPopups();
-      }
-    }
-    if (isOpen) {
-      document.addEventListener('keydown', closeByEscape);
-      return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      }
-    }
-  }, [isOpen])
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Switch>
-          <ProtectedRoute path='/movies' shortFilmsActive={shortFilmsActive} changeShortFilmState={handleChangeShortFilmActivetily} movies={movies} loggedIn={loggedIn} filmSearch={handleFilmSearch} exitProfile={handleExitProfile} component={Movies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
-          <ProtectedRoute path='/saved-movies' loggedIn={loggedIn} exitProfile={handleExitProfile} component={SavedMovies} savedFilms={savedMovies} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
-          <ProtectedRoute path='/profile' loggedIn={loggedIn} editProfile={handleUpdateUser} component={Profile} submitButtonText='Сохранить' exitProfile={handleExitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} />
+          <ProtectedRoute
+            path='/movies'
+            component={Movies}
+            movies={movies}
+            loggedIn={loggedIn}
+            logoLoggedIn={logoLoggedIn}
+            navigationBtn={navigationBtn}
+            profileImage={profileImage}
+            shortFilmsActive={shortFilmsActive}
+            filmSearch={handleFilmSearch}
+            exitProfile={handleExitToMain}
+            openNavigation={handleOpenNavigation}
+            changeShortFilmState={handleChangeShortFilmActivetily}
+          />
+          <ProtectedRoute
+            path='/saved-movies'
+            component={SavedMovies}
+            savedFilms={savedMovies}
+            loggedIn={loggedIn}
+            navigationBtn={navigationBtn}
+            profileImage={profileImage}
+            logoLoggedIn={logoLoggedIn}
+            exitProfile={handleExitToMain}
+            openNavigation={handleOpenNavigation}
+          />
+          <ProtectedRoute
+            path='/profile'
+            loggedIn={loggedIn}
+            editProfile={handleUpdateUser}
+            component={Profile}
+            submitButtonText='Сохранить'
+            exitProfile={handleExitProfile}
+            openNavigation={handleOpenNavigation}
+            navigationBtn={navigationBtn}
+            profileImage={profileImage}
+            logoLoggedIn={logoLoggedIn}
+          />
           <Route path='/signup'>
             <Register onRegister={onRegister} />
           </Route>

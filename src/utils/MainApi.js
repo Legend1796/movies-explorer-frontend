@@ -30,13 +30,14 @@ export class MainApi {
       });
   }
 
-  _getResponseData(res) {
-    if (res.ok) {
-      return res.clone().json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
+  signOut() {
+    return fetch(`${this._url}/signout`, {
+      method: 'GET',
+      headers: this._headers,
+      credentials: 'include',
+    })
+      .then(this._checkResponse)
   }
-
   getSavedMovies() {
     return fetch(`${this._url}/movies`, {
       method: 'GET',
@@ -46,6 +47,13 @@ export class MainApi {
       .then(res => {
         return this._getResponseData(res);
       });
+  }
+
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.clone().json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
 
@@ -58,40 +66,10 @@ const mainApi = new MainApi({
 
 export default mainApi;
 
-
-
-  // setInitialCards(newCardData) {
-  //   return fetch(`${this._url}/cards`, {
-  //     method: 'POST',
-  //     headers: this._headers,
-  //     credentials: "include",
-  //     body: JSON.stringify({
-  //       name: newCardData.name,
-  //       link: newCardData.link
-  //     })
-  //   })
-  //     .then(res => {
-  //       return this._getResponseData(res);
-  //     });
-  // }
-
-
-
   // deleteCard(cardId) {
   //   return fetch(`${this._url}/cards/${cardId}`, {
   //     credentials: "include",
   //     method: 'DELETE',
-  //     headers: this._headers
-  //   })
-  //     .then(res => {
-  //       return this._getResponseData(res);
-  //     });
-  // }
-
-  // changeLikeCardStatus(cardId, method) {
-  //   return fetch(`${this._url}/cards/${cardId}/likes`, {
-  //     credentials: "include",
-  //     method: method,
   //     headers: this._headers
   //   })
   //     .then(res => {

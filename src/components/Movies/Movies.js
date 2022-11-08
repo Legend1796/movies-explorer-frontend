@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState }) {
+function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState }) {
 
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
@@ -18,7 +18,7 @@ function Movies({ movies, loggedIn, exitProfile, initialFilms, onFilmSave, openN
 
   function filmSave(filmInfo) {
     console.log(filmInfo);
-    // onFilmSave(filmInfo); // need to give on Api
+    onFilmSave(filmInfo);
   }
 
   function handleChangeShortFilmActivetily() {

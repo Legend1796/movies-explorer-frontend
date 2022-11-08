@@ -15,7 +15,6 @@ function Film({ filmInfo, onFilmSave, onFilmDelete, savedFilms }) {
   function handlefilmSave() {
     onFilmSave(filmInfo);
     setIsSaved(true);
-    console.log(filmInfo);
   }
 
   function handlefilmDelete() {
