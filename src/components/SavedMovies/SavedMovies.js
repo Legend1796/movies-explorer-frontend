@@ -38,7 +38,7 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
       <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
       <section>
         <div className='movies__search'>
-          <form className='popup__form movies__container'>
+          <form onSubmit={handleSubmit} className='popup__form movies__container'>
             <div className='movies__search-block'>
               <input onChange={handleChange} value={values.savedFilmSearch || ''} className='movies__input' id='savedFilmSearch' name='savedFilmSearch' type='text' placeholder={!isValid ? errors.savedFilmSearch : 'Фильм'} maxLength='70' required />
               <button className='movies__search-button' type='submit'><img className='movies__search-image' src={find} alt='Кнопка поиска' /></button>

@@ -35,6 +35,7 @@ function App() {
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
   const [searchMoviesValue, setSearchMoviesValue] = React.useState('');
+  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const history = useHistory();
@@ -68,12 +69,14 @@ function App() {
       setIsLoading(true);
       mainApi.getSavedMovies()
         .then((res) => {
-          setSavedMovies(res);
+          const resultSearch = filterMovies(searchSavedMoviesValue, res)
+          console.log(resultSearch);
+          setSavedMovies(resultSearch);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
-  }, [loggedIn]);
+  }, [searchSavedMoviesValue]);
 
   React.useEffect(() => {
     function closeByEscape(evt) {
@@ -181,6 +184,10 @@ function App() {
     setSearchMoviesValue(value);
   }
 
+  function handleSavedFilmSearch(value) {
+    setSearchSavedMoviesValue(value);
+  }
+
   function handleExitToMain() {
     history.push('/main');
   }
@@ -216,6 +223,7 @@ function App() {
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             logoLoggedIn={logoLoggedIn}
+            savedFilmSearch={handleSavedFilmSearch}
             exitProfile={handleExitToMain}
             openNavigation={handleOpenNavigation}
           />
