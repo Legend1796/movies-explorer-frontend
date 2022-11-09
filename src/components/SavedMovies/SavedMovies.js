@@ -17,8 +17,7 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
   }
 
   function deletefilm(filmInfo) {
-    console.log(filmInfo);
-    // onFilmDelete(filmInfo); // need to give on Api
+    onFilmDelete(filmInfo);
   }
 
   function handleChangeShortFilmActivetily() {

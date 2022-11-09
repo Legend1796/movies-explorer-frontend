@@ -74,6 +74,17 @@ export class MainApi {
       });
   }
 
+  deleteMovie(movieId) {
+    return fetch(`${this._url}/movies/${movieId}`, {
+      credentials: 'include',
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
+
   _getResponseData(res) {
     if (res.ok) {
       return res.clone().json();
@@ -91,14 +102,3 @@ const mainApi = new MainApi({
 });
 
 export default mainApi;
-
-  // deleteCard(cardId) {
-  //   return fetch(`${this._url}/cards/${cardId}`, {
-  //     credentials: "include",
-  //     method: 'DELETE',
-  //     headers: this._headers
-  //   })
-  //     .then(res => {
-  //       return this._getResponseData(res);
-  //     });
-  // }

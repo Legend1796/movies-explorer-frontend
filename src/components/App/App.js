@@ -148,6 +148,16 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
+  function handleFilmDelete(filmInfo) {
+    setIsLoading(true);
+    mainApi.deleteMovie(filmInfo._id)
+      .then((res) => {
+        setSavedMovies(savedMovies.filter((i) => i.movieId !== res.movieId));
+      })
+      .catch((err) => onError())
+      .finally(() => setIsLoading(false))
+  }
+
   function handleOpenNavigation() {
     setOpenNavigation(true);
   }
@@ -233,8 +243,9 @@ function App() {
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             logoLoggedIn={logoLoggedIn}
-            savedFilmSearch={handleSavedFilmSearch}
             exitProfile={handleExitToMain}
+            onFilmDelete={handleFilmDelete}
+            savedFilmSearch={handleSavedFilmSearch}
             openNavigation={handleOpenNavigation}
           />
           <ProtectedRoute
