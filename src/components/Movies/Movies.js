@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState }) {
+function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState, savedMovies }) {
 
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
@@ -57,7 +57,7 @@ function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, nav
           :
           <ul className='elements'>
             {movies.map((movie) => (
-              <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} savedFilms={false} />
+              <Film filmInfo={movie} onFilmSave={filmSave} key={movie.id} savedFilms={false} savedMovies={savedMovies} />
             ))}
           </ul>
         }

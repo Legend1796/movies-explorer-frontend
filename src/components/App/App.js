@@ -44,9 +44,12 @@ function App() {
   React.useEffect(() => {
     if (loggedIn === true) {
       setIsLoading(true);
-      mainApi.getUserInfo()
-        .then((info) => {
+      Promise.all([
+        mainApi.getUserInfo(),
+        mainApi.getSavedMovies()])
+        .then(([info, movies]) => {
           setCurrentUser(info);
+          setSavedMovies(movies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
@@ -142,6 +145,7 @@ function App() {
     setIsLoading(true);
     mainApi.saveMovie(filmInfo)
       .then((res) => {
+        console.log(res);
         savedFilm();
       })
       .catch((err) => onError())
@@ -152,7 +156,7 @@ function App() {
     setIsLoading(true);
     mainApi.deleteMovie(filmInfo._id)
       .then((res) => {
-        setSavedMovies(savedMovies.filter((i) => i.movieId !== res.movieId));
+        setSavedMovies((state) => state.filter(c => c._id !== filmInfo._id));
       })
       .catch((err) => onError())
       .finally(() => setIsLoading(false))
@@ -225,9 +229,10 @@ function App() {
             component={Movies}
             movies={movies}
             loggedIn={loggedIn}
+            savedMovies={savedMovies}
             logoLoggedIn={logoLoggedIn}
-            navigationBtn={navigationBtn}
             profileImage={profileImage}
+            navigationBtn={navigationBtn}
             shortFilmsActive={shortFilmsActive}
             onFilmSave={handleFilmSave}
             filmSearch={handleFilmSearch}
@@ -238,8 +243,8 @@ function App() {
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
-            savedFilms={savedMovies}
             loggedIn={loggedIn}
+            savedFilms={savedMovies}
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             logoLoggedIn={logoLoggedIn}

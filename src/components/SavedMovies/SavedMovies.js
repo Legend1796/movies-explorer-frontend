@@ -57,7 +57,7 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
           :
           <ul className='elements'>
             {savedFilms.map((movie) => (
-              <Film filmInfo={movie} onFilmDelete={deletefilm} key={movie._id} savedFilms={true} />
+              <Film filmInfo={movie} onFilmDelete={deletefilm} key={movie._id} savedFilms={true} savedMovies={savedFilms} />
             ))}
           </ul>
         }
