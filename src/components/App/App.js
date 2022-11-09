@@ -140,12 +140,8 @@ function App() {
 
   function handleFilmSave(filmInfo) {
     setIsLoading(true);
-    console.log('image ' + filmInfo.image.url,
-      'thumbnail ' + filmInfo.image.formats.thumbnail.url);
     mainApi.saveMovie(filmInfo)
       .then((res) => {
-        console.log(res);
-        // setCurrentUser(res);
         savedFilm();
       })
       .catch((err) => onError())

@@ -67,17 +67,6 @@ export class MainApi {
         movieId: filmInfo.id,
         nameRU: filmInfo.nameRU,
         nameEN: filmInfo.nameEN,
-        // country: "США",
-        // director: "Стивен Кайак",
-        // duration: "61",
-        // year: "2010",
-        // description: "В конце 1960-х группа «Роллинг Стоунз», несмотря на все свои мегахиты и сверхуспешные концертные туры, была разорена. Виной всему — бездарный менеджмент и драконовское налогообложение в Британии. Тогда музыканты приняли не самое простое для себя решение: летом 1971 года после выхода альбома «Stiсky Fingers» они отправились на юг Франции записывать новую пластинку. Именно там, на Лазурном Берегу, в арендованном Китом Ричардсом подвале виллы Неллькот родился сборник «Exile on Main St.», который стал лучшим альбомом легендарной группы.",
-        // image: "https://images.unsplash.com/photo-1664733125707-ab692190574a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        // movieId: "2",
-        // nameRU: "«Роллинг Стоунз» в изгнании",
-        // nameEN: "Stones in Exile",
-        // trailerLink: "https://www.youtube.com/watch?v=UXcqcdYABFw",
-        // thumbnail: "https://images.unsplash.com/photo-1664733125707-ab692190574a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
       })
     })
       .then(res => {
@@ -94,8 +83,8 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  // baseUrl: 'https://movies.legend1796.nomoredomains.icu',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://movies.legend1796.nomoredomains.icu',
+  // baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
   }
