@@ -62,6 +62,7 @@ function App() {
       .then((res) => {
         const resultSearch = filterMovies(searchMoviesValue, res)
         setMovies(resultSearch);
+        console.log(movies);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false))
@@ -135,6 +136,7 @@ function App() {
         handleExitToMain();
         setCurrentUser({});
         localStorage.clear();
+        setMovies([]);
         setLoggedIn(false);
       })
       .catch((err) => onError())
@@ -145,6 +147,7 @@ function App() {
     setIsLoading(true);
     mainApi.saveMovie(filmInfo)
       .then((res) => {
+        savedMovies.push(res);
         console.log(res);
         savedFilm();
       })

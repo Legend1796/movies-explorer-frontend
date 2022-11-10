@@ -7,9 +7,9 @@ import { Route } from 'react-router-dom';
 function Film({ filmInfo, onFilmSave, onFilmDelete, savedFilms, savedMovies }) {
 
   const isSaved = savedMovies.some((i) => i.movieId === filmInfo.id);
+  console.log(savedMovies)
 
   function handleFilmSave() {
-    console.log(handleFilmSave)
     onFilmSave(filmInfo);
   }
 
