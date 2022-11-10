@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState, savedMovies }) {
+function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState, savedMovies, isNeedMoreButton, addMoreMovies }) {
 
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
@@ -64,7 +64,7 @@ function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, nav
       </section>
       <section>
         <div className='movies__more'>
-          <button className='movies__more-button' type='button'>Ещё</button>
+          <button className={`movies__more-button ${isNeedMoreButton ? 'movies__more-button_active' : ''}`} type='button' onClick={addMoreMovies}>Ещё</button>
         </div>
       </section>
       <Footer />

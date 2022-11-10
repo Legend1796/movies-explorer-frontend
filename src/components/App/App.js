@@ -31,6 +31,7 @@ function App() {
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
+  const [isNeedMoreButton, setNeedMoreButton] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
@@ -39,6 +40,7 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [countMovies, setCountMovies] = React.useState(6);
+  const [countSavedMovies, setCountSavedMovies] = React.useState(6);
   const [addCountMovies, setAddCountMovies] = React.useState(3);
   const history = useHistory();
   const isOpen = isInfoTooltipOpen || openNavigation;
@@ -64,6 +66,11 @@ function App() {
       .then((res) => {
         const resultSearch = filterMovies(searchMoviesValue, res)
         setMovies(resultSearch);
+        localStorage.setItem('allMovies', JSON.stringify(res))
+        localStorage.setItem('searchMoviesValue', searchMoviesValue);
+        localStorage.setItem('resultSearch', JSON.stringify(resultSearch));
+        localStorage.setItem('shortFilmsActive', shortFilmsActive);
+        countMoviesOnPage();
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false))
@@ -166,17 +173,32 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
-  function resetQuantityMovies() {
+  // const isMoreShow = localMovies?.length > quantityMovies;
+
+  function handleAddMoreMovies() {
+    setCountMovies(countMovies + addCountMovies);
+    console.log(countMovies)
+  }
+
+  function handleAddMoreSavedMovies() {
+    setCountSavedMovies(countSavedMovies + addCountMovies);
+    console.log(countMovies)
+  }
+
+  function countMoviesOnPage() {
     if (document.documentElement.scrollWidth > 1279) {
       setCountMovies(6);
+      setCountSavedMovies(6);
       setAddCountMovies(3);
       return;
     } else if (767 < document.documentElement.scrollWidth < 1280) {
       setCountMovies(4);
+      setCountSavedMovies(4);
       setAddCountMovies(2);
       return;
     } else if (document.documentElement.scrollWidth < 768) {
       setCountMovies(3);
+      setCountSavedMovies(3);
       setAddCountMovies(2);
       return;
     }
@@ -247,7 +269,7 @@ function App() {
           <ProtectedRoute
             path='/movies'
             component={Movies}
-            movies={movies}
+            movies={movies.slice(0, countMovies)}
             loggedIn={loggedIn}
             savedMovies={savedMovies}
             logoLoggedIn={logoLoggedIn}
@@ -257,6 +279,7 @@ function App() {
             onFilmSave={handleFilmSave}
             filmSearch={handleFilmSearch}
             exitProfile={handleExitToMain}
+            addMoreMovies={handleAddMoreMovies}
             openNavigation={handleOpenNavigation}
             changeShortFilmState={handleChangeShortFilmActivetily}
           />
@@ -264,15 +287,17 @@ function App() {
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
-            savedFilms={savedMovies}
+            savedFilms={savedMovies.slice(0, countSavedMovies)}
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             logoLoggedIn={logoLoggedIn}
             shortFilmsActive={shortFilmsActive}
+            isNeedMoreButton={isNeedMoreButton}
             exitProfile={handleExitToMain}
             onFilmDelete={handleFilmDelete}
-            savedFilmSearch={handleSavedFilmSearch}
+            addMoreMovies={handleAddMoreSavedMovies}
             openNavigation={handleOpenNavigation}
+            savedFilmSearch={handleSavedFilmSearch}
             changeShortFilmState={handleChangeShortFilmActivetily}
           />
           <ProtectedRoute
