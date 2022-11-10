@@ -109,6 +109,7 @@
 }
 
 .movies__more-button {
+  display: none;
   width: calc(100% - 140px);
   height: 36px;
   background-color: #F9F9F9;
@@ -120,6 +121,17 @@
   color: #000000;
   padding: 0;
   border: 0;
+  opacity: 1;
+}
+
+.movies__more-button_active {
+  display: block;
+}
+
+.movies__more-button:hover {
+  transition: opacity .2s linear;
+  opacity: .5;
+  cursor: pointer;
 }
 
 .elements {

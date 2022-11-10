@@ -38,6 +38,8 @@ function App() {
   const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [countMovies, setCountMovies] = React.useState(6);
+  const [addCountMovies, setAddCountMovies] = React.useState(3);
   const history = useHistory();
   const isOpen = isInfoTooltipOpen || openNavigation;
 
@@ -62,7 +64,6 @@ function App() {
       .then((res) => {
         const resultSearch = filterMovies(searchMoviesValue, res)
         setMovies(resultSearch);
-        console.log(movies);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false))
@@ -79,7 +80,7 @@ function App() {
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
-  }, [searchSavedMoviesValue]);
+  }, [searchSavedMoviesValue, shortFilmsActive]);
 
   React.useEffect(() => {
     function closeByEscape(evt) {
@@ -163,6 +164,22 @@ function App() {
       })
       .catch((err) => onError())
       .finally(() => setIsLoading(false))
+  }
+
+  function resetQuantityMovies() {
+    if (document.documentElement.scrollWidth > 1279) {
+      setCountMovies(6);
+      setAddCountMovies(3);
+      return;
+    } else if (767 < document.documentElement.scrollWidth < 1280) {
+      setCountMovies(4);
+      setAddCountMovies(2);
+      return;
+    } else if (document.documentElement.scrollWidth < 768) {
+      setCountMovies(3);
+      setAddCountMovies(2);
+      return;
+    }
   }
 
   function handleOpenNavigation() {
@@ -251,10 +268,12 @@ function App() {
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             logoLoggedIn={logoLoggedIn}
+            shortFilmsActive={shortFilmsActive}
             exitProfile={handleExitToMain}
             onFilmDelete={handleFilmDelete}
             savedFilmSearch={handleSavedFilmSearch}
             openNavigation={handleOpenNavigation}
+            changeShortFilmState={handleChangeShortFilmActivetily}
           />
           <ProtectedRoute
             path='/profile'

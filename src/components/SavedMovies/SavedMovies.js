@@ -7,8 +7,8 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, savedFilmSearch }) {
-  const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
+function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, savedFilmSearch, changeShortFilmState, shortFilmsActive }) {
+
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
   function handleSubmit(e) {
@@ -21,7 +21,7 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
   }
 
   function handleChangeShortFilmActivetily() {
-    setShortFilmsActive(!shortFilmsActive);
+    changeShortFilmState();
   }
 
   function handleOpenNavigation() {
@@ -64,7 +64,7 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
       </section>
       <section>
         <div className='movies__more'>
-          <button className='movies__more-button' type='button'>Ещё</button>
+          <button className='movies__more-button movies__more-button_active' type='button'>Ещё</button>
         </div>
       </section>
       <Footer />
