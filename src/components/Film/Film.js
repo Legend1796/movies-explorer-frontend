@@ -6,8 +6,7 @@ import { Route } from 'react-router-dom';
 
 function Film({ filmInfo, onFilmSave, onFilmDelete, savedFilms, savedMovies }) {
 
-  const isSaved = savedMovies.some((i) => i.movieId === filmInfo.id);
-  console.log(savedMovies)
+  const isSaved = savedMovies.some((i) => Number(i.movieId) === filmInfo.id);
 
   function handleFilmSave() {
     onFilmSave(filmInfo);
@@ -37,13 +36,13 @@ function Film({ filmInfo, onFilmSave, onFilmDelete, savedFilms, savedMovies }) {
           <img className='element__image' src={savedFilms ? filmInfo.image : `https://api.nomoreparties.co/${filmInfo.image.url}`} alt='Обложка фильма' />
         </a>
         <Route path='/movies'>
-          <button className='element__button' type='button' disabled={!isSaved}>
-            <img className='element__save' src={isSaved ? saveOn : saveOff} onClick={handleFilmSave} aria-label='В избранное' />
+          <button className='element__button' type='button' onClick={handleFilmSave} disabled={isSaved}>
+            <img className='element__save' src={isSaved ? saveOn : saveOff} aria-label='В избранное' />
           </button>
         </Route>
         <Route path='/saved-movies'>
-          <button className='element__button' type='button'>
-            <img className='element__save' src={deletefilm} onClick={handlefilmDelete} aria-label='В избранное' />
+          <button className='element__button' type='button' onClick={handlefilmDelete} >
+            <img className='element__save' src={deletefilm} aria-label='В избранное' />
           </button>
         </Route>
       </div>
