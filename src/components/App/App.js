@@ -31,6 +31,7 @@ function App() {
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
+  const [shortSavedFilmsActive, setShortSavedFilmsActive] = React.useState(true);
   const [isNeedMoreButton, setNeedMoreButton] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
@@ -46,20 +47,11 @@ function App() {
   const isOpen = isInfoTooltipOpen || openNavigation;
 
   React.useEffect(() => {
-    console.log('countSavedMovies: ' + countSavedMovies)
-    console.log('localStorage: ' + JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length)
-    if (JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length > countSavedMovies) {
-      setNeedMoreButton(true);
-    } else { setNeedMoreButton(false) }
-  }, [countSavedMovies, shortFilmsActive, savedMovies])
-
-  React.useEffect(() => {
-    console.log('countMovies: ' + countMovies)
-    console.log('localStorage: ' + JSON.parse(localStorage.getItem('resultSearchMovies')).length)
-    if (JSON.parse(localStorage.getItem('resultSearchMovies')).length > countMovies) {
-      setNeedMoreButton(true);
-    } else { setNeedMoreButton(false) }
-  }, [countMovies, shortFilmsActive, movies])
+    if (JSON.parse(localStorage.getItem('resultSearchMovies'))) {
+      setMovies(JSON.parse(localStorage.getItem('resultSearchMovies')));
+      setSearchMoviesValue(JSON.parse(localStorage.getItem('searchMoviesValue')));
+    }
+  }, []);
 
   React.useEffect(() => {
     if (loggedIn === true) {
@@ -107,7 +99,7 @@ function App() {
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
-  }, [searchSavedMoviesValue, shortFilmsActive]);
+  }, [searchSavedMoviesValue, shortSavedFilmsActive]);
 
   React.useEffect(() => {
     function closeByEscape(evt) {
@@ -122,6 +114,18 @@ function App() {
       }
     }
   }, [isOpen]);
+
+  React.useEffect(() => {
+    if (JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length > countSavedMovies) {
+      setNeedMoreButton(true);
+    } else { setNeedMoreButton(false) }
+  }, [countSavedMovies, shortFilmsActive, savedMovies])
+
+  React.useEffect(() => {
+    if (JSON.parse(localStorage.getItem('resultSearchMovies')).length > countMovies) {
+      setNeedMoreButton(true);
+    } else { setNeedMoreButton(false) }
+  }, [countMovies, shortFilmsActive, movies])
 
   function onRegister({ name, email, password }) {
     setIsLoading(true);
@@ -260,6 +264,10 @@ function App() {
     setShortFilmsActive(!shortFilmsActive);
   }
 
+  function handleChangeShortSavedFilmActivetily() {
+    setShortSavedFilmsActive(!shortSavedFilmsActive);
+  }
+
   function handleFilmSearch(value) {
     setSearchMoviesValue(value);
   }
@@ -314,7 +322,7 @@ function App() {
             addMoreMovies={handleAddMoreSavedMovies}
             openNavigation={handleOpenNavigation}
             savedFilmSearch={handleSavedFilmSearch}
-            changeShortFilmState={handleChangeShortFilmActivetily}
+            changeShortFilmState={handleChangeShortSavedFilmActivetily}
           />
           <ProtectedRoute
             path='/profile'
