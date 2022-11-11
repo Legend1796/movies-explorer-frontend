@@ -48,8 +48,7 @@ function App() {
 
   React.useEffect(() => {
     if (JSON.parse(localStorage.getItem('resultSearchMovies'))) {
-      setMovies(JSON.parse(localStorage.getItem('resultSearchMovies')));
-      setSearchMoviesValue(JSON.parse(localStorage.getItem('searchMoviesValue')));
+      setMovies(localStorage.getItem('resultSearchMovies'));
     }
   }, []);
 
