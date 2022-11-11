@@ -47,12 +47,6 @@ function App() {
   const isOpen = isInfoTooltipOpen || openNavigation;
 
   React.useEffect(() => {
-    if (JSON.parse(localStorage.getItem('resultSearchMovies'))) {
-      setMovies(localStorage.getItem('resultSearchMovies'));
-    }
-  }, []);
-
-  React.useEffect(() => {
     if (loggedIn === true) {
       setIsLoading(true);
       mainApi.getUserInfo()
