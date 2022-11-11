@@ -31,7 +31,7 @@ function App() {
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
-  const [isNeedMoreButton, setNeedMoreButton] = React.useState(true);
+  const [isNeedMoreButton, setNeedMoreButton] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
@@ -46,14 +46,27 @@ function App() {
   const isOpen = isInfoTooltipOpen || openNavigation;
 
   React.useEffect(() => {
+    console.log('countSavedMovies: ' + countSavedMovies)
+    console.log('localStorage: ' + JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length)
+    if (JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length > countSavedMovies) {
+      setNeedMoreButton(true);
+    } else { setNeedMoreButton(false) }
+  }, [countSavedMovies, shortFilmsActive, savedMovies])
+
+  React.useEffect(() => {
+    console.log('countMovies: ' + countMovies)
+    console.log('localStorage: ' + JSON.parse(localStorage.getItem('resultSearchMovies')).length)
+    if (JSON.parse(localStorage.getItem('resultSearchMovies')).length > countMovies) {
+      setNeedMoreButton(true);
+    } else { setNeedMoreButton(false) }
+  }, [countMovies, shortFilmsActive, movies])
+
+  React.useEffect(() => {
     if (loggedIn === true) {
       setIsLoading(true);
-      Promise.all([
-        mainApi.getUserInfo(),
-        mainApi.getSavedMovies()])
-        .then(([info, movies]) => {
+      mainApi.getUserInfo()
+        .then((info) => {
           setCurrentUser(info);
-          setSavedMovies(movies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
@@ -61,28 +74,35 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
-    setIsLoading(true);
-    moviesApi.getMovies()
-      .then((res) => {
-        const resultSearch = filterMovies(searchMoviesValue, res)
-        setMovies(resultSearch);
-        localStorage.setItem('allMovies', JSON.stringify(res))
-        localStorage.setItem('searchMoviesValue', searchMoviesValue);
-        localStorage.setItem('resultSearch', JSON.stringify(resultSearch));
-        localStorage.setItem('shortFilmsActive', shortFilmsActive);
-        countMoviesOnPage();
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false))
+    if (searchMoviesValue !== '') {
+      setIsLoading(true);
+      moviesApi.getMovies()
+        .then((res) => {
+          const resultSearch = filterMovies(searchMoviesValue, res)
+          setMovies(resultSearch);
+          localStorage.setItem('allMovies', JSON.stringify(res))
+          localStorage.setItem('searchMoviesValue', searchMoviesValue);
+          localStorage.setItem('resultSearchMovies', JSON.stringify(resultSearch));
+          localStorage.setItem('shortMoviesActive', shortFilmsActive);
+          countMoviesOnPage();
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false))
+    }
   }, [searchMoviesValue, shortFilmsActive]);
 
   React.useEffect(() => {
-    if (loggedIn === true) {
+    if (searchMoviesValue !== '') {
       setIsLoading(true);
       mainApi.getSavedMovies()
         .then((res) => {
           const resultSearch = filterMovies(searchSavedMoviesValue, res)
           setSavedMovies(resultSearch);
+          localStorage.setItem('allSavedMovies', JSON.stringify(res))
+          localStorage.setItem('searchSavedMoviesValue', searchSavedMoviesValue);
+          localStorage.setItem('resultSearchSavedMovies', JSON.stringify(resultSearch));
+          localStorage.setItem('shortSavedMoviesActive', shortFilmsActive);
+          countMoviesOnPage();
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
@@ -156,7 +176,6 @@ function App() {
     mainApi.saveMovie(filmInfo)
       .then((res) => {
         savedMovies.push(res);
-        console.log(res);
         savedFilm();
       })
       .catch((err) => onError())
@@ -173,16 +192,12 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
-  // const isMoreShow = localMovies?.length > quantityMovies;
-
   function handleAddMoreMovies() {
     setCountMovies(countMovies + addCountMovies);
-    console.log(countMovies)
   }
 
   function handleAddMoreSavedMovies() {
     setCountSavedMovies(countSavedMovies + addCountMovies);
-    console.log(countMovies)
   }
 
   function countMoviesOnPage() {
@@ -196,7 +211,7 @@ function App() {
       setCountSavedMovies(4);
       setAddCountMovies(2);
       return;
-    } else if (document.documentElement.scrollWidth < 768) {
+    } else if (document.documentElement.scrollWidth < 767) {
       setCountMovies(3);
       setCountSavedMovies(3);
       setAddCountMovies(2);
@@ -276,6 +291,7 @@ function App() {
             profileImage={profileImage}
             navigationBtn={navigationBtn}
             shortFilmsActive={shortFilmsActive}
+            isNeedMoreButton={isNeedMoreButton}
             onFilmSave={handleFilmSave}
             filmSearch={handleFilmSearch}
             exitProfile={handleExitToMain}
