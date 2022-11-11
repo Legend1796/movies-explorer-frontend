@@ -202,18 +202,18 @@ function App() {
 
   function countMoviesOnPage() {
     if (document.documentElement.scrollWidth > 1279) {
-      setCountMovies(6);
-      setCountSavedMovies(6);
+      setCountMovies(12);
+      setCountSavedMovies(12);
       setAddCountMovies(3);
       return;
     } else if (767 < document.documentElement.scrollWidth < 1280) {
-      setCountMovies(4);
-      setCountSavedMovies(4);
+      setCountMovies(8);
+      setCountSavedMovies(8);
       setAddCountMovies(2);
       return;
-    } else if (document.documentElement.scrollWidth < 767) {
-      setCountMovies(3);
-      setCountSavedMovies(3);
+    } else if (320 < document.documentElement.scrollWidth < 480) {
+      setCountMovies(5);
+      setCountSavedMovies(5);
       setAddCountMovies(2);
       return;
     }
