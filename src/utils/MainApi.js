@@ -94,7 +94,7 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'https://movies.legend1796.nomoredomains.icu',
+  baseUrl: 'https://api.movies.legend1796.nomoredomains.icu',
   // baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
