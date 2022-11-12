@@ -109,7 +109,7 @@ function App() {
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (searchMoviesValue !== '') {
+    if (searchSavedMoviesValue !== '') {
       if (JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length > countSavedMovies) {
         setNeedMoreButton(true);
       } else { setNeedMoreButton(false) }
@@ -117,7 +117,7 @@ function App() {
   }, [countSavedMovies, shortFilmsActive, savedMovies])
 
   React.useEffect(() => {
-    if (searchSavedMoviesValue !== '') {
+    if (searchMoviesValue !== '') {
       if (JSON.parse(localStorage.getItem('resultSearchMovies')).length > countMovies) {
         setNeedMoreButton(true);
       } else { setNeedMoreButton(false) }
