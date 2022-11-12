@@ -109,15 +109,19 @@ function App() {
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length > countSavedMovies) {
-      setNeedMoreButton(true);
-    } else { setNeedMoreButton(false) }
+    if (loggedIn) {
+      if (JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length > countSavedMovies) {
+        setNeedMoreButton(true);
+      } else { setNeedMoreButton(false) }
+    }
   }, [countSavedMovies, shortFilmsActive, savedMovies])
 
   React.useEffect(() => {
-    if (JSON.parse(localStorage.getItem('resultSearchMovies')).length > countMovies) {
-      setNeedMoreButton(true);
-    } else { setNeedMoreButton(false) }
+    if (loggedIn) {
+      if (JSON.parse(localStorage.getItem('resultSearchMovies')).length > countMovies) {
+        setNeedMoreButton(true);
+      } else { setNeedMoreButton(false) }
+    }
   }, [countMovies, shortFilmsActive, movies])
 
   function onRegister({ name, email, password }) {
@@ -257,10 +261,6 @@ function App() {
     setShortFilmsActive(!shortFilmsActive);
   }
 
-  function handleChangeShortSavedFilmActivetily() {
-    setShortSavedFilmsActive(!shortSavedFilmsActive);
-  }
-
   function handleFilmSearch(value) {
     setSearchMoviesValue(value);
   }
@@ -315,7 +315,7 @@ function App() {
             addMoreMovies={handleAddMoreSavedMovies}
             openNavigation={handleOpenNavigation}
             savedFilmSearch={handleSavedFilmSearch}
-            changeShortFilmState={handleChangeShortSavedFilmActivetily}
+            changeShortFilmState={handleChangeShortFilmActivetily}
           />
           <ProtectedRoute
             path='/profile'
