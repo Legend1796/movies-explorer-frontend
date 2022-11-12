@@ -64,11 +64,11 @@ function App() {
       moviesApi.getMovies()
         .then((res) => {
           const resultSearch = filterMovies(searchMoviesValue, res)
-          setMovies(resultSearch);
           localStorage.setItem('allMovies', JSON.stringify(res))
           localStorage.setItem('searchMoviesValue', searchMoviesValue);
           localStorage.setItem('resultSearchMovies', JSON.stringify(resultSearch));
           localStorage.setItem('shortMoviesActive', shortFilmsActive);
+          setMovies(resultSearch);
           countMoviesOnPage();
         })
         .catch((err) => console.log(err))
@@ -82,11 +82,11 @@ function App() {
       mainApi.getSavedMovies()
         .then((res) => {
           const resultSearch = filterMovies(searchSavedMoviesValue, res)
-          setSavedMovies(resultSearch);
           localStorage.setItem('allSavedMovies', JSON.stringify(res))
           localStorage.setItem('searchSavedMoviesValue', searchSavedMoviesValue);
           localStorage.setItem('resultSearchSavedMovies', JSON.stringify(resultSearch));
           localStorage.setItem('shortSavedMoviesActive', shortFilmsActive);
+          setSavedMovies(resultSearch);
           countMoviesOnPage();
         })
         .catch((err) => console.log(err))
