@@ -57,6 +57,9 @@ function App() {
         .then(([info, savedMovies, movies]) => {
           setCurrentUser(info);
           setSavedMovies(savedMovies);
+          if (savedMovies.length === 0) {
+            setFoundNothingText('Ничего не найдено');
+          }
           localStorage.setItem('allSavedMovies', JSON.stringify(savedMovies));
           localStorage.setItem('allMovies', JSON.stringify(movies));
         })
@@ -87,8 +90,6 @@ function App() {
       localStorage.setItem('shortMoviesActive', shortFilmsActive);
       setMovies(resultSearch);
       if (resultSearch.length === 0) {
-        console.log(resultSearch.length);
-        console.log(foundNothingText);
         setFoundNothingText('Ничего не найдено');
       }
       countMoviesOnPage();
@@ -324,6 +325,7 @@ function App() {
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             logoLoggedIn={logoLoggedIn}
+            foundNothing={foundNothingText}
             shortFilmsActive={shortFilmsActive}
             isNeedMoreButton={isNeedMoreButton}
             searchSavedMoviesValue={searchSavedMoviesValue}
