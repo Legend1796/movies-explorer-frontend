@@ -57,9 +57,6 @@ function App() {
         .then(([info, savedMovies, movies]) => {
           setCurrentUser(info);
           setSavedMovies(savedMovies);
-          if (savedMovies.length === 0) {
-            setFoundNothingText('Ничего не найдено');
-          }
           localStorage.setItem('allSavedMovies', JSON.stringify(savedMovies));
           localStorage.setItem('allMovies', JSON.stringify(movies));
         })
@@ -102,6 +99,9 @@ function App() {
       localStorage.setItem('searchSavedMoviesValue', searchSavedMoviesValue);
       localStorage.setItem('shortSavedMoviesActive', shortFilmsActive);
       setSavedMovies(resultSearch);
+      if (resultSearch.length === 0) {
+        setFoundNothingText('Ничего не найдено');
+      }
       countMoviesOnPage();
     }
   }, [searchSavedMoviesValue, shortFilmsActive]);
