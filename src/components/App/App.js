@@ -35,8 +35,8 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
-  const [searchMoviesValue, setSearchMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue'));
-  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState(localStorage.getItem('searchSavedMoviesValue'));
+  const [searchMoviesValue, setSearchMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue') || '');
+  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState(localStorage.getItem('searchSavedMoviesValue') || '');
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [countMovies, setCountMovies] = React.useState(6);
@@ -181,7 +181,10 @@ function App() {
       .then((res) => {
         savedMovies.push(res);
       })
-      .catch((err) => onError())
+      .catch((err) => {
+        onError();
+        handleExitProfile();
+      })
       .finally(() => setIsLoading(false))
   }
 
