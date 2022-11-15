@@ -122,7 +122,7 @@ function App() {
 
   React.useEffect(() => {
     if (searchSavedMoviesValue !== '') {
-      if (JSON.parse(localStorage.getItem('resultSearchSavedMovies')).length > countSavedMovies) {
+      if (savedMovies.length > countSavedMovies) {
         setNeedMoreButton(true);
       } else { setNeedMoreButton(false) }
     }
@@ -130,7 +130,7 @@ function App() {
 
   React.useEffect(() => {
     if (searchMoviesValue !== '') {
-      if (JSON.parse(localStorage.getItem('resultSearchMovies')).length > countMovies) {
+      if (movies.length > countMovies) {
         setNeedMoreButton(true);
       } else { setNeedMoreButton(false) }
     }
