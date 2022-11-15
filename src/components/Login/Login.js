@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Login({ onLoginIn }) {
 
-  const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({})
+  const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
   function handleSubmit(e) {
     e.preventDefault();

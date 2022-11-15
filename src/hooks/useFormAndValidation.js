@@ -10,7 +10,13 @@ export function useFormAndValidation() {
     const { name, value } = e.target
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: e.target.validationMessage });
-    setIsValid(e.target.closest('.popup__form').checkValidity());
+    if (name === 'email') {
+      const regularEmail = /^([A-Za-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,3})$/
+      setErrors({ ...errors, [name]: 'Некорректный email' });
+      setIsValid(regularEmail.test(value));
+    } else {
+      setIsValid(e.target.closest('.popup__form').checkValidity());
+    }
   }
 
   function resetErrors(data) {
