@@ -21,7 +21,8 @@ function SavedMovies({
   shortFilmsActive,
   isNeedMoreButton,
   addMoreMovies,
-  searchSavedMoviesValue }) {
+  searchSavedMoviesValue,
+}) {
 
   const [value, setValue] = React.useState(searchSavedMoviesValue);
 

@@ -35,6 +35,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
+  const [foundNothingText, setFoundNothingText] = React.useState('');
   const [searchMoviesValue, setSearchMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue') || '');
   const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState(localStorage.getItem('searchSavedMoviesValue') || '');
   const [movies, setMovies] = React.useState([]);
@@ -83,9 +84,13 @@ function App() {
     if (searchMoviesValue !== '') {
       const resultSearch = filterMovies(searchMoviesValue, JSON.parse(localStorage.getItem('allMovies')))
       localStorage.setItem('searchMoviesValue', searchMoviesValue);
-      localStorage.setItem('resultSearchMovies', JSON.stringify(resultSearch));
       localStorage.setItem('shortMoviesActive', shortFilmsActive);
       setMovies(resultSearch);
+      if (resultSearch.length === 0) {
+        console.log(resultSearch.length);
+        console.log(foundNothingText);
+        setFoundNothingText('Ничего не найдено');
+      }
       countMoviesOnPage();
     }
   }, [searchMoviesValue, shortFilmsActive]);
@@ -94,7 +99,6 @@ function App() {
     if (searchSavedMoviesValue !== '') {
       const resultSearch = filterMovies(searchSavedMoviesValue, JSON.parse(localStorage.getItem('allSavedMovies')));
       localStorage.setItem('searchSavedMoviesValue', searchSavedMoviesValue);
-      localStorage.setItem('resultSearchSavedMovies', JSON.stringify(resultSearch));
       localStorage.setItem('shortSavedMoviesActive', shortFilmsActive);
       setSavedMovies(resultSearch);
       countMoviesOnPage();
@@ -303,6 +307,7 @@ function App() {
             navigationBtn={navigationBtn}
             shortFilmsActive={shortFilmsActive}
             isNeedMoreButton={isNeedMoreButton}
+            foundNothing={foundNothingText}
             searchMoviesValue={searchMoviesValue}
             onFilmSave={handleFilmSave}
             filmSearch={handleFilmSearch}

@@ -21,7 +21,8 @@ function Movies({
   savedMovies,
   isNeedMoreButton,
   addMoreMovies,
-  searchMoviesValue
+  searchMoviesValue,
+  foundNothing
 }) {
 
   const [value, setValue] = React.useState(searchMoviesValue);
@@ -77,7 +78,7 @@ function Movies({
       <section>
         {movies.length === 0
           ?
-          <p className='elements__not-found'>Ничего не найдено</p>
+          <p className='elements__not-found'>{foundNothing}</p>
           :
           <ul className='elements'>
             {movies.map((movie) => (
