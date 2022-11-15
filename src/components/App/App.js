@@ -51,14 +51,17 @@ function App() {
       setIsLoading(true);
       Promise.all([
         mainApi.getUserInfo(),
-        mainApi.getSavedMovies()])
-        .then(([info, movies]) => {
+        mainApi.getSavedMovies(),
+        moviesApi.getMovies()])
+        .then(([info, savedMovies, movies]) => {
           setCurrentUser(info);
-          setSavedMovies(movies);
+          setSavedMovies(savedMovies);
+          localStorage.setItem('allSavedMovies', JSON.stringify(savedMovies));
+          localStorage.setItem('allMovies', JSON.stringify(movies));
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
-    };
+    }
   }, [loggedIn]);
 
   React.useEffect(() => {
@@ -68,49 +71,34 @@ function App() {
         history.replace(location.pathname);
       })
       .catch((err) => {
-        if (err === 'Ошибка: 401') {
-          setLoggedIn(false);
-          setCurrentUser({});
-          localStorage.clear();
-          history.push('/signin');
-        } else { console.log(err) }
+        setLoggedIn(false);
+        setCurrentUser({});
+        localStorage.clear();
+        history.push('/signin');
+        console.log(err);
       })
   }, [])
 
   React.useEffect(() => {
     if (searchMoviesValue !== '') {
-      setIsLoading(true);
-      moviesApi.getMovies()
-        .then((res) => {
-          const resultSearch = filterMovies(searchMoviesValue, res)
-          localStorage.setItem('allMovies', JSON.stringify(res))
-          localStorage.setItem('searchMoviesValue', searchMoviesValue);
-          localStorage.setItem('resultSearchMovies', JSON.stringify(resultSearch));
-          localStorage.setItem('shortMoviesActive', shortFilmsActive);
-          setMovies(resultSearch);
-          countMoviesOnPage();
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false))
+      const resultSearch = filterMovies(searchMoviesValue, JSON.parse(localStorage.getItem('allMovies')))
+      localStorage.setItem('searchMoviesValue', searchMoviesValue);
+      localStorage.setItem('resultSearchMovies', JSON.stringify(resultSearch));
+      localStorage.setItem('shortMoviesActive', shortFilmsActive);
+      setMovies(resultSearch);
+      countMoviesOnPage();
     }
   }, [searchMoviesValue, shortFilmsActive]);
 
   React.useEffect(() => {
-    if (searchMoviesValue !== '') {
-      setIsLoading(true);
-      mainApi.getSavedMovies()
-        .then((res) => {
-          const resultSearch = filterMovies(searchSavedMoviesValue, res)
-          localStorage.setItem('allSavedMovies', JSON.stringify(res))
-          localStorage.setItem('searchSavedMoviesValue', searchSavedMoviesValue);
-          localStorage.setItem('resultSearchSavedMovies', JSON.stringify(resultSearch));
-          localStorage.setItem('shortSavedMoviesActive', shortFilmsActive);
-          setSavedMovies(resultSearch);
-          countMoviesOnPage();
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false))
-    };
+    if (searchSavedMoviesValue !== '') {
+      const resultSearch = filterMovies(searchSavedMoviesValue, JSON.parse(localStorage.getItem('allSavedMovies')));
+      localStorage.setItem('searchSavedMoviesValue', searchSavedMoviesValue);
+      localStorage.setItem('resultSearchSavedMovies', JSON.stringify(resultSearch));
+      localStorage.setItem('shortSavedMoviesActive', shortFilmsActive);
+      setSavedMovies(resultSearch);
+      countMoviesOnPage();
+    }
   }, [searchSavedMoviesValue, shortFilmsActive]);
 
   React.useEffect(() => {
@@ -153,7 +141,6 @@ function App() {
 
   function onLoginIn({ email, password }) {
     setIsLoading(true);
-    console.log(email, password);
     auth.autorise(email, password)
       .then((res) => {
         onAsseccAllowed('Вы успешно авторизовались!');
@@ -193,7 +180,6 @@ function App() {
     mainApi.saveMovie(filmInfo)
       .then((res) => {
         savedMovies.push(res);
-        savedFilm();
       })
       .catch((err) => onError())
       .finally(() => setIsLoading(false))
@@ -257,13 +243,6 @@ function App() {
     setAccessImage(allowedImage);
     setInfoTooltipOpen(true);
   }
-
-  function savedFilm() {
-    setAccesMessage('Фильм сохранен!');
-    setAccessImage(allowedImage);
-    setInfoTooltipOpen(true);
-  }
-
 
   function filterMovies(searchMovies, movies) {
     if (shortFilmsActive) {
