@@ -9,11 +9,16 @@ import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState, savedMovies, isNeedMoreButton, addMoreMovies }) {
 
-  const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
+  const [value, setValue] = React.useState('');
+
 
   function handleSubmit(e) {
     e.preventDefault();
-    filmSearch(values.filmSearch);
+    filmSearch(value);
+  }
+
+  function handleChange(e) {
+    setValue(e.target.value);
   }
 
   function filmSave(filmInfo) {
@@ -28,10 +33,6 @@ function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, nav
     openNavigation();
   }
 
-  React.useEffect(() => {
-    resetErrors({ filmSearch: '' });
-  }, []);
-
   return (
     <>
       <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
@@ -39,7 +40,7 @@ function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, nav
         <div className='movies__search'>
           <form onSubmit={handleSubmit} className='popup__form movies__container'>
             <div className='movies__search-block'>
-              <input onChange={handleChange} value={values.filmSearch || ''} className='movies__input' id='filmSearch' name='filmSearch' type='text' placeholder={!isValid ? errors.filmSearch : 'Фильм'} maxLength='70' required />
+              <input onChange={handleChange} value={value} className='movies__input' type='text' placeholder='Фильм' maxLength='70' />
               <button className='movies__search-button' type='submit'><img className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
             </div>
           </form>

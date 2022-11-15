@@ -9,11 +9,15 @@ import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, savedFilmSearch, changeShortFilmState, shortFilmsActive, isNeedMoreButton, addMoreMovies }) {
 
-  const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
+  const [value, setValue] = React.useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    savedFilmSearch(values.savedFilmSearch);
+    savedFilmSearch(value);
+  }
+
+  function handleChange(e) {
+    setValue(e.target.value);
   }
 
   function deletefilm(filmInfo) {
@@ -28,10 +32,6 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
     openNavigation();
   }
 
-  React.useEffect(() => {
-    resetErrors({ filmSearch: '' });
-  }, []);
-
   return (
     <>
       <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
@@ -39,7 +39,7 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
         <div className='movies__search'>
           <form onSubmit={handleSubmit} className='popup__form movies__container'>
             <div className='movies__search-block'>
-              <input onChange={handleChange} value={values.savedFilmSearch || ''} className='movies__input' id='savedFilmSearch' name='savedFilmSearch' type='text' placeholder={!isValid ? errors.savedFilmSearch : 'Фильм'} maxLength='70' required />
+              <input onChange={handleChange} value={value} className='movies__input' id='savedFilmSearch' name='savedFilmSearch' type='text' placeholder='Фильм' maxLength='70' />
               <button className='movies__search-button' type='submit'><img className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
             </div>
             <div className='movies__short-container'>

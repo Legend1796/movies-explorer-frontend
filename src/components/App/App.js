@@ -278,11 +278,23 @@ function App() {
   }
 
   function handleFilmSearch(value) {
-    setSearchMoviesValue(value);
+    if (value !== '') {
+      setSearchMoviesValue(value);
+    } else {
+      setAccesMessage('Введите название фильма!');
+      setAccessImage(deniedImage);
+      setInfoTooltipOpen(true);
+    }
   }
 
   function handleSavedFilmSearch(value) {
-    setSearchSavedMoviesValue(value);
+    if (value !== '') {
+      setSearchSavedMoviesValue(value);
+    } else {
+      setAccesMessage('Введите название фильма!');
+      setAccessImage(deniedImage);
+      setInfoTooltipOpen(true);
+    }
   }
 
   function handleExitToMain() {
