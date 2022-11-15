@@ -19,7 +19,7 @@ function Login({ onLoginIn }) {
 
   return (
     <div className='login'>
-      <Link className='header__logo-link' to='/main'><img className='header__logo' src={logoLoggedIn} alt='Логотип сайта' /></Link>
+      <Link className='header__logo-link' to='/main'><img className='login__logo' src={logoLoggedIn} alt='Логотип сайта' /></Link>
       <Form onSubmit={handleSubmit} name='login' isActiveSubmitButton={isValid} submitButtonText='Войти' signupText='Ещё не зарегистрированы?' title='Рады видеть!'>
         <div className='login__input-container'>
           <span className='login__input-placeholder'>E-mail</span>

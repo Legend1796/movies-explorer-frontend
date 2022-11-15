@@ -19,7 +19,7 @@ function Register({ onRegister }) {
 
   return (
     <div className='login'>
-      <Link className='header__logo-link' to='/main'><img className='header__logo' src={logoLoggedIn} alt='Логотип сайта' /></Link>
+      <Link className='header__logo-link' to='/main'><img className='login__logo' src={logoLoggedIn} alt='Логотип сайта' /></Link>
       <Form onSubmit={handleSubmit} name='login' isActiveSubmitButton={isValid} submitButtonText='Зарегистрироваться' signupText='Уже зарегистрированы?' title='Добро пожаловать!'>
         <div className='login__input-container'>
           <span className='login__input-placeholder'>Имя</span>

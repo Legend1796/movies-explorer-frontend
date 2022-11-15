@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute';
 import Header from '../Header/Header';
@@ -30,8 +30,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
-  const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
-  const [shortSavedFilmsActive, setShortSavedFilmsActive] = React.useState(true);
+  const [shortFilmsActive, setShortFilmsActive] = React.useState(false);
   const [isNeedMoreButton, setNeedMoreButton] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
@@ -44,19 +43,39 @@ function App() {
   const [countSavedMovies, setCountSavedMovies] = React.useState(6);
   const [addCountMovies, setAddCountMovies] = React.useState(3);
   const history = useHistory();
+  const location = useLocation();
   const isOpen = isInfoTooltipOpen || openNavigation;
 
   React.useEffect(() => {
     if (loggedIn === true) {
       setIsLoading(true);
-      mainApi.getUserInfo()
-        .then((info) => {
+      Promise.all([
+        mainApi.getUserInfo(),
+        mainApi.getSavedMovies()])
+        .then(([info, movies]) => {
           setCurrentUser(info);
+          setSavedMovies(movies);
         })
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
   }, [loggedIn]);
+
+  React.useEffect(() => {
+    mainApi.getUserInfo()
+      .then((info) => {
+        setLoggedIn(true);
+        history.replace(location.pathname);
+      })
+      .catch((err) => {
+        if (err === 'Ошибка: 401') {
+          setLoggedIn(false);
+          setCurrentUser({});
+          localStorage.clear();
+          history.push('/signin');
+        } else { console.log(err) }
+      })
+  }, [])
 
   React.useEffect(() => {
     if (searchMoviesValue !== '') {
@@ -92,7 +111,7 @@ function App() {
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false))
     };
-  }, [searchSavedMoviesValue, shortSavedFilmsActive]);
+  }, [searchSavedMoviesValue, shortFilmsActive]);
 
   React.useEffect(() => {
     function closeByEscape(evt) {
@@ -125,22 +144,19 @@ function App() {
   }, [countMovies, shortFilmsActive, movies])
 
   function onRegister({ name, email, password }) {
-    setIsLoading(true);
     auth.register(name, email, password)
       .then((res) => {
-        onAsseccAllowed();
-        setLoggedIn(true);
-        history.push('/movies');
+        onLoginIn({ email: email, password: password });
       })
       .catch(() => onError())
-      .finally(() => setIsLoading(false))
   }
 
   function onLoginIn({ email, password }) {
     setIsLoading(true);
+    console.log(email, password);
     auth.autorise(email, password)
       .then((res) => {
-        onAsseccAllowed();
+        onAsseccAllowed('Вы успешно авторизовались!');
         setLoggedIn(true);
         history.push("/movies");
       })
@@ -230,8 +246,8 @@ function App() {
     setInfoTooltipOpen(true);
   }
 
-  function onAsseccAllowed() {
-    setAccesMessage('Вы успешно зарегистрировались!');
+  function onAsseccAllowed(message) {
+    setAccesMessage(message);
     setAccessImage(allowedImage);
     setInfoTooltipOpen(true);
   }

@@ -25,6 +25,9 @@
 }
 
 .button-to-main {
+  padding: 0;
+  border: none;
+  background-color: white;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -33,6 +36,10 @@
   color: #FF6838;
   text-decoration: none;
   margin: 184px auto 60px;
+}
+
+.button-to-main:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1279px) {
