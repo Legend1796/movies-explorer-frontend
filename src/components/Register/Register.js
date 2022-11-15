@@ -2,6 +2,7 @@ import React from 'react';
 import logoLoggedIn from '../../images/header-logo.svg';
 import Form from '../Form/Form';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import { Link } from 'react-router-dom';
 
 function Register({ onRegister }) {
 
@@ -18,7 +19,7 @@ function Register({ onRegister }) {
 
   return (
     <div className='login'>
-      <img className='login__logo' src={logoLoggedIn} alt='Логотип сайта' />
+      <Link className='header__logo-link' to='/main'><img className='header__logo' src={logoLoggedIn} alt='Логотип сайта' /></Link>
       <Form onSubmit={handleSubmit} name='login' isActiveSubmitButton={isValid} submitButtonText='Зарегистрироваться' signupText='Уже зарегистрированы?' title='Добро пожаловать!'>
         <div className='login__input-container'>
           <span className='login__input-placeholder'>Имя</span>
