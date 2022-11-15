@@ -35,8 +35,8 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
-  const [searchMoviesValue, setSearchMoviesValue] = React.useState('');
-  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState('');
+  const [searchMoviesValue, setSearchMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue'));
+  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState(localStorage.getItem('searchSavedMoviesValue'));
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [countMovies, setCountMovies] = React.useState(6);
@@ -300,6 +300,7 @@ function App() {
             navigationBtn={navigationBtn}
             shortFilmsActive={shortFilmsActive}
             isNeedMoreButton={isNeedMoreButton}
+            searchMoviesValue={searchMoviesValue}
             onFilmSave={handleFilmSave}
             filmSearch={handleFilmSearch}
             exitProfile={handleExitToMain}
@@ -317,6 +318,7 @@ function App() {
             logoLoggedIn={logoLoggedIn}
             shortFilmsActive={shortFilmsActive}
             isNeedMoreButton={isNeedMoreButton}
+            searchSavedMoviesValue={searchSavedMoviesValue}
             exitProfile={handleExitToMain}
             onFilmDelete={handleFilmDelete}
             addMoreMovies={handleAddMoreSavedMovies}

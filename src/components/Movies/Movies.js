@@ -5,11 +5,26 @@ import React from 'react';
 import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut, filmSearch, shortFilmsActive, changeShortFilmState, savedMovies, isNeedMoreButton, addMoreMovies }) {
+function Movies({
+  movies, loggedIn,
+  exitProfile,
+  onFilmSave,
+  openNavigation,
+  navigationBtn,
+  profileImage,
+  logoLoggedIn,
+  logoLoggedOut,
+  filmSearch,
+  shortFilmsActive,
+  changeShortFilmState,
+  savedMovies,
+  isNeedMoreButton,
+  addMoreMovies,
+  searchMoviesValue
+}) {
 
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(searchMoviesValue);
 
 
   function handleSubmit(e) {
@@ -35,7 +50,15 @@ function Movies({ movies, loggedIn, exitProfile, onFilmSave, openNavigation, nav
 
   return (
     <>
-      <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+      <Header
+        loggedIn={loggedIn}
+        exitProfile={exitProfile}
+        openNavigation={handleOpenNavigation}
+        navigationBtn={navigationBtn}
+        profileImage={profileImage}
+        logoLoggedIn={logoLoggedIn}
+        logoLoggedOut={logoLoggedOut}
+      />
       <section>
         <div className='movies__search'>
           <form onSubmit={handleSubmit} className='popup__form movies__container'>
