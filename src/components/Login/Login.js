@@ -8,8 +8,6 @@ function Login({ onLoginIn }) {
 
   const { values, handleChange, errors, isValid, resetErrors } = useFormAndValidation({});
 
-  console.log(isValid);
-
   function handleSubmit(e) {
     e.preventDefault();
     onLoginIn(values);

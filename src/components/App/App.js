@@ -132,11 +132,9 @@ function App() {
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (searchSavedMoviesValue !== '') {
-      if (savedMovies.length > countSavedMovies) {
-        setNeedMoreButton(true);
-      } else { setNeedMoreButton(false) }
-    }
+    if (savedMovies.length > countSavedMovies) {
+      setNeedMoreButton(true);
+    } else { setNeedMoreButton(false) }
   }, [countSavedMovies, shortFilmsActive, savedMovies])
 
   React.useEffect(() => {
@@ -216,10 +214,13 @@ function App() {
   }
 
   function handleAddMoreMovies() {
+    countMoviesOnPage();
     setCountMovies(countMovies + addCountMovies);
   }
 
   function handleAddMoreSavedMovies() {
+    console.log(addCountMovies);
+    countMoviesOnPage();
     setCountSavedMovies(countSavedMovies + addCountMovies);
   }
 
