@@ -23,7 +23,18 @@ import mainApi from '../../utils/MainApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import moviesApi from '../../utils/MoviesApi';
-import { SHORTTIME, FULLSIZE, TABLETSIZE, MOBILESIZE } from '../../utils/consts'
+import {
+  SHORTMOVIESDURATION,
+  FULLSIZE,
+  TABLETSIZE,
+  MOBILESIZE,
+  COUNTMOVIESINFULLSIZE,
+  COUNTMOVIESINTABLESIZE,
+  COUNTMOVIESINMOBILESIZE,
+  COUNTADDMOVIESINFULLSIZE,
+  COUNTADDMOVIESINTABLESIZE,
+  COUNTADDMOVIESINMOBILESIZE
+} from '../../utils/consts'
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({ name: '', email: '' });
@@ -214,19 +225,19 @@ function App() {
 
   function countMoviesOnPage() {
     if (document.documentElement.scrollWidth >= FULLSIZE) {
-      setCountMovies(12);
-      setCountSavedMovies(12);
-      setAddCountMovies(3);
+      setCountMovies(COUNTMOVIESINFULLSIZE);
+      setCountSavedMovies(COUNTMOVIESINFULLSIZE);
+      setAddCountMovies(COUNTADDMOVIESINFULLSIZE);
       return;
     } else if (TABLETSIZE <= document.documentElement.scrollWidth < FULLSIZE) {
-      setCountMovies(8);
-      setCountSavedMovies(8);
-      setAddCountMovies(2);
+      setCountMovies(COUNTMOVIESINTABLESIZE);
+      setCountSavedMovies(COUNTMOVIESINTABLESIZE);
+      setAddCountMovies(COUNTADDMOVIESINTABLESIZE);
       return;
     } else if (document.documentElement.scrollWidth < MOBILESIZE) {
-      setCountMovies(5);
-      setCountSavedMovies(5);
-      setAddCountMovies(2);
+      setCountMovies(COUNTMOVIESINMOBILESIZE);
+      setCountSavedMovies(COUNTMOVIESINMOBILESIZE);
+      setAddCountMovies(COUNTADDMOVIESINMOBILESIZE);
       return;
     }
   }
@@ -257,7 +268,7 @@ function App() {
     if (shortFilmsActive) {
       return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
     } else {
-      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration > 52);
+      return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration > SHORTMOVIESDURATION);
     }
   }
 
