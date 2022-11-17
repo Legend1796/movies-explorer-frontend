@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { regularEmail } from '../utils/consts'
 
 export function useFormAndValidation() {
   const [values, setValues] = useState({});
@@ -11,9 +12,7 @@ export function useFormAndValidation() {
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: e.target.validationMessage });
     if (name === 'email') {
-      const regularEmail = /^([A-Za-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,3})$/
-      setErrors({ ...errors, [name]: 'Некорректный email' });
-      setIsValid(regularEmail.test(value));
+      setIsValid(regularEmail.test(value) && e.target.closest('.popup__form').checkValidity());
     } else {
       setIsValid(e.target.closest('.popup__form').checkValidity());
     }
@@ -22,7 +21,7 @@ export function useFormAndValidation() {
   function resetErrors(data) {
     setValues(data);
     setErrors({});
-    setIsValid(true);
+    setIsValid(false);
   }
 
   return { values, handleChange, errors, isValid, resetErrors, setValues };

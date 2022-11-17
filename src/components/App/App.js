@@ -23,7 +23,7 @@ import mainApi from '../../utils/MainApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import moviesApi from '../../utils/MoviesApi';
-
+import { SHORTTIME, FULLSIZE, TABLETSIZE, MOBILESIZE } from '../../utils/consts'
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({ name: '', email: '' });
@@ -166,6 +166,7 @@ function App() {
       .catch((err) => onError())
       .finally(() => setIsLoading(false))
   }
+
   function handleExitProfile() {
     setIsLoading(true);
     mainApi.signOut()
@@ -212,17 +213,17 @@ function App() {
   }
 
   function countMoviesOnPage() {
-    if (document.documentElement.scrollWidth > 1279) {
+    if (document.documentElement.scrollWidth >= FULLSIZE) {
       setCountMovies(12);
       setCountSavedMovies(12);
       setAddCountMovies(3);
       return;
-    } else if (767 < document.documentElement.scrollWidth < 1280) {
+    } else if (TABLETSIZE <= document.documentElement.scrollWidth < FULLSIZE) {
       setCountMovies(8);
       setCountSavedMovies(8);
       setAddCountMovies(2);
       return;
-    } else if (320 < document.documentElement.scrollWidth < 480) {
+    } else if (document.documentElement.scrollWidth < MOBILESIZE) {
       setCountMovies(5);
       setCountSavedMovies(5);
       setAddCountMovies(2);

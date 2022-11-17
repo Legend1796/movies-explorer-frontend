@@ -1,3 +1,5 @@
+import { baseUrlMain, imagesUrl } from '../utils/consts'
+
 export class MainApi {
   constructor(options) {
     this._url = options.baseUrl;
@@ -61,9 +63,9 @@ export class MainApi {
         duration: filmInfo.duration,
         year: filmInfo.year,
         description: filmInfo.description,
-        image: `https://api.nomoreparties.co/${filmInfo.image.url}`,
+        image: `${imagesUrl}${filmInfo.image.url}`,
         trailerLink: filmInfo.trailerLink,
-        thumbnail: `https://api.nomoreparties.co/${filmInfo.image.formats.thumbnail.url}`,
+        thumbnail: `${imagesUrl}${filmInfo.image.formats.thumbnail.url}`,
         movieId: filmInfo.id,
         nameRU: filmInfo.nameRU,
         nameEN: filmInfo.nameEN,
@@ -94,8 +96,7 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'https://api.movies.legend1796.nomoredomains.icu',
-  // baseUrl: 'http://localhost:3000',
+  baseUrl: baseUrlMain,
   headers: {
     'Content-Type': 'application/json'
   }
