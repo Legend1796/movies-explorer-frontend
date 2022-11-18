@@ -18,7 +18,7 @@ function SavedMovies({
   logoLoggedOut,
   savedFilmSearch,
   changeShortFilmState,
-  shortFilmsActive,
+  shortSavedFilmsActive,
   isNeedMoreButton,
   addMoreMovies,
   searchSavedMoviesValue,
@@ -68,7 +68,7 @@ function SavedMovies({
             </div>
             <div className='movies__short-container'>
               <p className='movies__short-title'>Короткометражки</p>
-              <button className='movies__short-button' type='button'><img onClick={handleChangeShortFilmActivetily} className='movies__short-image' src={shortFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' /></button>
+              <button className='movies__short-button' type='button'><img onClick={handleChangeShortFilmActivetily} className='movies__short-image' src={shortSavedFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' /></button>
             </div>
           </form>
           <div className='movies__underline' />
