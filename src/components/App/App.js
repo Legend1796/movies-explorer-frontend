@@ -49,15 +49,18 @@ function App() {
   const [accessImage, setAccessImage] = React.useState('');
   const [foundNothingText, setFoundNothingText] = React.useState('');
   const [searchMoviesValue, setSearchMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue') || '');
-  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState(localStorage.getItem('searchSavedMoviesValue') || '');
+  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [countMovies, setCountMovies] = React.useState(6);
   const [countSavedMovies, setCountSavedMovies] = React.useState(6);
   const [addCountMovies, setAddCountMovies] = React.useState(3);
+  const [pageWidth, setPagewidth] = React.useState(document.documentElement.scrollWidth);
   const history = useHistory();
   const location = useLocation();
   const isOpen = isInfoTooltipOpen || openNavigation;
+
+  window.onresize = newPageSize;
 
   React.useEffect(() => {
     if (loggedIn === true) {
@@ -104,7 +107,7 @@ function App() {
       }
       countMoviesOnPage();
     }
-  }, [searchMoviesValue, shortFilmsActive]);
+  }, [searchMoviesValue, shortFilmsActive, pageWidth]);
 
   React.useEffect(() => {
     if (loggedIn === true) {
@@ -117,7 +120,7 @@ function App() {
       setSavedMovies(resultSearch);
       countMoviesOnPage();
     }
-  }, [searchSavedMoviesValue, shortSavedFilmsActive]);
+  }, [searchSavedMoviesValue, shortSavedFilmsActive, pageWidth]);
 
   React.useEffect(() => {
     function closeByEscape(evt) {
@@ -146,6 +149,11 @@ function App() {
       } else { setNeedMoreButton(false) }
     }
   }, [countMovies, shortFilmsActive, movies])
+
+  function handleGetAllSavedMovies() {
+    setSavedMovies(JSON.parse(localStorage.getItem('allSavedMovies')));
+    setSearchSavedMoviesValue('');
+  }
 
   function onRegister({ name, email, password }) {
     auth.register(name, email, password)
@@ -231,17 +239,17 @@ function App() {
   }
 
   function countMoviesOnPage() {
-    if (document.documentElement.scrollWidth >= FULLSIZE) {
+    if (pageWidth >= FULLSIZE) {
       setCountMovies(COUNTMOVIESINFULLSIZE);
       setCountSavedMovies(COUNTMOVIESINFULLSIZE);
       setAddCountMovies(COUNTADDMOVIESINFULLSIZE);
       return;
-    } else if (TABLETSIZE <= document.documentElement.scrollWidth < FULLSIZE) {
+    } else if (TABLETSIZE <= pageWidth < FULLSIZE) {
       setCountMovies(COUNTMOVIESINTABLESIZE);
       setCountSavedMovies(COUNTMOVIESINTABLESIZE);
       setAddCountMovies(COUNTADDMOVIESINTABLESIZE);
       return;
-    } else if (document.documentElement.scrollWidth < MOBILESIZE) {
+    } else if (pageWidth < MOBILESIZE) {
       setCountMovies(COUNTMOVIESINMOBILESIZE);
       setCountSavedMovies(COUNTMOVIESINMOBILESIZE);
       setAddCountMovies(COUNTADDMOVIESINMOBILESIZE);
@@ -333,6 +341,12 @@ function App() {
     setOpenNavigation(false);
   }
 
+  function newPageSize() {
+    setTimeout(() => {
+      setPagewidth(document.documentElement.scrollWidth)
+    }, 1000)
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
@@ -361,6 +375,7 @@ function App() {
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
+            getAllSavedMovies={handleGetAllSavedMovies}
             savedFilms={savedMovies.slice(0, countSavedMovies)}
             navigationBtn={navigationBtn}
             profileImage={profileImage}
