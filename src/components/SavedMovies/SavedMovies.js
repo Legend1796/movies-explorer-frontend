@@ -21,12 +21,11 @@ function SavedMovies({
   shortSavedFilmsActive,
   isNeedMoreButton,
   addMoreMovies,
-  searchSavedMoviesValue,
   foundNothing,
   getAllSavedMovies
 }) {
 
-  const [value, setValue] = React.useState(searchSavedMoviesValue);
+  const [value, setValue] = React.useState('');
 
   React.useEffect(() => {
     getAllSavedMovies();

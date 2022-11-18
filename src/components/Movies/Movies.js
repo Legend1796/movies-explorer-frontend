@@ -23,11 +23,15 @@ function Movies({
   isNeedMoreButton,
   addMoreMovies,
   searchMoviesValue,
-  foundNothing
+  foundNothing,
+  getAllSavedMovies
 }) {
 
   const [value, setValue] = React.useState(searchMoviesValue);
 
+  React.useEffect(() => {
+    getAllSavedMovies();
+  }, [])
 
   function handleSubmit(e) {
     e.preventDefault();

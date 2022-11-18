@@ -218,10 +218,9 @@ function App() {
     setIsLoading(true);
     mainApi.deleteMovie(filmInfo._id)
       .then((res) => {
-        console.log(filmInfo.movieId);
-        setSavedMovies((state) => state.filter(c => c.movieId !== filmInfo.movieId));
-        console.log(savedMovies);
-        localStorage.setItem('allSavedMovies', JSON.stringify(savedMovies));
+        const newArraySavedMovies = savedMovies.filter((i) => i.movieId !== filmInfo.movieId);;
+        setSavedMovies(newArraySavedMovies);
+        localStorage.setItem('allSavedMovies', JSON.stringify(newArraySavedMovies));
       })
       .catch((err) => onError())
       .finally(() => setIsLoading(false))
@@ -356,7 +355,7 @@ function App() {
             component={Movies}
             movies={movies.slice(0, countMovies)}
             loggedIn={loggedIn}
-            savedMovies={JSON.parse(localStorage.getItem('allSavedMovies'))}
+            savedMovies={savedMovies}
             logoLoggedIn={logoLoggedIn}
             profileImage={profileImage}
             navigationBtn={navigationBtn}
@@ -369,13 +368,13 @@ function App() {
             exitProfile={handleExitToMain}
             addMoreMovies={handleAddMoreMovies}
             openNavigation={handleOpenNavigation}
+            getAllSavedMovies={handleGetAllSavedMovies}
             changeShortFilmState={handleChangeShortFilmActivetily}
           />
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
-            getAllSavedMovies={handleGetAllSavedMovies}
             savedFilms={savedMovies.slice(0, countSavedMovies)}
             navigationBtn={navigationBtn}
             profileImage={profileImage}
@@ -383,12 +382,12 @@ function App() {
             foundNothing={foundNothingText}
             shortSavedFilmsActive={shortSavedFilmsActive}
             isNeedMoreButton={isNeedMoreButton}
-            searchSavedMoviesValue={searchSavedMoviesValue}
             exitProfile={handleExitToMain}
             onFilmDelete={handleFilmDelete}
-            addMoreMovies={handleAddMoreSavedMovies}
             openNavigation={handleOpenNavigation}
             savedFilmSearch={handleSavedFilmSearch}
+            addMoreMovies={handleAddMoreSavedMovies}
+            getAllSavedMovies={handleGetAllSavedMovies}
             changeShortFilmState={handleChangeShortSavedFilmActivetily}
           />
           <ProtectedRoute
