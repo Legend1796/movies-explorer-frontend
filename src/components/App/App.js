@@ -116,7 +116,6 @@ function App() {
       if (resultSearch.length === 0) {
         setFoundNothingText('Ничего не найдено');
       }
-      console.log(resultSearch);
       setSavedMovies(resultSearch);
       countMoviesOnPage();
     }
@@ -153,6 +152,7 @@ function App() {
   function handleGetAllSavedMovies() {
     setSavedMovies(JSON.parse(localStorage.getItem('allSavedMovies')));
     setSearchSavedMoviesValue('');
+    setShortSavedFilmsActive(false);
   }
 
   function onRegister({ name, email, password }) {
