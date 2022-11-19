@@ -84,6 +84,12 @@ function App() {
     mainApi.getUserInfo()
       .then((info) => {
         setLoggedIn(true);
+        if (localStorage) {
+          setShortFilmsActive(localStorage.getItem('shortMoviesActive'));
+          setSearchMoviesValue(localStorage.getItem('searchMoviesValue'));
+          setMovies(localStorage.getItem('resultSearchMovies'));
+          // console.log(movies);
+        }
         history.replace(location.pathname);
       })
       .catch((err) => {
@@ -102,19 +108,17 @@ function App() {
     if (searchMoviesValue !== '') {
       localStorage.setItem('searchMoviesValue', searchMoviesValue);
       localStorage.setItem('shortMoviesActive', shortFilmsActive);
-      const resultSearch = filterMovies(searchMoviesValue, JSON.parse(localStorage.getItem('allMovies')))
+      const resultSearch = filterMovies(searchMoviesValue, JSON.parse(localStorage.getItem('allMovies')));
       localStorage.setItem('resultSearchMovies', resultSearch);
-      console.log(shortFilmsActive);
-      console.log(resultSearch);
       setMovies(resultSearch);
-      console.log(movies);
-
       if (resultSearch.length === 0) {
         setFoundNothingText('Ничего не найдено');
       }
       countMoviesOnPage();
     }
   }, [searchMoviesValue, shortFilmsActive, pageWidth]);
+
+
 
   React.useEffect(() => {
     if (loggedIn === true) {
