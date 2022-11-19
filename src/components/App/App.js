@@ -41,15 +41,15 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
-  const [shortFilmsActive, setShortFilmsActive] = React.useState(false);
+  const [shortFilmsActive, setShortFilmsActive] = React.useState(localStorage.getItem('shortMoviesActive') || false);
   const [shortSavedFilmsActive, setShortSavedFilmsActive] = React.useState(false);
   const [isNeedMoreButton, setNeedMoreButton] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
   const [foundNothingText, setFoundNothingText] = React.useState('');
-  const [searchMoviesValue, setSearchMoviesValue] = React.useState('');
-  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue') || '');
+  const [searchMoviesValue, setSearchMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue') || '');
+  const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [countMovies, setCountMovies] = React.useState(6);
@@ -89,6 +89,9 @@ function App() {
       .catch((err) => {
         setLoggedIn(false);
         setCurrentUser({});
+        setMovies([]);
+        setSearchMoviesValue('');
+        setShortFilmsActive(false);
         localStorage.clear();
         history.push('/signin');
         console.log(err);
@@ -97,11 +100,15 @@ function App() {
 
   React.useEffect(() => {
     if (searchMoviesValue !== '') {
-      const resultSearch = filterMovies(searchMoviesValue, JSON.parse(localStorage.getItem('allMovies')))
       localStorage.setItem('searchMoviesValue', searchMoviesValue);
-      localStorage.setItem('resultSearchMovies', resultSearch);
       localStorage.setItem('shortMoviesActive', shortFilmsActive);
+      const resultSearch = filterMovies(searchMoviesValue, JSON.parse(localStorage.getItem('allMovies')))
+      localStorage.setItem('resultSearchMovies', resultSearch);
+      console.log(shortFilmsActive);
+      console.log(resultSearch);
       setMovies(resultSearch);
+      console.log(movies);
+
       if (resultSearch.length === 0) {
         setFoundNothingText('Ничего не найдено');
       }
@@ -196,6 +203,8 @@ function App() {
         setCurrentUser({});
         localStorage.clear();
         setMovies([]);
+        setSearchMoviesValue('');
+        setShortFilmsActive(false);
         setLoggedIn(false);
       })
       .catch((err) => onError())
