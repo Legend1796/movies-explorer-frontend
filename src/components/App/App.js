@@ -110,8 +110,6 @@ function App() {
       localStorage.setItem('shortMoviesActive', JSON.stringify(shortFilmsActive));
       localStorage.setItem('searchMoviesValue', searchMoviesValue);
       localStorage.setItem('resultSearchMovies', JSON.stringify(resultSearch));
-
-      console.log(shortFilmsActive);
       setMovies(resultSearch);
       setPagewidth(document.documentElement.scrollWidth);
       if (resultSearch.length === 0) {
