@@ -41,7 +41,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
-  const [shortFilmsActive, setShortFilmsActive] = React.useState(JSON.parse(localStorage.getItem('shortMoviesActive')));
+  const [shortFilmsActive, setShortFilmsActive] = React.useState(JSON.parse(localStorage.getItem('shortMoviesActive')) || false);
   // const [shortFilmsActive, setShortFilmsActive] = React.useState(false);
   const [shortSavedFilmsActive, setShortSavedFilmsActive] = React.useState(false);
   const [isNeedMoreButton, setNeedMoreButton] = React.useState(false);
