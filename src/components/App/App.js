@@ -41,14 +41,15 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [openNavigation, setOpenNavigation] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
-  const [shortFilmsActive, setShortFilmsActive] = React.useState(localStorage.getItem('shortMoviesActive') || false);
+  const [shortFilmsActive, setShortFilmsActive] = React.useState(JSON.parse(localStorage.getItem('shortMoviesActive')));
+  // const [shortFilmsActive, setShortFilmsActive] = React.useState(false);
   const [shortSavedFilmsActive, setShortSavedFilmsActive] = React.useState(false);
   const [isNeedMoreButton, setNeedMoreButton] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [accesMessage, setAccesMessage] = React.useState('');
   const [accessImage, setAccessImage] = React.useState('');
   const [foundNothingText, setFoundNothingText] = React.useState('');
-  const [searchMoviesValue, setSearchMoviesValue] = React.useState(localStorage.getItem('searchMoviesValue') || '');
+  const [searchMoviesValue, setSearchMoviesValue] = React.useState('');
   const [searchSavedMoviesValue, setSearchSavedMoviesValue] = React.useState('');
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
@@ -59,6 +60,9 @@ function App() {
   const history = useHistory();
   const location = useLocation();
   const isOpen = isInfoTooltipOpen || openNavigation;
+  const localStorageAllMovies = JSON.parse(localStorage.getItem('allMovies'));
+  const localStorageAllSavedMovies = JSON.parse(localStorage.getItem('allSavedMovies'));
+  const localStorageSearchMoviesValue = localStorage.getItem('searchMoviesValue');
 
   window.onresize = newPageSize;
 
@@ -84,11 +88,8 @@ function App() {
     mainApi.getUserInfo()
       .then((info) => {
         setLoggedIn(true);
-        if (localStorage) {
-          setShortFilmsActive(localStorage.getItem('shortMoviesActive'));
-          setSearchMoviesValue(localStorage.getItem('searchMoviesValue'));
-          setMovies(localStorage.getItem('resultSearchMovies'));
-          // console.log(movies);
+        if (localStorageSearchMoviesValue) {
+          setSearchMoviesValue(localStorageSearchMoviesValue);
         }
         history.replace(location.pathname);
       })
@@ -106,11 +107,14 @@ function App() {
 
   React.useEffect(() => {
     if (searchMoviesValue !== '') {
+      const resultSearch = filterMovies(searchMoviesValue, localStorageAllMovies);
+      localStorage.setItem('shortMoviesActive', JSON.stringify(shortFilmsActive));
       localStorage.setItem('searchMoviesValue', searchMoviesValue);
-      localStorage.setItem('shortMoviesActive', shortFilmsActive);
-      const resultSearch = filterMovies(searchMoviesValue, JSON.parse(localStorage.getItem('allMovies')));
-      localStorage.setItem('resultSearchMovies', resultSearch);
+      localStorage.setItem('resultSearchMovies', JSON.stringify(resultSearch));
+
+      console.log(shortFilmsActive);
       setMovies(resultSearch);
+      setPagewidth(document.documentElement.scrollWidth);
       if (resultSearch.length === 0) {
         setFoundNothingText('Ничего не найдено');
       }
@@ -118,12 +122,10 @@ function App() {
     }
   }, [searchMoviesValue, shortFilmsActive, pageWidth]);
 
-
-
   React.useEffect(() => {
     if (loggedIn === true) {
       var resultSearch = [];
-      resultSearch = filterSavedMovies(searchSavedMoviesValue, JSON.parse(localStorage.getItem('allSavedMovies')));
+      resultSearch = filterSavedMovies(searchSavedMoviesValue, localStorageAllSavedMovies);
       if (resultSearch.length === 0) {
         setFoundNothingText('Ничего не найдено');
       }
@@ -294,7 +296,7 @@ function App() {
   }
 
   function filterMovies(searchMovies, movies) {
-    if (!shortFilmsActive) {
+    if (shortFilmsActive === false) {
       return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase()));
     } else {
       return movies.filter((i) => i.nameRU.toLowerCase().includes(searchMovies.toLowerCase())).filter((i) => i.duration <= SHORTMOVIESDURATION);
@@ -319,7 +321,6 @@ function App() {
 
   function handleChangeShortFilmActivetily() {
     setShortFilmsActive(!shortFilmsActive);
-
   }
 
   function handleChangeShortSavedFilmActivetily() {
@@ -387,17 +388,13 @@ function App() {
             exitProfile={handleExitToMain}
             addMoreMovies={handleAddMoreMovies}
             openNavigation={handleOpenNavigation}
-            getAllSavedMovies={handleGetAllSavedMovies}
             changeShortFilmState={handleChangeShortFilmActivetily}
           />
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
-            savedFilms={
-              savedMovies
-              // savedMovies.slice(0, countSavedMovies)
-            }
+            savedFilms={savedMovies.slice(0, countSavedMovies)}
             navigationBtn={navigationBtn}
             profileImage={profileImage}
             logoLoggedIn={logoLoggedIn}
