@@ -6,20 +6,46 @@ import Film from '../Film/Film';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavigation, navigationBtn, profileImage, logoLoggedIn, logoLoggedOut }) {
-  const [shortFilmsActive, setShortFilmsActive] = React.useState(true);
+function SavedMovies({
+  loggedIn,
+  exitProfile,
+  onFilmDelete,
+  savedFilms,
+  openNavigation,
+  navigationBtn,
+  profileImage,
+  logoLoggedIn,
+  logoLoggedOut,
+  savedFilmSearch,
+  changeShortFilmState,
+  shortSavedFilmsActive,
+  isNeedMoreButton,
+  addMoreMovies,
+  foundNothing,
+  getAllSavedMovies
+}) {
+
+  const [value, setValue] = React.useState('');
+
+  React.useEffect(() => {
+    getAllSavedMovies();
+  }, [])
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    savedFilmSearch(value);
+  }
+
+  function handleChange(e) {
+    setValue(e.target.value);
+  }
 
   function deletefilm(filmInfo) {
-    console.log(filmInfo);
-    // onFilmDelete(filmInfo); // need to give on Api
+    onFilmDelete(filmInfo);
   }
 
   function handleChangeShortFilmActivetily() {
-    setShortFilmsActive(!shortFilmsActive);
-  }
-
-  function handleBottonSearchClick() {
-    console.log('click');
+    changeShortFilmState();
   }
 
   function handleOpenNavigation() {
@@ -28,32 +54,45 @@ function SavedMovies({ loggedIn, exitProfile, onFilmDelete, savedFilms, openNavi
 
   return (
     <>
-      <Header loggedIn={loggedIn} exitProfile={exitProfile} openNavigation={handleOpenNavigation} navigationBtn={navigationBtn} profileImage={profileImage} logoLoggedIn={logoLoggedIn} logoLoggedOut={logoLoggedOut} />
+      <Header
+        loggedIn={loggedIn}
+        exitProfile={exitProfile}
+        openNavigation={handleOpenNavigation}
+        navigationBtn={navigationBtn}
+        profileImage={profileImage}
+        logoLoggedIn={logoLoggedIn}
+        logoLoggedOut={logoLoggedOut}
+      />
       <section>
         <div className='movies__search'>
-          <form className='movies__container'>
+          <form onSubmit={handleSubmit} className='popup__form movies__container'>
             <div className='movies__search-block'>
-              <input className='movies__input' id='film-search' name='film-search' type='film-search' placeholder='Фильм' maxLength='70' required />
-              <button className='movies__search-button' type='button'><img onClick={handleBottonSearchClick} className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
+              <input onChange={handleChange} value={value} className='movies__input' id='savedFilmSearch' name='savedFilmSearch' type='text' placeholder='Фильм' maxLength='70' />
+              <button className='movies__search-button' type='submit'><img className='movies__search-image' src={find} alt='Кнопка поиска' /></button>
             </div>
             <div className='movies__short-container'>
               <p className='movies__short-title'>Короткометражки</p>
-              <button className='movies__short-button' type='button'><img onClick={handleChangeShortFilmActivetily} className='movies__short-image' src={shortFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' /></button>
+              <button className='movies__short-button' type='button'><img onClick={handleChangeShortFilmActivetily} className='movies__short-image' src={shortSavedFilmsActive ? smalltumbOn : smalltumbOff} alt='Кнопка поиска' /></button>
             </div>
           </form>
           <div className='movies__underline' />
         </div>
       </section>
       <section>
-        <ul className='elements'>
-          {savedFilms.map((film) => (
-            <Film filmInfo={film} onFilmDelete={deletefilm} key={film._id} />
-          ))}
-        </ul>
+        {savedFilms.length === 0
+          ?
+          <p className='elements__not-found'>{foundNothing}</p>
+          :
+          <ul className='elements'>
+            {savedFilms.map((movie) => (
+              <Film filmInfo={movie} onFilmDelete={deletefilm} key={movie._id} savedFilms={true} savedMovies={savedFilms} />
+            ))}
+          </ul>
+        }
       </section>
       <section>
         <div className='movies__more'>
-          <button className='movies__more-button' type='button'>Ещё</button>
+          <button className={`movies__more-button ${isNeedMoreButton ? 'movies__more-button_active' : ''}`} type='button' onClick={addMoreMovies}>Ещё</button>
         </div>
       </section>
       <Footer />

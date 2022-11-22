@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom';
 
 function Form({ submitButtonText, isActiveSubmitButton, name, onSubmit, children, signupText, title }) {
+
   return (
     <form className='popup__form' name={name} noValidate onSubmit={onSubmit}>
       <h2 className='login__title'>{title}</h2>

@@ -1,0 +1,89 @@
+.infoTooltip {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .3s, opacity .3s linear;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.infoTooltip_opened {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.infoTooltip__container {
+  background-color: white;
+  width: 430px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoTooltip__text_access-container {
+  margin: 32px auto 60px;
+  width: 358px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+}
+
+.infoTooltip__access-image {
+  margin: 60px auto 0;
+}
+
+.infoTooltip__close {
+  background-image: url('../../images/Close_Icon.svg');
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  background-color: #00000000;
+  z-index: 2;
+  border: none;
+  opacity: 1;
+}
+
+.infoTooltip__close:hover {
+  transition: opacity .2s linear;
+  opacity: .6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 605px) {
+  .infoTooltip__close {
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: -36px;
+    background-size: contain;
+  }
+
+  .infoTooltip__text_access-container {
+    margin-top: 50px;
+    width: 244px;
+  }
+
+  .infoTooltip__text_access-container {
+    margin: 40px auto 50px;
+    width: 244px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .infoTooltip__container {
+    width: 282px;
+  }
+}

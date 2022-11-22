@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { regularEmail } from '../utils/consts'
 
 export function useFormAndValidation() {
   const [values, setValues] = useState({});
@@ -10,13 +11,17 @@ export function useFormAndValidation() {
     const { name, value } = e.target
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: e.target.validationMessage });
-    setIsValid(e.target.closest('.popup__form').checkValidity());
+    if (name === 'email') {
+      setIsValid(regularEmail.test(value) && e.target.closest('.popup__form').checkValidity());
+    } else {
+      setIsValid(e.target.closest('.popup__form').checkValidity());
+    }
   }
 
   function resetErrors(data) {
     setValues(data);
     setErrors({});
-    setIsValid(true);
+    setIsValid(false);
   }
 
   return { values, handleChange, errors, isValid, resetErrors, setValues };
